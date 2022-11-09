@@ -3,6 +3,7 @@ package kamya.app;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
@@ -84,9 +85,18 @@ Glide.with(getApplicationContext()).load(Uri.parse("tggfxd")).into(bg);
 					public void run() {
 
 
-						in.setClass(getApplicationContext(),LoginActivity.class);
-						_ActivityTransition(logo, "p", in);
+						SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+
+						if(sh.getString("user_id", "").equals(""))
+						{
+							in.setClass(getApplicationContext(),LoginActivity.class);
+							_ActivityTransition(logo, "p", in);
+
+						} else {
+							startActivity(new Intent(getApplicationContext(),HomeLayout.class));
+						}
 						finish();
+
 
 						time.cancel();
 					}

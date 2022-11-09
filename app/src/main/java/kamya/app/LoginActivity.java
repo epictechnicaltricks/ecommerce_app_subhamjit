@@ -27,8 +27,12 @@ import android.widget.Toast;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -51,10 +55,9 @@ public class LoginActivity extends  Activity  {
 	private boolean pass_boolean = false;
 	private final boolean emailVerified = false;
 	private final String user_email = "";
-	private HashMap<String, Object> map = new HashMap<>();
+
 	
-	private final ArrayList<HashMap<String, Object>> user_list = new ArrayList<>();
-	
+
 	private LinearLayout linear1;
 	private LinearLayout bg;
 	private LinearLayout linear5;
@@ -106,12 +109,35 @@ public class LoginActivity extends  Activity  {
 	private TimerTask otp_timer;
 	private AlertDialog.Builder email_dialog;
 	private SharedPreferences sh;
-	private RequestNetwork net;
-	private RequestNetwork.RequestListener _net_request_listener;
+
+
+	private RequestNetwork login_api;
+	private RequestNetwork.RequestListener _login_api_listener;
+
+	private RequestNetwork register_api;
+	private RequestNetwork.RequestListener _register_api_listener;
+
+	private RequestNetwork otp_sent_api;
+	private RequestNetwork.RequestListener _otp_sent_api_listener;
+
+	private RequestNetwork otp_verify_api;
+	private RequestNetwork.RequestListener _otp_verify_api_listener;
+
+	private RequestNetwork new_password_api;
+	private RequestNetwork.RequestListener new_password_api_listener;
+
+	private HashMap<String, Object> map = new HashMap<>();
+	private ArrayList<HashMap<String, Object>> results = new ArrayList<>();
+
 
 	private CoordinatorLayout coordinatorLayout;
 
 	private HashMap<String, Object> api_map = new HashMap<>();
+
+	String api = "https://kkkamya.in/index.php/Api_request/api_list?";
+    String list=""; // temp variable
+
+	int resend_count = 0;
 
 
 	@Override
@@ -121,6 +147,21 @@ public class LoginActivity extends  Activity  {
 		initialize(_savedInstanceState);
 
 		initializeLogic();
+
+
+		SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+		SharedPreferences.Editor myEdit = sharedPreferences.edit();
+
+		//int _position = 0;
+		myEdit.putString("fullname", "");
+		myEdit.putString("user_id","");
+		myEdit.putString("email",  "");
+		myEdit.putString("mobile", "");
+		//myEdit.putString("is_loggedin", Objects.requireNonNull(results.get(_position).get("is_loggedin")).toString());
+		//myEdit.putString("last_login_ip", Objects.requireNonNull(results.get(_position).get("last_login_ip")).toString());
+		//myEdit.putString("bill_id", Objects.requireNonNull(results.get(_position).get("bill_id")).toString());
+		myEdit.putString("api", api);
+		myEdit.apply();
 
 
 
@@ -177,7 +218,256 @@ public class LoginActivity extends  Activity  {
 		//fauth = FirebaseAuth.getInstance();
 		email_dialog = new AlertDialog.Builder(this);
 		sh = getSharedPreferences("sh", Activity.MODE_PRIVATE);
-		net = new RequestNetwork(this);
+
+
+		login_api = new RequestNetwork(this);
+		register_api = new RequestNetwork(this);
+		otp_sent_api = new RequestNetwork(this);
+		otp_verify_api = new RequestNetwork(this);
+		new_password_api = new RequestNetwork(this);
+
+
+
+
+		_otp_verify_api_listener = new RequestNetwork.RequestListener() {
+			@Override
+			public void onResponse(String _param1, String _param2, HashMap<String, Object> _param3) {
+				final String _tag = _param1;
+				final String _response = _param2;
+				final HashMap<String, Object> _responseHeaders = _param3;
+
+				try {
+					progressbar.setVisibility(View.GONE);
+
+					if (_response.contains("200")) {
+
+						action_btn.performClick();
+
+						if(action.equals("otp_verify_new_user"))
+						{
+							login_mode_ = true;
+							login_txt.setText("Create account");
+							//OTP_verified_new_register=true;
+							verify_otp_for_signup();
+
+						}else{
+
+							login_mode_ = false;
+							login_txt.setText("Login account");
+							//OTP_verified_forgot_pass=true;
+							verify_otp_for_password_reset();
+
+						}
+
+
+
+					} else {
+
+						showMessage("Not a valid OTP !\n\n"+_response);
+
+					}
+				} catch(Exception e) {
+
+					showMessage("Error on response\n\n"+_response);
+				}
+
+
+			}
+
+			@Override
+			public void onErrorResponse(String _param1, String _param2) {
+				final String _tag = _param1;
+				final String _message = _param2;
+
+			}
+		};
+
+		_login_api_listener = new RequestNetwork.RequestListener() {
+			@Override
+			public void onResponse(String tag, String response, HashMap<String, Object> responseHeaders) {
+
+
+				try {
+					progressbar.setVisibility(View.GONE);
+
+					if (response.contains("200")) {
+
+
+						map = new Gson().fromJson(response, new TypeToken<HashMap<String, Object>>(){}.getType());
+						list = (new Gson()).toJson(map.get("resultSet"), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+						results = new Gson().fromJson(list, new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+						//Collections.reverse(results);
+
+
+						SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+						SharedPreferences.Editor myEdit = sharedPreferences.edit();
+
+						int _position = 0;
+						myEdit.putString("fullname", Objects.requireNonNull(results.get(_position).get("fullname")).toString());
+						myEdit.putString("user_id", Objects.requireNonNull(results.get(_position).get("user_id")).toString());
+						myEdit.putString("email", Objects.requireNonNull(results.get(_position).get("email")).toString());
+						myEdit.putString("mobile", Objects.requireNonNull(results.get(_position).get("mobile")).toString());
+						//myEdit.putString("is_loggedin", Objects.requireNonNull(results.get(_position).get("is_loggedin")).toString());
+						//myEdit.putString("last_login_ip", Objects.requireNonNull(results.get(_position).get("last_login_ip")).toString());
+						//myEdit.putString("bill_id", Objects.requireNonNull(results.get(_position).get("bill_id")).toString());
+						myEdit.putString("api", api);
+						myEdit.apply();
+
+
+						startActivity(new Intent(getApplicationContext(),MainActivity.class));
+						finish();
+
+                        showMessage("Welcome, "+Objects.requireNonNull(results.get(_position).get("fullname")));
+						showMessage("Login Success\n\n"+response);
+		/*
+		output result login response
+
+		{
+			"status": 200,
+				"resultSet": [
+			{
+				"usertype": 2,
+					"fullname": "subhamjeet",
+					"email": "rrrrr@gmail.comrojalima",
+					"mobile": "1234567890",
+					"user_id": "57",
+					"last_login_ip": "",
+					"is_loggedin": true,
+					"bill_id": null
+			}
+    ]
+		}*/
+
+
+
+
+					} else {
+
+						showMessage("Login Failed..\n\n"+response);
+					}
+
+				} catch(Exception e) {
+
+					showMessage("Error on response\n\n"+e+"\n\n" +response);
+				}
+
+
+			}
+
+			@Override
+			public void onErrorResponse(String tag, String message) {
+
+				progressbar.setVisibility(View.GONE);
+				showMessage("No internet !");
+
+			}
+		};
+
+		_register_api_listener = new RequestNetwork.RequestListener() {
+			@Override
+			public void onResponse(String tag, String response, HashMap<String, Object> responseHeaders) {
+
+				try {
+					progressbar.setVisibility(View.GONE);
+
+					if (response.contains("200")) {
+
+						//login_txt.performClick();
+
+						send_otp_api_request(phone_no.getText().toString().trim(),"otp_verify_new_user");
+						showMessage("Register success");
+
+					} else if(response.contains("exist!!")) {
+
+						login_txt.performClick();
+						showMessage("User already registered ! Login now");
+
+					} else {
+
+						showMessage("Error \n\n"+response);
+						finish();
+					}
+				} catch(Exception e) {
+
+					showMessage("Error on response"+response);
+				}
+
+
+			}
+
+			@Override
+			public void onErrorResponse(String tag, String message) {
+
+				showMessage("No internet !");
+
+			}
+		};
+
+		_otp_sent_api_listener = new RequestNetwork.RequestListener() {
+			@Override
+			public void onResponse(String tag, String response, HashMap<String, Object> responseHeaders) {
+
+				try {
+					progressbar.setVisibility(View.GONE);
+
+					if (response.contains("200")) {
+
+
+						showMessage("OTP Sent \n\n"+response);
+
+					} else {
+
+						showMessage("Failed to sent OTP Try again ! \n\n"+response);
+
+					}
+				} catch(Exception e) {
+
+					showMessage("Error on response\n\n" +response);
+				}
+
+
+			}
+
+			@Override
+			public void onErrorResponse(String tag, String message) {
+
+			}
+		};
+
+		new_password_api_listener = new RequestNetwork.RequestListener() {
+			@Override
+			public void onResponse(String tag, String response, HashMap<String, Object> responseHeaders) {
+
+				try {
+					progressbar.setVisibility(View.GONE);
+
+					if (response.contains("200")) {
+
+						//finish();
+
+						Toast.makeText(getApplicationContext(), "Password updated", Toast.LENGTH_SHORT).show();
+
+						login_txt.performClick();
+
+
+					} else {
+
+						showMessage("Failed to Update, Try again !\n\n" +response);
+
+					}
+				} catch(Exception e) {
+
+					showMessage("Error on response");
+				}
+
+			}
+
+			@Override
+			public void onErrorResponse(String tag, String message) {
+
+			}
+		};
+
 
 
 
@@ -447,12 +737,27 @@ public class LoginActivity extends  Activity  {
 		resend_otp.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View _view) {
+
+
+if(resend_count>=1){  // when we click resend button again it will send otp
+
+
+	progressbar.setVisibility(View.VISIBLE);
+
+	api_map.clear();
+	api_map = new HashMap<>();
+	api_map.put("method", "chkResetPassword");
+	api_map.put("mobile", phone.trim());
+
+	otp_sent_api.setParams(api_map, RequestNetworkController.REQUEST_PARAM);
+	otp_sent_api.startRequestNetwork(RequestNetworkController.GET, api, "no tag", _otp_sent_api_listener);
+
+
+}
 				timer = 60;
 				resend_otp.setEnabled(false);
 				resend_otp.setAlpha((float)(0.6d));
-				if(otp_timer!=null){
-					otp_timer.cancel();
-				}
+
 				otp_timer = new TimerTask() {
 					@Override
 					public void run() {
@@ -465,7 +770,14 @@ public class LoginActivity extends  Activity  {
 									resend_otp.setText("Resend OTP");
 									resend_otp.setEnabled(true);
 									resend_otp.setAlpha((float)(1));
+
+                                    resend_count++;
+
+
+
+
 									otp_timer.cancel();
+
 								}
 
 								timer--;
@@ -473,7 +785,7 @@ public class LoginActivity extends  Activity  {
 						});
 					}
 				};
-				_timer.scheduleAtFixedRate(otp_timer, 0, 1000);
+				_timer.scheduleAtFixedRate(otp_timer, 100, 1000);
 			}
 		});
 		
@@ -505,22 +817,6 @@ public class LoginActivity extends  Activity  {
 			}
 		});
 		
-		_net_request_listener = new RequestNetwork.RequestListener() {
-			@Override
-			public void onResponse(String _param1, String _param2, HashMap<String, Object> _param3) {
-				final String _tag = _param1;
-				final String _response = _param2;
-				final HashMap<String, Object> _responseHeaders = _param3;
-				
-			}
-			
-			@Override
-			public void onErrorResponse(String _param1, String _param2) {
-				final String _tag = _param1;
-				final String _message = _param2;
-				
-			}
-		};
 
 
 /*		try {
@@ -660,16 +956,6 @@ if (_success) {
 
 	}
 
-	/*public void _request_api (final String _method) {
-		api_map = new HashMap<>();
-		api_map.put("method", _method);
-		api_map.put("student_id", stu_id);
-		
-		net.setParams(api_map, RequestNetworkController.REQUEST_PARAM);
-		net.startRequestNetwork(RequestNetworkController.GET, api, "no tag", _in_request_listener);
-
-
-	}*/
 
 
 	private void initializeLogic() {
@@ -816,38 +1102,110 @@ if (_success) {
 
 	public void login_api_request(String email,String password)
 	{
-		Toast.makeText(this, "Login complete", Toast.LENGTH_SHORT).show();
+		progressbar.setVisibility(View.VISIBLE);
+		api_map.clear();
+		api_map = new HashMap<>();
+		api_map.put("method", "login");
+		api_map.put("username", email.trim());
+		api_map.put("password", password.trim());
+
+		login_api.setParams(api_map, RequestNetworkController.REQUEST_PARAM);
+		login_api.startRequestNetwork(RequestNetworkController.GET, api, "no tag", _login_api_listener);
+
+
+		//Toast.makeText(this, "Login complete", Toast.LENGTH_SHORT).show();
+	}
+
+	public void new_password_api_request(String con_pass,String pass,String mobile)
+	{
+
+		//method=resetPassword&con_password=9999&new_password=9999&mobile=9668551168
+		progressbar.setVisibility(View.VISIBLE);
+		api_map.clear();
+		api_map = new HashMap<>();
+		api_map.put("method", "resetPassword");
+		api_map.put("con_password", con_pass.trim());
+		api_map.put("new_password", pass.trim());
+		api_map.put("mobile", mobile.trim());
+
+		new_password_api.setParams(api_map, RequestNetworkController.REQUEST_PARAM);
+		new_password_api.startRequestNetwork(RequestNetworkController.GET, api, "no tag", new_password_api_listener);
+
+
+		Toast.makeText(this, "Verifying OTP", Toast.LENGTH_SHORT).show();
 	}
 
 	public void signup_api_request(String email,String password, String name, String phone)
 	{
+		progressbar.setVisibility(View.VISIBLE);
+		api_map.clear();
+		api_map = new HashMap<>();
+		api_map.put("method", "register");
+		api_map.put("fullname", name.trim());
+		api_map.put("email", email.trim());
+		api_map.put("password", password.trim());
+		api_map.put("user_type", "2");
+		api_map.put("mobile", phone.trim());
 
-		Toast.makeText(this, "Signup complete", Toast.LENGTH_SHORT).show();
+		register_api.setParams(api_map, RequestNetworkController.REQUEST_PARAM);
+		register_api.startRequestNetwork(RequestNetworkController.GET, api, "no tag", _register_api_listener);
 
 
-		send_otp_api_request(phone,"otp_verify_new_user");
+		//Toast.makeText(this, "Signup complete", Toast.LENGTH_SHORT).show();
+
+
+
 
 	}
 
+	private void verify_otp_api_request(String mobile, String otp_value){
+		//api_url + method=verifyOTPforResetpass&mobile=9668551168&otp_value=5339
+		progressbar.setVisibility(View.VISIBLE);
+		api_map.clear();
+		api_map = new HashMap<>();
+		api_map.put("method", "verifyOTPforResetpass");
+		api_map.put("mobile", mobile.trim());
+		api_map.put("otp_value", otp_value.trim());
+
+		otp_verify_api.setParams(api_map, RequestNetworkController.REQUEST_PARAM);
+		otp_verify_api.startRequestNetwork(RequestNetworkController.GET, api, "no tag", _otp_verify_api_listener);
+
+
+	}
+
+
 	public void send_otp_api_request(String phone,String otp_type)
 	{
+
+		//api_url  method=chkResetPassword&mobile=9668551168
 		action = otp_type;
 		//Toast.makeText(this, action, Toast.LENGTH_SHORT).show();
 		_show_otp_layout();
-		progressbar.setVisibility(View.GONE);
+		progressbar.setVisibility(View.VISIBLE);
+
+		api_map.clear();
+		api_map = new HashMap<>();
+		api_map.put("method", "chkResetPassword");
+		api_map.put("mobile", phone.trim());
+
+		otp_sent_api.setParams(api_map, RequestNetworkController.REQUEST_PARAM);
+		otp_sent_api.startRequestNetwork(RequestNetworkController.GET, api, "no tag", _otp_sent_api_listener);
+
+
+
 		if(otp_type.equals("otp_verify_new_user"))
 		{
 			login_mode_ = true;
 			login_txt.setText("Create account");
 			//send for new user
-			Toast.makeText(this, "otp_verify_new_user", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(this, "otp_verify_new_user", Toast.LENGTH_SHORT).show();
 
 		}else{
 
 			login_mode_ = false;
 			login_txt.setText("Login account");
 			// forgot password
-			Toast.makeText(this, "otp_for_reset_password", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(this, "otp_for_reset_password", Toast.LENGTH_SHORT).show();
 
 		}
 
@@ -860,7 +1218,7 @@ if (_success) {
 		_show_password_reset_layout();
 		action = "password_reset";
 		// show password + confirm pass layout then > login
-		Toast.makeText(this, "	Password updated", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(this, "Password updated", Toast.LENGTH_SHORT).show();
 	}
 	public void verify_otp_for_signup()
 	{
@@ -879,7 +1237,7 @@ if (_success) {
 
 			// HERE one button perform all tasks
 
-			Toast.makeText(this, action, Toast.LENGTH_SHORT).show();
+			//Toast.makeText(this, action, Toast.LENGTH_SHORT).show();
 
 			if (Util.isConnected(getApplicationContext())) {
 
@@ -926,7 +1284,8 @@ if (_success) {
 
 							 	if (Util.isConnected(LoginActivity.this)) {
 
-									verify_otp_for_password_reset();
+							 		verify_otp_api_request(phone_no.getText().toString().trim(),otp_text.getText().toString().trim());
+
 
 							 	}
 									 else {
@@ -951,7 +1310,9 @@ if (_success) {
 
 								if (Util.isConnected(getApplicationContext())) {
 
-									verify_otp_for_signup();
+
+									verify_otp_api_request(phone_no.getText().toString().trim(),otp_text.getText().toString().trim());
+
 
 								}
 								else {
@@ -1029,21 +1390,18 @@ if (_success) {
 											|| pass.getText().toString().contains("?")) {
 
 
-										if (Util.isConnected(LoginActivity.this)) {
+										/*if (Util.isConnected(getApplicationContext()) {*/
 
-											finish();
 
-											Toast.makeText(this, "Password updated", Toast.LENGTH_SHORT).show();
-											//send_otp_api_request(phone_no.getText().toString().trim());
+											if(Util.isConnected(getApplicationContext())){
+												new_password_api_request(c_pass.getText().toString(),pass.getText().toString(),phone_no.getText().toString());
 
-											//fauth.sendPasswordResetEmail(email.getText().toString().trim()).addOnCompleteListener(_fauth_reset_password_listener);
-										}
-										else {
-											_Sneek_Message( "No internet !");
-											progressbar.setVisibility(View.GONE);
-										}
+											}else {
+												_Sneek_Message( "No internet !");
+												progressbar.setVisibility(View.GONE);
+											}
 
-									}else {
+										}else {
 
 										pass.setError("At least 1 spl char @#$&!?");
 										progressbar.setVisibility(View.GONE);
@@ -1051,7 +1409,7 @@ if (_success) {
 									}
 									else {
 										progressbar.setVisibility(View.GONE);
-										_Sneek_Message( "No internet !");
+										_Sneek_Message( "Very small password !");
 									}
 
 
@@ -1106,7 +1464,7 @@ if (_success) {
 														if (Util.isConnected(getApplicationContext())) {
 
 
-															signup_api_request("","","","");
+															signup_api_request(email.getText().toString(),pass.getText().toString(),name.getText().toString(),phone_no.getText().toString());
 															//fauth.createUserWithEmailAndPassword(email.getText().toString().trim(), pass.getText().toString().trim()).addOnCompleteListener(LoginActivity.this, _fauth_create_user_listener);
 
 														}
@@ -1366,7 +1724,7 @@ if (_success) {
 	
 	@Deprecated
 	public void showMessage(String _s) {
-		Toast.makeText(getApplicationContext(), _s, Toast.LENGTH_SHORT).show();
+		Toast.makeText(getApplicationContext(), _s, Toast.LENGTH_LONG).show();
 	}
 	
 

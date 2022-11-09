@@ -1,0 +1,15 @@
+#Internal package file, do not edit.
+#Fri Nov 04 13:48:26 IST 2022
+2.base=C\:\\Users\\RAM\\Downloads\\Kamya_by_jeet\\app\\build\\intermediates\\merged_assets\\debug\\out
+0.path=classes.dex
+count=3
+1.set=DEX
+2.path=fonts/google_sans_medium.ttf
+2.baseType=DIRECTORY
+0.base=C\:\\Users\\RAM\\Downloads\\Kamya_by_jeet\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\out
+2.set=ASSET
+1.baseType=DIRECTORY
+1.path=classes.dex
+0.baseType=DIRECTORY
+1.base=C\:\\Users\\RAM\\Downloads\\Kamya_by_jeet\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\out
+0.set=DEX

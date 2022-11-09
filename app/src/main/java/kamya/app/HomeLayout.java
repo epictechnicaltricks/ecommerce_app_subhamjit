@@ -3,6 +3,7 @@ package kamya.app;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
@@ -13,6 +14,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Timer;
@@ -28,7 +30,9 @@ public class HomeLayout extends  Activity {
 	private LinearLayout front;
 	private ImageView logo;
 	private ImageView bg;
-	
+
+	private TextView name, email, phone, userid,logout;
+
 	private TimerTask time;
 	private final Intent in = new Intent();
 	@Override
@@ -58,11 +62,16 @@ public class HomeLayout extends  Activity {
 	
 	private void initialize(Bundle _savedInstanceState) {
 		
-		relative = findViewById(R.id.relative);
-		bg_layout = findViewById(R.id.bg_layout);
-		front = findViewById(R.id.front);
-		logo = findViewById(R.id.logo);
+		//relative = findViewById(R.id.relative);
+		//bg_layout = findViewById(R.id.bg_layout);
+		//front = findViewById(R.id.front);
+		//logo = findViewById(R.id.logo);
 		bg = findViewById(R.id.bg);
+		name = findViewById(R.id.name);
+		userid = findViewById(R.id.user_id);
+		phone = findViewById(R.id.phone_no);
+		email = findViewById(R.id.email);
+		logout = findViewById(R.id.Logout);
 	}
 
 	@Override
@@ -76,7 +85,7 @@ public class HomeLayout extends  Activity {
 bg.setImageBitmap(FileUtil.decodeSampleBitmapFromPath(FileUtil.readFile("ggfd"), 1024, 1024));
 Glide.with(getApplicationContext()).load(Uri.parse("tggfxd")).into(bg);
 */
-		time = new TimerTask() {
+	/*	time = new TimerTask() {
 			@Override
 			public void run() {
 				runOnUiThread(new Runnable() {
@@ -93,7 +102,47 @@ Glide.with(getApplicationContext()).load(Uri.parse("tggfxd")).into(bg);
 				});
 			}
 		};
-		_timer.schedule(time, 3500);
+		_timer.schedule(time, 3500);*/
+
+		logout.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+
+				SharedPreferences sha = HomeLayout.this.getSharedPreferences("MySharedPref",MODE_PRIVATE);
+				SharedPreferences.Editor editor = sha.edit();
+				editor.clear();
+				editor.apply();
+
+				startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+				finish();
+
+			}
+		});
+
+		SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+
+		try{
+
+			String _phone=sh.getString("mobile", "");
+			String _fullname=sh.getString("fullname", "");
+			String _email=sh.getString("email", "");
+			String _id=sh.getString("user_id", "");
+
+
+			phone.setText(_phone);
+			name.setText(_fullname);
+			email.setText(_email);
+			userid.setText(_id);
+
+		}catch(Exception e)
+		{
+			showMessage(e.toString());
+		}
+
+
+
+
+
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 			getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 		}
