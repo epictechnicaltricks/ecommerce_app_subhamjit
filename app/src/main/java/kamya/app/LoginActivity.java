@@ -241,7 +241,8 @@ public class LoginActivity extends  Activity  {
 
 					if (_response.contains("200")) {
 
-						action_btn.performClick();
+
+						//action_btn.performClick();
 
 						if(action.equals("otp_verify_new_user"))
 						{
@@ -372,10 +373,10 @@ public class LoginActivity extends  Activity  {
 
 					if (response.contains("200")) {
 
-						//login_txt.performClick();
-
 						send_otp_api_request(phone_no.getText().toString().trim(),"otp_verify_new_user");
-						showMessage("Register success");
+
+						//login_txt.performClick();
+						showMessage("Register success, Login now.");
 
 					} else if(response.contains("exist!!")) {
 
@@ -417,12 +418,14 @@ public class LoginActivity extends  Activity  {
 
 					} else {
 
-						showMessage("Failed to sent OTP Try again ! \n\n"+response);
+						login_txt.performClick();
+						forgot_pass.performClick(); //dont remove
+						showMessage("Number not registered ! \n\n"+response);
 
 					}
 				} catch(Exception e) {
 
-					showMessage("Error on response\n\n" +response);
+					showMessage("Failed to sent OTP \n\n" +response);
 				}
 
 
@@ -747,7 +750,7 @@ if(resend_count>=1){  // when we click resend button again it will send otp
 	api_map.clear();
 	api_map = new HashMap<>();
 	api_map.put("method", "chkResetPassword");
-	api_map.put("mobile", phone.trim());
+	api_map.put("mobile", phone_no.getText().toString().trim());
 
 	otp_sent_api.setParams(api_map, RequestNetworkController.REQUEST_PARAM);
 	otp_sent_api.startRequestNetwork(RequestNetworkController.GET, api, "no tag", _otp_sent_api_listener);
@@ -757,6 +760,12 @@ if(resend_count>=1){  // when we click resend button again it will send otp
 				timer = 60;
 				resend_otp.setEnabled(false);
 				resend_otp.setAlpha((float)(0.6d));
+
+				if(otp_timer!=null)
+				{
+					otp_timer.cancel();
+					// don't remove this if condition
+				}
 
 				otp_timer = new TimerTask() {
 					@Override
@@ -1223,8 +1232,8 @@ if (_success) {
 	public void verify_otp_for_signup()
 	{
 		// restart the app
-		finish();
-		startActivity(new Intent(getApplicationContext(),MainActivity.class));
+		//finish();
+		//startActivity(new Intent(getApplicationContext(),MainActivity.class));
 		Toast.makeText(this, "Account created", Toast.LENGTH_SHORT).show();
 
 	}
@@ -1463,9 +1472,10 @@ if (_success) {
 													if (phone_no.getText().toString().trim().length() == 10) {
 														if (Util.isConnected(getApplicationContext())) {
 
-
 															signup_api_request(email.getText().toString(),pass.getText().toString(),name.getText().toString(),phone_no.getText().toString());
-															//fauth.createUserWithEmailAndPassword(email.getText().toString().trim(), pass.getText().toString().trim()).addOnCompleteListener(LoginActivity.this, _fauth_create_user_listener);
+
+
+																//fauth.createUserWithEmailAndPassword(email.getText().toString().trim(), pass.getText().toString().trim()).addOnCompleteListener(LoginActivity.this, _fauth_create_user_listener);
 
 														}
 														else {
