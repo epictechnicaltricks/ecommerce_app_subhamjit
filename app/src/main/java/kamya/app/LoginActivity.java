@@ -308,6 +308,8 @@ public class LoginActivity extends  Activity  {
 						myEdit.putString("user_id", Objects.requireNonNull(results.get(_position).get("user_id")).toString());
 						myEdit.putString("email", Objects.requireNonNull(results.get(_position).get("email")).toString());
 						myEdit.putString("mobile", Objects.requireNonNull(results.get(_position).get("mobile")).toString());
+						//myEdit.putString("bill_id", Objects.requireNonNull(results.get(_position).get("bill_id")).toString());
+
 						//myEdit.putString("is_loggedin", Objects.requireNonNull(results.get(_position).get("is_loggedin")).toString());
 						//myEdit.putString("last_login_ip", Objects.requireNonNull(results.get(_position).get("last_login_ip")).toString());
 						//myEdit.putString("bill_id", Objects.requireNonNull(results.get(_position).get("bill_id")).toString());

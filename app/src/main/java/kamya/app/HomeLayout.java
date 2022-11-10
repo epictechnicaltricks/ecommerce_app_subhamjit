@@ -31,7 +31,7 @@ public class HomeLayout extends  Activity {
 	private ImageView logo;
 	private ImageView bg;
 
-	private TextView name, email, phone, userid,logout;
+	private TextView name, email, phone, userid,logout,bill;
 
 	private TimerTask time;
 	private final Intent in = new Intent();
@@ -69,9 +69,10 @@ public class HomeLayout extends  Activity {
 		bg = findViewById(R.id.bg);
 		name = findViewById(R.id.name);
 		userid = findViewById(R.id.user_id);
-		phone = findViewById(R.id.phone_no);
+		phone = findViewById(R.id.mobile);
 		email = findViewById(R.id.email);
 		logout = findViewById(R.id.Logout);
+		bill = findViewById(R.id.bill_id);
 	}
 
 	@Override
@@ -82,10 +83,15 @@ public class HomeLayout extends  Activity {
 
 	private void initializeLogic() {
 		/*
+
 bg.setImageBitmap(FileUtil.decodeSampleBitmapFromPath(FileUtil.readFile("ggfd"), 1024, 1024));
 Glide.with(getApplicationContext()).load(Uri.parse("tggfxd")).into(bg);
+
 */
-	/*	time = new TimerTask() {
+
+		/*
+
+	time = new TimerTask() {
 			@Override
 			public void run() {
 				runOnUiThread(new Runnable() {
@@ -102,7 +108,9 @@ Glide.with(getApplicationContext()).load(Uri.parse("tggfxd")).into(bg);
 				});
 			}
 		};
-		_timer.schedule(time, 3500);*/
+		_timer.schedule(time, 3500);
+
+		*/
 
 		logout.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -126,13 +134,15 @@ Glide.with(getApplicationContext()).load(Uri.parse("tggfxd")).into(bg);
 			String _phone=sh.getString("mobile", "");
 			String _fullname=sh.getString("fullname", "");
 			String _email=sh.getString("email", "");
-			String _id=sh.getString("user_id", "");
+			String _id = sh.getString("user_id", "");
+			//String _bill = sh.getString("bill_id", "");
 
 
 			phone.setText(_phone);
 			name.setText(_fullname);
 			email.setText(_email);
 			userid.setText(_id);
+			//bill.setText(_bill +"\nbill_id");
 
 		}catch(Exception e)
 		{
