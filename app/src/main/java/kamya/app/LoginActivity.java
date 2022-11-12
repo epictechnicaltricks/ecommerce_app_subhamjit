@@ -312,7 +312,7 @@ public class LoginActivity extends  Activity  {
 
 						//myEdit.putString("is_loggedin", Objects.requireNonNull(results.get(_position).get("is_loggedin")).toString());
 						//myEdit.putString("last_login_ip", Objects.requireNonNull(results.get(_position).get("last_login_ip")).toString());
-						//myEdit.putString("bill_id", Objects.requireNonNull(results.get(_position).get("bill_id")).toString());
+
 						myEdit.putString("api", api);
 						myEdit.apply();
 

@@ -29,6 +29,13 @@
 			android:name=".LoginActivity"
 			android:theme="@style/NoActionBar" />
 
+		 <activity
+		android:name=".LayoutActivity"
+		android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+		android:hardwareAccelerated="true"
+		android:supportsPictureInPicture="true"
+		android:screenOrientation="portrait"/>
+
 		<activity android:name=".HomeLayout" android:theme="@style/NoActionBar"/>
 
 

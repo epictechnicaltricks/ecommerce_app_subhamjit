@@ -93,7 +93,10 @@ Glide.with(getApplicationContext()).load(Uri.parse("tggfxd")).into(bg);
 							_ActivityTransition(logo, "p", in);
 
 						} else {
-							startActivity(new Intent(getApplicationContext(),HomeLayout.class));
+							//startActivity(new Intent(getApplicationContext(),HomeLayout.class));
+							startActivity(new Intent(getApplicationContext(),LayoutActivity.class));
+
+
 						}
 						finish();
 
