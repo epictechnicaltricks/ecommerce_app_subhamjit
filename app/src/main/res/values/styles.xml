@@ -20,6 +20,8 @@
 			<item	name="colorControlHighlight">@color/colorControlHighlight</item>
 			<item	name="colorControlNormal">@color/colorControlNormal</item>
 		</style>
+
+
 		<style	name="AppTheme.FullScreen"	parent="AppTheme">
 			<item	name="android:windowFullscreen">true</item>
 			<item	name="android:windowContentOverlay">@null</item>

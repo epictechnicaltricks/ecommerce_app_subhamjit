@@ -12,8 +12,6 @@ androidx/transition/R.java
  androidx.transition.R$styleable
 androidx/print/R.java
  androidx.print.R
-androidx/cursoradapter/R.java
- androidx.cursoradapter.R
 androidx/vectordrawable/R.java
  androidx.vectordrawable.R
  androidx.vectordrawable.R$attr
@@ -26,6 +24,197 @@ androidx/vectordrawable/R.java
  androidx.vectordrawable.R$string
  androidx.vectordrawable.R$style
  androidx.vectordrawable.R$styleable
+androidx/lifecycle/livedata/core/R.java
+ androidx.lifecycle.livedata.core.R
+androidx/appcompat/resources/R.java
+ androidx.appcompat.resources.R
+ androidx.appcompat.resources.R$attr
+ androidx.appcompat.resources.R$color
+ androidx.appcompat.resources.R$dimen
+ androidx.appcompat.resources.R$drawable
+ androidx.appcompat.resources.R$id
+ androidx.appcompat.resources.R$integer
+ androidx.appcompat.resources.R$layout
+ androidx.appcompat.resources.R$string
+ androidx.appcompat.resources.R$style
+ androidx.appcompat.resources.R$styleable
+kamya/app/RequestNetwork.java
+ kamya.app.RequestNetwork
+ kamya.app.RequestNetwork$RequestListener
+androidx/arch/core/R.java
+ androidx.arch.core.R
+androidx/fragment/R.java
+ androidx.fragment.R
+ androidx.fragment.R$attr
+ androidx.fragment.R$color
+ androidx.fragment.R$dimen
+ androidx.fragment.R$drawable
+ androidx.fragment.R$id
+ androidx.fragment.R$integer
+ androidx.fragment.R$layout
+ androidx.fragment.R$string
+ androidx.fragment.R$style
+ androidx.fragment.R$styleable
+androidx/savedstate/R.java
+ androidx.savedstate.R
+kamya/app/HomeLayout.java
+ kamya.app.HomeLayout
+ kamya.app.HomeLayout$1
+androidx/asynclayoutinflater/R.java
+ androidx.asynclayoutinflater.R
+ androidx.asynclayoutinflater.R$attr
+ androidx.asynclayoutinflater.R$color
+ androidx.asynclayoutinflater.R$dimen
+ androidx.asynclayoutinflater.R$drawable
+ androidx.asynclayoutinflater.R$id
+ androidx.asynclayoutinflater.R$integer
+ androidx.asynclayoutinflater.R$layout
+ androidx.asynclayoutinflater.R$string
+ androidx.asynclayoutinflater.R$style
+ androidx.asynclayoutinflater.R$styleable
+kamya/app/BuildConfig.java
+ kamya.app.BuildConfig
+androidx/interpolator/R.java
+ androidx.interpolator.R
+kamya/app/LoginActivity.java
+ kamya.app.LoginActivity
+ kamya.app.LoginActivity$1
+ kamya.app.LoginActivity$10
+ kamya.app.LoginActivity$11
+ kamya.app.LoginActivity$12
+ kamya.app.LoginActivity$13
+ kamya.app.LoginActivity$14
+ kamya.app.LoginActivity$15
+ kamya.app.LoginActivity$16
+ kamya.app.LoginActivity$17
+ kamya.app.LoginActivity$18
+ kamya.app.LoginActivity$19
+ kamya.app.LoginActivity$2
+ kamya.app.LoginActivity$2$1
+ kamya.app.LoginActivity$2$2
+ kamya.app.LoginActivity$2$3
+ kamya.app.LoginActivity$20
+ kamya.app.LoginActivity$21
+ kamya.app.LoginActivity$22
+ kamya.app.LoginActivity$22$1
+ kamya.app.LoginActivity$22$1$1
+ kamya.app.LoginActivity$23
+ kamya.app.LoginActivity$24
+ kamya.app.LoginActivity$25
+ kamya.app.LoginActivity$26
+ kamya.app.LoginActivity$27
+ kamya.app.LoginActivity$28
+ kamya.app.LoginActivity$29
+ kamya.app.LoginActivity$3
+ kamya.app.LoginActivity$4
+ kamya.app.LoginActivity$5
+ kamya.app.LoginActivity$6
+ kamya.app.LoginActivity$7
+ kamya.app.LoginActivity$8
+ kamya.app.LoginActivity$9
+androidx/core/R.java
+ androidx.core.R
+ androidx.core.R$attr
+ androidx.core.R$color
+ androidx.core.R$dimen
+ androidx.core.R$drawable
+ androidx.core.R$id
+ androidx.core.R$integer
+ androidx.core.R$layout
+ androidx.core.R$string
+ androidx.core.R$style
+ androidx.core.R$styleable
+kamya/app/R.java
+ kamya.app.R
+ kamya.app.R$anim
+ kamya.app.R$animator
+ kamya.app.R$attr
+ kamya.app.R$bool
+ kamya.app.R$color
+ kamya.app.R$dimen
+ kamya.app.R$drawable
+ kamya.app.R$id
+ kamya.app.R$integer
+ kamya.app.R$interpolator
+ kamya.app.R$layout
+ kamya.app.R$mipmap
+ kamya.app.R$string
+ kamya.app.R$style
+ kamya.app.R$styleable
+androidx/activity/R.java
+ androidx.activity.R
+ androidx.activity.R$attr
+ androidx.activity.R$color
+ androidx.activity.R$dimen
+ androidx.activity.R$drawable
+ androidx.activity.R$id
+ androidx.activity.R$integer
+ androidx.activity.R$layout
+ androidx.activity.R$string
+ androidx.activity.R$style
+ androidx.activity.R$styleable
+androidx/recyclerview/R.java
+ androidx.recyclerview.R
+ androidx.recyclerview.R$attr
+ androidx.recyclerview.R$color
+ androidx.recyclerview.R$dimen
+ androidx.recyclerview.R$drawable
+ androidx.recyclerview.R$id
+ androidx.recyclerview.R$integer
+ androidx.recyclerview.R$layout
+ androidx.recyclerview.R$string
+ androidx.recyclerview.R$style
+ androidx.recyclerview.R$styleable
+kamya/app/MainActivity.java
+ kamya.app.MainActivity
+ kamya.app.MainActivity$1
+ kamya.app.MainActivity$1$1
+kamya/app/Util.java
+ kamya.app.Util
+ kamya.app.Util$1
+androidx/drawerlayout/R.java
+ androidx.drawerlayout.R
+ androidx.drawerlayout.R$attr
+ androidx.drawerlayout.R$color
+ androidx.drawerlayout.R$dimen
+ androidx.drawerlayout.R$drawable
+ androidx.drawerlayout.R$id
+ androidx.drawerlayout.R$integer
+ androidx.drawerlayout.R$layout
+ androidx.drawerlayout.R$string
+ androidx.drawerlayout.R$style
+ androidx.drawerlayout.R$styleable
+androidx/versionedparcelable/R.java
+ androidx.versionedparcelable.R
+kamya/app/LayoutActivity.java
+ kamya.app.LayoutActivity
+ kamya.app.LayoutActivity$1
+ kamya.app.LayoutActivity$2
+ kamya.app.LayoutActivity$3
+ kamya.app.LayoutActivity$4
+ kamya.app.LayoutActivity$MyFragmentAdapter
+androidx/lifecycle/viewmodel/R.java
+ androidx.lifecycle.viewmodel.R
+com/bumptech/glide/R.java
+ com.bumptech.glide.R
+ com.bumptech.glide.R$attr
+ com.bumptech.glide.R$color
+ com.bumptech.glide.R$dimen
+ com.bumptech.glide.R$drawable
+ com.bumptech.glide.R$id
+ com.bumptech.glide.R$integer
+ com.bumptech.glide.R$layout
+ com.bumptech.glide.R$string
+ com.bumptech.glide.R$style
+ com.bumptech.glide.R$styleable
+kamya/app/Wishlist_FragmentActivity.java
+ kamya.app.Wishlist_FragmentActivity
+kamya/app/Cart_FragmentActivity.java
+ kamya.app.Cart_FragmentActivity
+com/bumptech/glide/gifdecoder/R.java
+ com.bumptech.glide.gifdecoder.R
+androidx/cursoradapter/R.java
+ androidx.cursoradapter.R
 kamya/app/RequestNetworkController.java
  kamya.app.RequestNetworkController
  kamya.app.RequestNetworkController$1
@@ -33,8 +222,6 @@ kamya/app/RequestNetworkController.java
  kamya.app.RequestNetworkController$3
  kamya.app.RequestNetworkController$3$1
  kamya.app.RequestNetworkController$3$2
-androidx/lifecycle/livedata/core/R.java
- androidx.lifecycle.livedata.core.R
 androidx/cardview/R.java
  androidx.cardview.R
  androidx.cardview.R$attr
@@ -66,6 +253,33 @@ androidx/swiperefreshlayout/R.java
  androidx.swiperefreshlayout.R$string
  androidx.swiperefreshlayout.R$style
  androidx.swiperefreshlayout.R$styleable
+kamya/app/Home_FragmentActivity.java
+ kamya.app.Home_FragmentActivity
+ kamya.app.Home_FragmentActivity$1
+ kamya.app.Home_FragmentActivity$10
+ kamya.app.Home_FragmentActivity$11
+ kamya.app.Home_FragmentActivity$2
+ kamya.app.Home_FragmentActivity$3
+ kamya.app.Home_FragmentActivity$4
+ kamya.app.Home_FragmentActivity$5
+ kamya.app.Home_FragmentActivity$6
+ kamya.app.Home_FragmentActivity$7
+ kamya.app.Home_FragmentActivity$8
+ kamya.app.Home_FragmentActivity$8$1
+ kamya.app.Home_FragmentActivity$9
+ kamya.app.Home_FragmentActivity$Listview1Adapter
+ kamya.app.Home_FragmentActivity$Listview1Adapter$1
+ kamya.app.Home_FragmentActivity$Listview1Adapter$2
+ kamya.app.Home_FragmentActivity$Listview2Adapter
+ kamya.app.Home_FragmentActivity$Listview2Adapter$1
+ kamya.app.Home_FragmentActivity$Listview2Adapter$2
+ kamya.app.Home_FragmentActivity$Listview3Adapter
+ kamya.app.Home_FragmentActivity$Listview3Adapter$1
+ kamya.app.Home_FragmentActivity$Listview3Adapter$2
+ kamya.app.Home_FragmentActivity$Listview4Adapter
+ kamya.app.Home_FragmentActivity$Listview4Adapter$1
+ kamya.app.Home_FragmentActivity$Listview4Adapter$2
+ kamya.app.Home_FragmentActivity$Viewpager1Adapter
 androidx/appcompat/R.java
  androidx.appcompat.R
  androidx.appcompat.R$anim
@@ -81,18 +295,6 @@ androidx/appcompat/R.java
  androidx.appcompat.R$string
  androidx.appcompat.R$style
  androidx.appcompat.R$styleable
-androidx/appcompat/resources/R.java
- androidx.appcompat.resources.R
- androidx.appcompat.resources.R$attr
- androidx.appcompat.resources.R$color
- androidx.appcompat.resources.R$dimen
- androidx.appcompat.resources.R$drawable
- androidx.appcompat.resources.R$id
- androidx.appcompat.resources.R$integer
- androidx.appcompat.resources.R$layout
- androidx.appcompat.resources.R$string
- androidx.appcompat.resources.R$style
- androidx.appcompat.resources.R$styleable
 androidx/lifecycle/livedata/R.java
  androidx.lifecycle.livedata.R
 androidx/legacy/coreui/R.java
@@ -109,29 +311,8 @@ androidx/legacy/coreui/R.java
  androidx.legacy.coreui.R$styleable
 androidx/lifecycle/R.java
  androidx.lifecycle.R
-kamya/app/RequestNetwork.java
- kamya.app.RequestNetwork
- kamya.app.RequestNetwork$RequestListener
-androidx/arch/core/R.java
- androidx.arch.core.R
 androidx/documentfile/R.java
  androidx.documentfile.R
-androidx/fragment/R.java
- androidx.fragment.R
- androidx.fragment.R$attr
- androidx.fragment.R$color
- androidx.fragment.R$dimen
- androidx.fragment.R$drawable
- androidx.fragment.R$id
- androidx.fragment.R$integer
- androidx.fragment.R$layout
- androidx.fragment.R$string
- androidx.fragment.R$style
- androidx.fragment.R$styleable
-androidx/savedstate/R.java
- androidx.savedstate.R
-androidx/localbroadcastmanager/R.java
- androidx.localbroadcastmanager.R
 androidx/customview/R.java
  androidx.customview.R
  androidx.customview.R$attr
@@ -144,18 +325,8 @@ androidx/customview/R.java
  androidx.customview.R$string
  androidx.customview.R$style
  androidx.customview.R$styleable
-androidx/asynclayoutinflater/R.java
- androidx.asynclayoutinflater.R
- androidx.asynclayoutinflater.R$attr
- androidx.asynclayoutinflater.R$color
- androidx.asynclayoutinflater.R$dimen
- androidx.asynclayoutinflater.R$drawable
- androidx.asynclayoutinflater.R$id
- androidx.asynclayoutinflater.R$integer
- androidx.asynclayoutinflater.R$layout
- androidx.asynclayoutinflater.R$string
- androidx.asynclayoutinflater.R$style
- androidx.asynclayoutinflater.R$styleable
+androidx/exifinterface/R.java
+ androidx.exifinterface.R
 androidx/loader/R.java
  androidx.loader.R
  androidx.loader.R$attr
@@ -196,52 +367,8 @@ com/google/android/material/R.java
  com.google.android.material.R$string
  com.google.android.material.R$style
  com.google.android.material.R$styleable
-kamya/app/BuildConfig.java
- kamya.app.BuildConfig
-androidx/interpolator/R.java
- androidx.interpolator.R
-androidx/lifecycle/viewmodel/R.java
- androidx.lifecycle.viewmodel.R
-androidx/core/R.java
- androidx.core.R
- androidx.core.R$attr
- androidx.core.R$color
- androidx.core.R$dimen
- androidx.core.R$drawable
- androidx.core.R$id
- androidx.core.R$integer
- androidx.core.R$layout
- androidx.core.R$string
- androidx.core.R$style
- androidx.core.R$styleable
-kamya/app/R.java
- kamya.app.R
- kamya.app.R$anim
- kamya.app.R$animator
- kamya.app.R$attr
- kamya.app.R$bool
- kamya.app.R$color
- kamya.app.R$dimen
- kamya.app.R$drawable
- kamya.app.R$id
- kamya.app.R$integer
- kamya.app.R$interpolator
- kamya.app.R$layout
- kamya.app.R$string
- kamya.app.R$style
- kamya.app.R$styleable
-androidx/activity/R.java
- androidx.activity.R
- androidx.activity.R$attr
- androidx.activity.R$color
- androidx.activity.R$dimen
- androidx.activity.R$drawable
- androidx.activity.R$id
- androidx.activity.R$integer
- androidx.activity.R$layout
- androidx.activity.R$string
- androidx.activity.R$style
- androidx.activity.R$styleable
+kamya/app/Account_FragmentActivity.java
+ kamya.app.Account_FragmentActivity
 androidx/slidingpanelayout/R.java
  androidx.slidingpanelayout.R
  androidx.slidingpanelayout.R$attr
@@ -254,49 +381,15 @@ androidx/slidingpanelayout/R.java
  androidx.slidingpanelayout.R$string
  androidx.slidingpanelayout.R$style
  androidx.slidingpanelayout.R$styleable
-androidx/recyclerview/R.java
- androidx.recyclerview.R
- androidx.recyclerview.R$attr
- androidx.recyclerview.R$color
- androidx.recyclerview.R$dimen
- androidx.recyclerview.R$drawable
- androidx.recyclerview.R$id
- androidx.recyclerview.R$integer
- androidx.recyclerview.R$layout
- androidx.recyclerview.R$string
- androidx.recyclerview.R$style
- androidx.recyclerview.R$styleable
 kamya/app/FileUtil.java
  kamya.app.FileUtil
-androidx/vectordrawable/animated/R.java
- androidx.vectordrawable.animated.R
- androidx.vectordrawable.animated.R$attr
- androidx.vectordrawable.animated.R$color
- androidx.vectordrawable.animated.R$dimen
- androidx.vectordrawable.animated.R$drawable
- androidx.vectordrawable.animated.R$id
- androidx.vectordrawable.animated.R$integer
- androidx.vectordrawable.animated.R$layout
- androidx.vectordrawable.animated.R$string
- androidx.vectordrawable.animated.R$style
- androidx.vectordrawable.animated.R$styleable
-kamya/app/Util.java
- kamya.app.Util
- kamya.app.Util$1
-androidx/drawerlayout/R.java
- androidx.drawerlayout.R
- androidx.drawerlayout.R$attr
- androidx.drawerlayout.R$color
- androidx.drawerlayout.R$dimen
- androidx.drawerlayout.R$drawable
- androidx.drawerlayout.R$id
- androidx.drawerlayout.R$integer
- androidx.drawerlayout.R$layout
- androidx.drawerlayout.R$string
- androidx.drawerlayout.R$style
- androidx.drawerlayout.R$styleable
-androidx/versionedparcelable/R.java
- androidx.versionedparcelable.R
+kamya/app/Category_FragmentActivity.java
+ kamya.app.Category_FragmentActivity
+ kamya.app.Category_FragmentActivity$1
+ kamya.app.Category_FragmentActivity$2
+ kamya.app.Category_FragmentActivity$3
+ kamya.app.Category_FragmentActivity$4
+ kamya.app.Category_FragmentActivity$Gridview1Adapter
 androidx/viewpager/R.java
  androidx.viewpager.R
  androidx.viewpager.R$attr
@@ -309,46 +402,17 @@ androidx/viewpager/R.java
  androidx.viewpager.R$string
  androidx.viewpager.R$style
  androidx.viewpager.R$styleable
-kamya/app/HomeLayout.java
- kamya.app.HomeLayout
- kamya.app.HomeLayout$1
-kamya/app/MainActivity.java
- kamya.app.MainActivity
- kamya.app.MainActivity$1
- kamya.app.MainActivity$1$1
-kamya/app/LoginActivity.java
- kamya.app.LoginActivity
- kamya.app.LoginActivity$1
- kamya.app.LoginActivity$10
- kamya.app.LoginActivity$11
- kamya.app.LoginActivity$12
- kamya.app.LoginActivity$13
- kamya.app.LoginActivity$14
- kamya.app.LoginActivity$15
- kamya.app.LoginActivity$16
- kamya.app.LoginActivity$17
- kamya.app.LoginActivity$18
- kamya.app.LoginActivity$19
- kamya.app.LoginActivity$2
- kamya.app.LoginActivity$2$1
- kamya.app.LoginActivity$2$2
- kamya.app.LoginActivity$2$3
- kamya.app.LoginActivity$20
- kamya.app.LoginActivity$21
- kamya.app.LoginActivity$22
- kamya.app.LoginActivity$22$1
- kamya.app.LoginActivity$22$1$1
- kamya.app.LoginActivity$23
- kamya.app.LoginActivity$24
- kamya.app.LoginActivity$25
- kamya.app.LoginActivity$26
- kamya.app.LoginActivity$27
- kamya.app.LoginActivity$28
- kamya.app.LoginActivity$29
- kamya.app.LoginActivity$3
- kamya.app.LoginActivity$4
- kamya.app.LoginActivity$5
- kamya.app.LoginActivity$6
- kamya.app.LoginActivity$7
- kamya.app.LoginActivity$8
- kamya.app.LoginActivity$9
+androidx/localbroadcastmanager/R.java
+ androidx.localbroadcastmanager.R
+androidx/vectordrawable/animated/R.java
+ androidx.vectordrawable.animated.R
+ androidx.vectordrawable.animated.R$attr
+ androidx.vectordrawable.animated.R$color
+ androidx.vectordrawable.animated.R$dimen
+ androidx.vectordrawable.animated.R$drawable
+ androidx.vectordrawable.animated.R$id
+ androidx.vectordrawable.animated.R$integer
+ androidx.vectordrawable.animated.R$layout
+ androidx.vectordrawable.animated.R$string
+ androidx.vectordrawable.animated.R$style
+ androidx.vectordrawable.animated.R$styleable

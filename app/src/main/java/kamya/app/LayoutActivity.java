@@ -2,6 +2,7 @@ package kamya.app;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -60,7 +61,7 @@ public class LayoutActivity extends  AppCompatActivity  {
 	private ViewPager viewpager1;
 	private BottomNavigationView bottomnavigation1;
 	private TextView title;
-
+	private TextView name, email, phone, userid,logout,bill;
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
 		super.onCreate(_savedInstanceState);
@@ -70,7 +71,47 @@ public class LayoutActivity extends  AppCompatActivity  {
 	}
 	
 	private void initialize(Bundle _savedInstanceState) {
-		
+
+
+
+
+		/////////////////DRAWER LAYOUT /////////////////////
+
+		name = findViewById(R.id.name);
+		userid = findViewById(R.id.user_id);
+		phone = findViewById(R.id.mobile);
+		email = findViewById(R.id.email);
+		logout = findViewById(R.id.Logout);
+		bill = findViewById(R.id.bill_id);
+
+		SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+
+		try{
+			String _phone=sh.getString("mobile", "");
+			String _fullname=sh.getString("fullname", "");
+			String _email=sh.getString("email", "");
+			String _id = sh.getString("user_id", "");
+			//String _bill = sh.getString("bill_id", "");
+
+
+			phone.setText(_phone);
+			name.setText(_fullname);
+			email.setText(_email);
+			userid.setText(_id);
+			//bill.setText(_bill +"\nbill_id");
+
+		}catch(Exception e)
+		{
+			showMessage(e.toString());
+		}
+
+
+
+
+
+
+
+		/////////////////////////////////
 		_app_bar = (AppBarLayout) findViewById(R.id._app_bar);
 		_coordinator = (CoordinatorLayout) findViewById(R.id._coordinator);
 		_toolbar = (Toolbar) findViewById(R.id._toolbar);
@@ -240,16 +281,21 @@ public class LayoutActivity extends  AppCompatActivity  {
 	}
 
 
+
 	private void initializeLogic() {
 
 		_transparent_satus();
-		_shape(100, 100, 0, 0, "#ffffff", "#ffffff", 0, bottomnavigation1);
+		_shape(100, 100, 0, 0, "#ffffff", "#bdbdbd", 2, bottomnavigation1);
 		bottomnavigation1.setElevation((float)15);
         _UI();
 		//bottomnavigation1.getBar().setBackgroundColor(0xFF000000);
 		//bottomnavigation1.setActiveTabColor("#FFFFFE");
 		try{ Objects.requireNonNull(getSupportActionBar()).hide(); }
 		catch (Exception e){}
+
+
+
+
 
 
 
@@ -281,6 +327,12 @@ public class LayoutActivity extends  AppCompatActivity  {
 		else {
 			super.onBackPressed();
 		}
+	}
+
+
+	public void openDrawer() {
+		DrawerLayout drawer = (DrawerLayout) findViewById(R.id._drawer);
+		drawer.openDrawer(GravityCompat.START);
 	}
 
 	public void _transparent_satus () {

@@ -61,6 +61,7 @@
 							<com.google.android.material.bottomnavigation.BottomNavigationView
 								android:id="@+id/bottomnavigation1"
 								android:layout_width="match_parent"
+								android:elevation="10dp"
 								android:layout_height="wrap_content"/>
 						</LinearLayout>
 					</RelativeLayout>
