@@ -341,6 +341,8 @@ menu.setOnClickListener(new OnClickListener() {
 				final String _tag = _param1;
 				final String _response = _param2;
 				final HashMap<String, Object> _responseHeaders = _param3;
+
+				//Toast.makeText(getActivity(), _response, Toast.LENGTH_SHORT).show();
 				_show_response(_response);
 			}
 
@@ -406,9 +408,24 @@ menu.setOnClickListener(new OnClickListener() {
 		user_name.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.BOLD);
 		welcome.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
 
-		_show_response(tempJson);
+		//_show_response(tempJson);
 
-		//_api_request();
+		_api_request();
+
+
+		show_more3.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+
+				Intent in = new Intent();
+				in.setClass(getContext(), SeeMoreActivity.class);
+				in.putExtra("type","fresh_new");
+				startActivity(in);
+
+
+			}
+		});
+
 	}
 
 	@Override
@@ -494,6 +511,7 @@ menu.setOnClickListener(new OnClickListener() {
 	}
 
 
+
 	public void _api_request () {
 		map.clear();
 		listmap.clear();
@@ -532,6 +550,7 @@ menu.setOnClickListener(new OnClickListener() {
 				// refresh the list or recycle or grid
 
 				Collections.shuffle(results);
+
 				_grid_from_list(results);
 
 				_grid_from_list2(results);
@@ -547,7 +566,8 @@ menu.setOnClickListener(new OnClickListener() {
 				//Util.showMessage(getContext(), _response);
 			}
 		} catch(Exception e) {
-			Util.showMessage(getContext(), "Error ");
+
+			Util.showMessage(getContext(), "Error \n\n"+e);
 		}
 	}
 
@@ -903,38 +923,76 @@ Code By EPIC Technical Tricks on 26th April 2022
 			final TextView price = (TextView) _view.findViewById(R.id.price);
 			final ImageView wish_btn = (ImageView) _view.findViewById(R.id.wish_btn);
 
-			product_name.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.BOLD);
-			qty.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
-			price.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
-			price.setText("₹"+results.get((int)_position).get("product_price").toString().replaceAll("[.]00",""));
-			product_name.setText(results.get((int)_position).get("product_name").toString());
+			try{
+
+				product_name.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.BOLD);
+				qty.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
+				price.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
+
+				price.setText("₹"+ Objects.requireNonNull(results.get((int) _position).get("product_price")).toString().replaceAll("[.]00",""));
+				product_name.setText(results.get((int)_position).get("product_name").toString());
 
 
 
 
-			Glide.with(getContext())
-					.load(Uri.parse(results.get((int)_position).get("product_image").toString()))
-                     .error(R.drawable.pyramids)
-					.placeholder(R.drawable.pyramids)
-					.thumbnail(0.01f)
-					.into(product_image);
+				Glide.with(getContext())
+						.load(Uri.parse(results.get((int)_position).get("product_image").toString()))
+						.error(R.drawable.pyramids)
+						.placeholder(R.drawable.pyramids)
+						.thumbnail(0.01f)
+						.into(product_image);
 
 
-			wish_btn.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b) { this.setCornerRadius(a); this.setColor(b); return this; } }.getIns((int)100, 0xFFFFFFFF));
-			product_desc = results.get((int)_position).get("product_desc").toString();
-			wish_btn.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View _view) {
+				wish_btn.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b) { this.setCornerRadius(a); this.setColor(b); return this; } }.getIns((int)100, 0xFFFFFFFF));
 
-					wish_btn.setImageResource(R.drawable.red_heart);
-					Util.showMessage(getContext(), "Wishlist Added");
-				}
-			});
+
+				 wish_btn.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View _view) {
+
+						wish_btn.setImageResource(R.drawable.red_heart);
+						Util.showMessage(getContext(), "Wishlist Added");
+					}
+				});
+
+				cardview1.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View view) {
+
+						Intent in = new Intent();
+						in.setClass(getContext(),ViewProductActivity.class);
+						in.putExtra("imageURL", Objects.requireNonNull(results.get((int) _position).get("product_image")).toString());
+						//in.putExtra("desc",Objects.requireNonNull(results.get((int) _position).get("product_desc")).toString());
+						in.putExtra("price",price.getText());
+						in.putExtra("cat_name", Objects.requireNonNull(results.get((int) _position).get("category_name")).toString());
+						in.putExtra("name",product_name.getText());
+
+						_ActivityTransition(product_name, "p", in);
+
+
+						//startActivity(in);
+
+					}
+				});
+
+
+			}catch (Exception e)
+			{
+				Util.showMessage(getContext(),"Error on api parameter \n\n"+e);
+			}
+
 
 
 			return _view;
 		}
 	}
+
+
+	public void _ActivityTransition (final View _view, final String _transitionName, final Intent _intent) {
+		_view.setTransitionName(_transitionName); android.app.ActivityOptions optionsCompat = android.app.ActivityOptions.makeSceneTransitionAnimation(getActivity(), _view, _transitionName); startActivity(_intent, optionsCompat.toBundle());
+	}
+
+
 	public class Listview2Adapter extends BaseAdapter {
 		ArrayList<HashMap<String, Object>> _data;
 		public Listview2Adapter(ArrayList<HashMap<String, Object>> _arr) {
@@ -992,7 +1050,7 @@ Code By EPIC Technical Tricks on 26th April 2022
 
 
 			wish_btn.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b) { this.setCornerRadius(a); this.setColor(b); return this; } }.getIns((int)100, 0xFFFFFFFF));
-			product_desc = results.get((int)_position).get("product_desc").toString();
+			//product_desc = results.get((int)_position).get("product_desc").toString();
 			wish_btn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View _view) {
@@ -1063,8 +1121,7 @@ Code By EPIC Technical Tricks on 26th April 2022
 
 
 			wish_btn.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b) { this.setCornerRadius(a); this.setColor(b); return this; } }.getIns((int)100, 0xFFFFFFFF));
-			product_desc = results.get((int)_position).get("product_desc").toString();
-			wish_btn.setOnClickListener(new View.OnClickListener() {
+				wish_btn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View _view) {
 
@@ -1134,7 +1191,7 @@ Code By EPIC Technical Tricks on 26th April 2022
 
 
 			wish_btn.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b) { this.setCornerRadius(a); this.setColor(b); return this; } }.getIns((int)100, 0xFFFFFFFF));
-			product_desc = results.get((int)_position).get("product_desc").toString();
+//			product_desc = results.get((int)_position).get("product_desc").toString();
 			wish_btn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View _view) {

@@ -106,7 +106,20 @@ public class LayoutActivity extends  AppCompatActivity  {
 		}
 
 
+		logout.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
 
+				SharedPreferences sha = LayoutActivity.this.getSharedPreferences("MySharedPref",MODE_PRIVATE);
+				SharedPreferences.Editor editor = sha.edit();
+				editor.clear();
+				editor.apply();
+
+				startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+				finish();
+
+			}
+		});
 
 
 
@@ -280,9 +293,14 @@ public class LayoutActivity extends  AppCompatActivity  {
 		_view.setBackground(s);
 	}
 
+	public void _setTransitionName (final View _view, final String _transitionName) {
+		_view.setTransitionName(_transitionName);
+	}
 
 
 	private void initializeLogic() {
+
+		_setTransitionName(_fab, "p");
 
 		_transparent_satus();
 		_shape(100, 100, 0, 0, "#ffffff", "#bdbdbd", 2, bottomnavigation1);

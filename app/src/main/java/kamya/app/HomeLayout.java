@@ -89,6 +89,8 @@ Glide.with(getApplicationContext()).load(Uri.parse("tggfxd")).into(bg);
 
 */
 
+
+
 		/*
 
 	time = new TimerTask() {

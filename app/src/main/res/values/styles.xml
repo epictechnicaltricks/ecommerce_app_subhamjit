@@ -8,6 +8,9 @@
 		<item	name="android:colorControlHighlight">@color/colorControlHighlight</item>
 		<item	name="android:colorControlNormal">@color/colorControlNormal</item>
 	</style>
+
+
+
 	<style	name="NoStatusBar"	parent="AppTheme">
 		<item	name="android:windowFullscreen">true</item>
 	</style>

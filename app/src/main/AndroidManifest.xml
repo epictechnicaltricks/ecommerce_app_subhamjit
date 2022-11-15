@@ -37,6 +37,8 @@
 		android:screenOrientation="portrait"/>
 
 		<activity android:name=".HomeLayout" android:theme="@style/NoActionBar"/>
+		<activity android:name=".ViewProductActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+		<activity android:name=".SeeMoreActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
 
 		<uses-library
