@@ -192,9 +192,20 @@ kamya/app/LayoutActivity.java
  kamya.app.LayoutActivity$2
  kamya.app.LayoutActivity$3
  kamya.app.LayoutActivity$4
+ kamya.app.LayoutActivity$5
  kamya.app.LayoutActivity$MyFragmentAdapter
 androidx/lifecycle/viewmodel/R.java
  androidx.lifecycle.viewmodel.R
+kamya/app/SeeMoreActivity.java
+ kamya.app.SeeMoreActivity
+ kamya.app.SeeMoreActivity$1
+ kamya.app.SeeMoreActivity$2
+ kamya.app.SeeMoreActivity$3
+ kamya.app.SeeMoreActivity$4
+ kamya.app.SeeMoreActivity$Gridview1Adapter
+ kamya.app.SeeMoreActivity$Gridview1Adapter$1
+ kamya.app.SeeMoreActivity$Gridview1Adapter$2
+ kamya.app.SeeMoreActivity$Gridview1Adapter$3
 com/bumptech/glide/R.java
  com.bumptech.glide.R
  com.bumptech.glide.R$attr
@@ -258,18 +269,26 @@ kamya/app/Home_FragmentActivity.java
  kamya.app.Home_FragmentActivity$1
  kamya.app.Home_FragmentActivity$10
  kamya.app.Home_FragmentActivity$11
+ kamya.app.Home_FragmentActivity$11$1
+ kamya.app.Home_FragmentActivity$12
+ kamya.app.Home_FragmentActivity$13
+ kamya.app.Home_FragmentActivity$14
+ kamya.app.Home_FragmentActivity$15
+ kamya.app.Home_FragmentActivity$16
+ kamya.app.Home_FragmentActivity$17
  kamya.app.Home_FragmentActivity$2
  kamya.app.Home_FragmentActivity$3
  kamya.app.Home_FragmentActivity$4
  kamya.app.Home_FragmentActivity$5
  kamya.app.Home_FragmentActivity$6
  kamya.app.Home_FragmentActivity$7
+ kamya.app.Home_FragmentActivity$7$1
  kamya.app.Home_FragmentActivity$8
- kamya.app.Home_FragmentActivity$8$1
  kamya.app.Home_FragmentActivity$9
  kamya.app.Home_FragmentActivity$Listview1Adapter
  kamya.app.Home_FragmentActivity$Listview1Adapter$1
  kamya.app.Home_FragmentActivity$Listview1Adapter$2
+ kamya.app.Home_FragmentActivity$Listview1Adapter$3
  kamya.app.Home_FragmentActivity$Listview2Adapter
  kamya.app.Home_FragmentActivity$Listview2Adapter$1
  kamya.app.Home_FragmentActivity$Listview2Adapter$2
@@ -279,7 +298,25 @@ kamya/app/Home_FragmentActivity.java
  kamya.app.Home_FragmentActivity$Listview4Adapter
  kamya.app.Home_FragmentActivity$Listview4Adapter$1
  kamya.app.Home_FragmentActivity$Listview4Adapter$2
+ kamya.app.Home_FragmentActivity$NewGridAdapter
+ kamya.app.Home_FragmentActivity$NewGridAdapter$1
  kamya.app.Home_FragmentActivity$Viewpager1Adapter
+kamya/app/ViewProductActivity.java
+ kamya.app.ViewProductActivity
+ kamya.app.ViewProductActivity$1
+ kamya.app.ViewProductActivity$10
+ kamya.app.ViewProductActivity$11
+ kamya.app.ViewProductActivity$12
+ kamya.app.ViewProductActivity$13
+ kamya.app.ViewProductActivity$14
+ kamya.app.ViewProductActivity$2
+ kamya.app.ViewProductActivity$3
+ kamya.app.ViewProductActivity$4
+ kamya.app.ViewProductActivity$5
+ kamya.app.ViewProductActivity$6
+ kamya.app.ViewProductActivity$7
+ kamya.app.ViewProductActivity$8
+ kamya.app.ViewProductActivity$9
 androidx/appcompat/R.java
  androidx.appcompat.R
  androidx.appcompat.R$anim
@@ -297,6 +334,21 @@ androidx/appcompat/R.java
  androidx.appcompat.R$styleable
 androidx/lifecycle/livedata/R.java
  androidx.lifecycle.livedata.R
+com/example/tastytoast/R.java
+ com.example.tastytoast.R
+ com.example.tastytoast.R$anim
+ com.example.tastytoast.R$attr
+ com.example.tastytoast.R$bool
+ com.example.tastytoast.R$color
+ com.example.tastytoast.R$dimen
+ com.example.tastytoast.R$drawable
+ com.example.tastytoast.R$id
+ com.example.tastytoast.R$integer
+ com.example.tastytoast.R$interpolator
+ com.example.tastytoast.R$layout
+ com.example.tastytoast.R$string
+ com.example.tastytoast.R$style
+ com.example.tastytoast.R$styleable
 androidx/legacy/coreui/R.java
  androidx.legacy.coreui.R
  androidx.legacy.coreui.R$attr

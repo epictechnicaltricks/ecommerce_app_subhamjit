@@ -245,6 +245,9 @@ switch (getIntent().getStringExtra("type"))
 						Intent in = new Intent();
 						in.setClass(SeeMoreActivity.this,ViewProductActivity.class);
 						in.putExtra("imageURL", Objects.requireNonNull(results.get((int) _position).get("product_image")).toString());
+
+						in.putExtra("product_id", Objects.requireNonNull(results.get((int) _position).get("product_id")).toString());
+
 						//in.putExtra("desc",Objects.requireNonNull(results.get((int) _position).get("product_desc")).toString());
 						in.putExtra("price",price.getText());
 						in.putExtra("cat_name", Objects.requireNonNull(results.get((int) _position).get("category_name")).toString());

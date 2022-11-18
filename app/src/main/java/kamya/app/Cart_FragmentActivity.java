@@ -11,9 +11,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 
-public class Cart_FragmentActivity extends  Fragment  { 
+
+
+public class Cart_FragmentActivity extends  Fragment  {
+
 	
-	@NonNull
+
+
+@NonNull
 	@Override
 	public View onCreateView(@NonNull LayoutInflater _inflater, @Nullable ViewGroup _container, @Nullable Bundle _savedInstanceState) {
 		View _view = _inflater.inflate(R.layout.cart__fragment, _container, false);

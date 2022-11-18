@@ -48,7 +48,10 @@ public class Category_FragmentActivity extends  Fragment  {
 
 	private RequestNetwork re;
 	private RequestNetwork.RequestListener _re_request_listener;
-	@NonNull
+	
+
+
+@NonNull
 	@Override
 	public View onCreateView(@NonNull LayoutInflater _inflater, @Nullable ViewGroup _container, @Nullable Bundle _savedInstanceState) {
 		View _view = _inflater.inflate(R.layout.category__fragment, _container, false);
@@ -67,7 +70,12 @@ public class Category_FragmentActivity extends  Fragment  {
 		progressbar1 = (ProgressBar) _view.findViewById(R.id.progressbar1);
 		re = new RequestNetwork((Activity)getContext());
 
-		_re_request_listener = new RequestNetwork.RequestListener() {
+
+
+
+
+
+			_re_request_listener = new RequestNetwork.RequestListener() {
 			@Override
 			public void onResponse(String _param1, String _param2, HashMap<String, Object> _param3) {
 				final String _tag = _param1;
@@ -86,6 +94,7 @@ public class Category_FragmentActivity extends  Fragment  {
 	}
 
 	private void initializeLogic() {
+
 		_api_request();
 		gridview1.setVerticalSpacing((int)0);
 		gridview1.setHorizontalSpacing((int)0);
@@ -99,11 +108,6 @@ public class Category_FragmentActivity extends  Fragment  {
 
 		super.onActivityResult(_requestCode, _resultCode, _data);
 
-		switch (_requestCode) {
-
-			default:
-				break;
-		}
 	}
 
 	public void _api_request () {

@@ -40,7 +40,7 @@
                     android:id="@+id/linear4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="35dp"
+
                     android:padding="8dp"
                     android:gravity="center_horizontal|center_vertical"
                     android:orientation="horizontal">
@@ -144,11 +144,14 @@
                         android:textColor="#616161"/>
                 </LinearLayout>
             </LinearLayout>
+<!--
 
-            <ScrollView
+            <androidx.core.widget.NestedScrollView
                 android:id="@+id/vscroll1"
+                android:isScrollContainer="true"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
+-->
 
                 <LinearLayout
                     android:id="@+id/scroll"
@@ -161,280 +164,339 @@
                         android:layout_width="match_parent"
                         android:layout_height="190dp" />
 
-                    <!-- This a layout -->
 
-
-                    <LinearLayout
-                        android:background="@drawable/back_white_full_round11"
-                        android:id="@+id/slider_layout2"
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/cat"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:id="@+id/title_layout2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:padding="8dp">
-
-                            <TextView
-
-                                android:id="@+id/title2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="8dp"
-                                android:text="Top Picks"
-                                android:textColor="#FBFBFB"
-                                android:textSize="22sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-
-                                android:background="@drawable/back_white_full_round99"
-
-                                android:id="@+id/show_more23"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="10dp"
-
-                                android:padding="8dp"
-                                android:text="See More"
-                                android:textColor="#000000"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-                        <HorizontalScrollView
-                            android:id="@+id/hscroll2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="20dp">
-                            <LinearLayout
-                                android:id="@+id/linear_g2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-                                <ListView
-                                    android:scrollbars="none"
-                                    android:id="@+id/listview1"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-
-                                    android:padding="8dp"
-                                    android:choiceMode="none"/>
-                            </LinearLayout>
-                        </HorizontalScrollView>
-                    </LinearLayout>
+                        android:paddingLeft="20dp"
+                        android:paddingTop="4dp"
+                        android:paddingRight="13dp"
+                        android:paddingBottom="0dp"
+                        android:text="Category "
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:textColor="#212121"/>
 
 
-                    <!-- This a layout -->
 
-                    <LinearLayout
-                        android:id="@+id/slider_layout3"
+                    <GridView
+                        android:scrollbars="none"
+                        android:id="@+id/new_grid"
                         android:layout_width="match_parent"
+
+                        android:numColumns="auto_fit"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:id="@+id/title_layout3"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:padding="8dp">
-
-                            <TextView
-                                android:id="@+id/title22"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="8dp"
-                                android:text="Trending"
-                                android:textColor="#000000"
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
-
-                            <TextView
+                        android:layout_marginBottom="55dp"
+                        android:paddingLeft="8dp"
+                        android:paddingTop="8dp"
+                        android:paddingRight="8dp"
+                        android:stretchMode="columnWidth"/>
 
 
-                                android:id="@+id/show_more2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="10dp"
-                                android:textStyle="bold"
-                                android:padding="8dp"
-                                android:text="See More"
-                                android:textColor="#052B9C"
-                                android:textSize="14sp" />
-                        </LinearLayout>
 
-                        <HorizontalScrollView
-                            android:id="@+id/hscroll22"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="20dp">
-                            <LinearLayout
-                                android:id="@+id/linear_g3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-                                <ListView
-                                    android:id="@+id/listview2"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
+    <LinearLayout
 
-                                    android:padding="8dp"
-                                    android:choiceMode="none"/>
-                            </LinearLayout>
-                        </HorizontalScrollView>
+        android:visibility="gone"
+
+        android:id="@+id/all_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
 
-                    </LinearLayout>
 
 
-                    <androidx.viewpager.widget.ViewPager
-                        android:id="@+id/viewpager2"
+
+
+        <!-- This a layout -->
+
+
+        <LinearLayout
+
+            android:background="@drawable/back_white_full_round11"
+            android:id="@+id/slider_layout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/title_layout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <TextView
+
+                    android:id="@+id/title2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="8dp"
+                    android:text="Top Picks"
+                    android:textColor="#FBFBFB"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+
+                    android:background="@drawable/back_white_full_round99"
+
+                    android:id="@+id/show_more23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+
+                    android:padding="8dp"
+                    android:text="See More"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <HorizontalScrollView
+                android:id="@+id/hscroll2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="20dp">
+                <LinearLayout
+                    android:id="@+id/linear_g2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ListView
+                        android:scrollbars="none"
+                        android:id="@+id/listview1"
                         android:layout_width="match_parent"
-                        android:layout_height="190dp" />
+                        android:layout_height="match_parent"
+
+                        android:padding="8dp"
+                        android:choiceMode="none"/>
+                </LinearLayout>
+            </HorizontalScrollView>
+        </LinearLayout>
 
 
-                    <!-- This a layout -->
+        <!-- This a layout -->
 
-                    <LinearLayout
-                        android:background="@drawable/back_white_full_round22"
-                        android:id="@+id/slider_layout"
+
+        <LinearLayout
+
+            android:id="@+id/slider_layout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/title_layout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/title22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="8dp"
+                    android:text="Trending"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+
+
+                    android:id="@+id/show_more2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:textStyle="bold"
+                    android:padding="8dp"
+                    android:text="See More"
+                    android:textColor="#052B9C"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <HorizontalScrollView
+                android:id="@+id/hscroll22"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="20dp">
+                <LinearLayout
+                    android:id="@+id/linear_g3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ListView
+                        android:id="@+id/listview2"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_height="match_parent"
 
-                        <LinearLayout
-
-                            android:id="@+id/title_layout"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:padding="8dp">
-
-                            <TextView
-                                android:id="@+id/title"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="8dp"
-                                android:text="Winter Sell"
-                                android:textColor="#FFFFFF"
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:background="@drawable/back_white_full_round99"
-
-                                android:id="@+id/show_more"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="10dp"
-                                android:padding="8dp"
-                                android:text="See More"
-                                android:textColor="#000000"
-                                android:textSize="14sp" />
-                        </LinearLayout>
+                        android:padding="8dp"
+                        android:choiceMode="none"/>
+                </LinearLayout>
+            </HorizontalScrollView>
 
 
-                        <HorizontalScrollView
-                            android:id="@+id/hscroll222"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="20dp">
-                            <LinearLayout
-                                android:id="@+id/linear_g4"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-                                <ListView
-                                    android:id="@+id/listview3"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-
-                                    android:padding="8dp"
-                                    android:choiceMode="none"/>
-                            </LinearLayout>
-                        </HorizontalScrollView>
+        </LinearLayout>
 
 
-                    </LinearLayout>
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager2"
+            android:layout_width="match_parent"
+            android:layout_height="190dp" />
 
 
-                    <androidx.viewpager.widget.ViewPager
-                        android:layout_marginTop="10dp"
-                        android:id="@+id/viewpager3"
+        <!-- This a layout -->
+
+        <LinearLayout
+            android:background="@drawable/back_white_full_round22"
+            android:id="@+id/slider_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+
+                android:id="@+id/title_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="8dp"
+                    android:text="Winter Sell"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:background="@drawable/back_white_full_round99"
+
+                    android:id="@+id/show_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:padding="8dp"
+                    android:text="See More"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+
+            <HorizontalScrollView
+                android:id="@+id/hscroll222"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="20dp">
+                <LinearLayout
+                    android:id="@+id/linear_g4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ListView
+                        android:id="@+id/listview3"
                         android:layout_width="match_parent"
-                        android:layout_height="190dp" />
+                        android:layout_height="match_parent"
 
-                    <LinearLayout
-                        android:layout_marginBottom="54dp"
-                        android:background="@drawable/back_white_full_round44"
-                        android:id="@+id/slider_layout4"
+                        android:padding="8dp"
+                        android:choiceMode="none"/>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+
+        </LinearLayout>
+
+
+        <androidx.viewpager.widget.ViewPager
+            android:layout_marginTop="10dp"
+            android:id="@+id/viewpager3"
+            android:layout_width="match_parent"
+            android:layout_height="190dp" />
+
+        <LinearLayout
+            android:layout_marginBottom="54dp"
+            android:background="@drawable/back_white_full_round44"
+            android:id="@+id/slider_layout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/title_layout6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/title3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="8dp"
+                    android:text="Festival offers"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:background="@drawable/back_white_full_round99"
+
+                    android:id="@+id/show_more3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:padding="8dp"
+                    android:text="See More"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <HorizontalScrollView
+                android:id="@+id/hscroll2222"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="20dp">
+                <LinearLayout
+                    android:id="@+id/linear_g5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ListView
+                        android:id="@+id/listview4"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_height="match_parent"
 
-                        <LinearLayout
-                            android:id="@+id/title_layout6"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:padding="8dp">
-
-                            <TextView
-                                android:id="@+id/title3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="8dp"
-                                android:text="Festival offers"
-                                android:textColor="#FFFFFF"
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:background="@drawable/back_white_full_round99"
-
-                                android:id="@+id/show_more3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="10dp"
-                                android:padding="8dp"
-                                android:text="See More"
-                                android:textColor="#000000"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-                        <HorizontalScrollView
-                            android:id="@+id/hscroll2222"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="20dp">
-                            <LinearLayout
-                                android:id="@+id/linear_g5"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-                                <ListView
-                                    android:id="@+id/listview4"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-
-                                    android:padding="8dp"
-                                    android:choiceMode="none"/>
-                            </LinearLayout>
-                        </HorizontalScrollView>
+                        android:padding="8dp"
+                        android:choiceMode="none"/>
+                </LinearLayout>
+            </HorizontalScrollView>
 
 
-                    </LinearLayout>
+        </LinearLayout>
+        <!-- This a layout -->
+
+
+
+
+
+    </LinearLayout>
+
+
 
 
                 </LinearLayout>
-            </ScrollView>
+         <!--   </androidx.core.widget.NestedScrollView>
+     -->
+
         </LinearLayout>
 
     </RelativeLayout>

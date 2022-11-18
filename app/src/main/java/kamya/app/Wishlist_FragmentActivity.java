@@ -12,8 +12,8 @@ import androidx.fragment.app.Fragment;
 
 
 public class Wishlist_FragmentActivity extends  Fragment  { 
-	
-	@NonNull
+
+@NonNull
 	@Override
 	public View onCreateView(@NonNull LayoutInflater _inflater, @Nullable ViewGroup _container, @Nullable Bundle _savedInstanceState) {
 		View _view = _inflater.inflate(R.layout.wishlist__fragment, _container, false);
@@ -33,12 +33,7 @@ public class Wishlist_FragmentActivity extends  Fragment  {
 	public void onActivityResult(int _requestCode, int _resultCode, Intent _data) {
 		
 		super.onActivityResult(_requestCode, _resultCode, _data);
-		
-		switch (_requestCode) {
-			
-			default:
-			break;
-		}
+
 	}
 	
 	

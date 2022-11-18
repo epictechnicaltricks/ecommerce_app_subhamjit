@@ -62,6 +62,11 @@ public class LayoutActivity extends  AppCompatActivity  {
 	private BottomNavigationView bottomnavigation1;
 	private TextView title;
 	private TextView name, email, phone, userid,logout,bill;
+
+	String api = "https://kkkamya.in/index.php/Api_request/api_list?";
+
+
+
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
 		super.onCreate(_savedInstanceState);
@@ -300,9 +305,16 @@ public class LayoutActivity extends  AppCompatActivity  {
 
 	private void initializeLogic() {
 
+
+		SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+		SharedPreferences.Editor myEdit = sharedPreferences.edit();
+
+		myEdit.putString("api", api);
+		myEdit.apply();
+
 		_setTransitionName(_fab, "p");
 
-		_transparent_satus();
+		//_transparent_satus();
 		_shape(100, 100, 0, 0, "#ffffff", "#bdbdbd", 2, bottomnavigation1);
 		bottomnavigation1.setElevation((float)15);
         _UI();

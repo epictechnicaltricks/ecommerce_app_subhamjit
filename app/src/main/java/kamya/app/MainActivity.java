@@ -90,14 +90,16 @@ Glide.with(getApplicationContext()).load(Uri.parse("tggfxd")).into(bg);
 						if(sh.getString("user_id", "").equals(""))
 						{
 							in.setClass(getApplicationContext(),LoginActivity.class);
-							_ActivityTransition(logo, "p", in);
+
 
 						} else {
 							//startActivity(new Intent(getApplicationContext(),HomeLayout.class));
-							startActivity(new Intent(getApplicationContext(),LayoutActivity.class));
+							in.setClass(getApplicationContext(),LayoutActivity.class);
+
 
 
 						}
+						_ActivityTransition(logo, "p", in);
 						finish();
 
 
@@ -117,12 +119,7 @@ Glide.with(getApplicationContext()).load(Uri.parse("tggfxd")).into(bg);
 	protected void onActivityResult(int _requestCode, int _resultCode, Intent _data) {
 		
 		super.onActivityResult(_requestCode, _resultCode, _data);
-		
-		switch (_requestCode) {
-			
-			default:
-			break;
-		}
+
 	}
 	
 	public void _transparentStatusAndNavigation () {

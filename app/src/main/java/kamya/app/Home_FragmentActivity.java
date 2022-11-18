@@ -22,7 +22,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,35 +45,35 @@ import java.util.TimerTask;
 public class Home_FragmentActivity extends  Fragment  {
 
 
-	private Timer _timer = new Timer();
+	private final Timer _timer = new Timer();
 
 	private double count = 0;
 	private HashMap<String, Object> map = new HashMap<>();
-	private String rawdata = "";
-	private double ki = 0;
-	private String di = "";
-	private String daydates = "";
-	private HashMap<String, Object> converted = new HashMap<>();
-	private String finedimage = "";
-	private String post = "";
-	private String ptitle = "";
-	private String userimage = "";
-	private String postcat = "";
-	private String username = "";
-	private String error = "";
+	private final String rawdata = "";
+	private final double ki = 0;
+	private final String di = "";
+	private final String daydates = "";
+	private final HashMap<String, Object> converted = new HashMap<>();
+	private final String finedimage = "";
+	private final String post = "";
+	private final String ptitle = "";
+	private final String userimage = "";
+	private final String postcat = "";
+	private final String username = "";
+	private final String error = "";
 	private HashMap<String, Object> api_map = new HashMap<>();
 	private String list = "";
-	private String product_desc = "";
+	private final String product_desc = "";
 
-	private ArrayList<HashMap<String, Object>> listmap = new ArrayList<>();
-	private ArrayList<HashMap<String, Object>> shut = new ArrayList<>();
-	private ArrayList<String> allraw = new ArrayList<>();
-	private ArrayList<HashMap<String, Object>> readypost = new ArrayList<>();
+	private final ArrayList<HashMap<String, Object>> listmap = new ArrayList<>();
+	private final ArrayList<HashMap<String, Object>> shut = new ArrayList<>();
+	private final ArrayList<String> allraw = new ArrayList<>();
+	private final ArrayList<HashMap<String, Object>> readypost = new ArrayList<>();
 	private ArrayList<HashMap<String, Object>> results = new ArrayList<>();
 
 	private LinearLayout bg;
 	private LinearLayout linear2;
-	private ScrollView vscroll1;
+	//private ScrollView vscroll1;
 	private LinearLayout linear4;
 	private LinearLayout search;
 	private LinearLayout linear5;
@@ -94,171 +93,19 @@ public class Home_FragmentActivity extends  Fragment  {
 	private TextView show_more,show_more2,show_more3,show_more4;
 	private LinearLayout linear6;
 
-	private TimerTask srcoll_timer;
+	private TimerTask srcoll_timer,time2; //here time2 for request category with some dely
 	private RequestNetwork re;
 	private RequestNetwork.RequestListener _re_request_listener;
 
 	private LinearLayout linear_g2,linear_g22,linear_g222,linear_g2222;
 	private ListView listview1,listview2,listview3,listview4;
 
-	String tempJson="{\n" +
-			"   \"status\":200,\n" +
-			"   \"0\":[\n" +
-			"      {\n" +
-			"         \"product_id\":\"8\",\n" +
-			"         \"category_name\":\"Saree n Saree\",\n" +
-			"         \"product_name\":\"Bollywood Saree\",\n" +
-			"         \"product_price\":\"1500.00\",\n" +
-			"         \"product_image\":\"https://kkkamya.in/uploads/product/Product_20210822_1629642096.jpg\",\n" +
-			"         \"product_desc\":\"\"\n" +
-			"      },\n" +
-			"      {\n" +
-			"         \"product_id\":\"9\",\n" +
-			"         \"category_name\":\"Women Clothing\",\n" +
-			"         \"product_name\":\"Gown\",\n" +
-			"         \"product_price\":\"2000.00\",\n" +
-			"         \"product_image\":\"https://kkkamya.in/uploads/product/Product_20210824_1629799434.jpg\",\n" +
-			"         \"product_desc\":\"\"\n" +
-			"      },\n" +
-			"      {\n" +
-			"         \"product_id\":\"11\",\n" +
-			"         \"category_name\":\"Clothing & Apparel\",\n" +
-			"         \"product_name\":\"Chudidar\",\n" +
-			"         \"product_price\":\"800.00\",\n" +
-			"         \"product_image\":\"https://kkkamya.in/uploads/product/Product_20210824_1629801048.jpg\",\n" +
-			"         \"product_desc\":\"<p>Cotton Chudidar</p>\"\n" +
-			"      },\n" +
-			"      {\n" +
-			"         \"product_id\":\"12\",\n" +
-			"         \"category_name\":\"Women Clothing\",\n" +
-			"         \"product_name\":\"Western Dresses\",\n" +
-			"         \"product_price\":\"600.00\",\n" +
-			"         \"product_image\":\"https://kkkamya.in/uploads/product/Product_20210824_1629802060.jpg\",\n" +
-			"         \"product_desc\":\"\"\n" +
-			"      },\n" +
-			"      {\n" +
-			"         \"product_id\":\"14\",\n" +
-			"         \"category_name\":\"Women Clothing\",\n" +
-			"         \"product_name\":\"Western Dress\",\n" +
-			"         \"product_price\":\"800.00\",\n" +
-			"         \"product_image\":\"https://kkkamya.in/uploads/product/Product_20210824_1629806637.jpg\",\n" +
-			"         \"product_desc\":\"\"\n" +
-			"      },\n" +
-			"      {\n" +
-			"         \"product_id\":\"15\",\n" +
-			"         \"category_name\":\"Home Appliances\",\n" +
-			"         \"product_name\":\"Micro Oven\",\n" +
-			"         \"product_price\":\"2200.00\",\n" +
-			"         \"product_image\":\"https://kkkamya.in/uploads/product/Product_20210824_1629814968.jpg\",\n" +
-			"         \"product_desc\":\"\"\n" +
-			"      },\n" +
-			"      {\n" +
-			"         \"product_id\":\"23\",\n" +
-			"         \"category_name\":\"Fashion\",\n" +
-			"         \"product_name\":\"Ladies Bag\",\n" +
-			"         \"product_price\":\"500.00\",\n" +
-			"         \"product_image\":\"https://kkkamya.in/uploads/product/Product_20221004_1664895798.jpg\",\n" +
-			"         \"product_desc\":\"<p>Ladies Bag<br></p>\"\n" +
-			"      },\n" +
-			"      {\n" +
-			"         \"product_id\":\"24\",\n" +
-			"         \"category_name\":\"Fashion\",\n" +
-			"         \"product_name\":\"Ladies Bag\",\n" +
-			"         \"product_price\":\"550.00\",\n" +
-			"         \"product_image\":\"https://kkkamya.in/uploads/product/Product_20221004_1664896457.jpg\",\n" +
-			"         \"product_desc\":\"<p>3 no. of Ladies Bag </p>\"\n" +
-			"      },\n" +
-			"      {\n" +
-			"         \"product_id\":\"25\",\n" +
-			"         \"category_name\":\"Fashion\",\n" +
-			"         \"product_name\":\"Ladies Bags\",\n" +
-			"         \"product_price\":\"380.00\",\n" +
-			"         \"product_image\":\"https://kkkamya.in/uploads/product/Product_20211015_1634312536.jpg\",\n" +
-			"         \"product_desc\":\"<p>One no. of Ladies Lather Bag</p>\"\n" +
-			"      },\n" +
-			"      {\n" +
-			"         \"product_id\":\"26\",\n" +
-			"         \"category_name\":\"Fashion\",\n" +
-			"         \"product_name\":\"Ladies styles Bag\",\n" +
-			"         \"product_price\":\"400.00\",\n" +
-			"         \"product_image\":\"https://kkkamya.in/uploads/product/Product_20211015_1634312855.jpg\",\n" +
-			"         \"product_desc\":\"<p><br></p>\"\n" +
-			"      },\n" +
-			"      {\n" +
-			"         \"product_id\":\"28\",\n" +
-			"         \"category_name\":\"Home Décor & Furniture\",\n" +
-			"         \"product_name\":\"Furniture\",\n" +
-			"         \"product_price\":\"20000.00\",\n" +
-			"         \"product_image\":\"https://kkkamya.in/uploads/product/Product_20211229_1640717390.jpg\",\n" +
-			"         \"product_desc\":\"\"\n" +
-			"      },\n" +
-			"      {\n" +
-			"         \"product_id\":\"30\",\n" +
-			"         \"category_name\":\"Sharee\",\n" +
-			"         \"product_name\":\"Designer Shree\",\n" +
-			"         \"product_price\":\"950.00\",\n" +
-			"         \"product_image\":\"https://kkkamya.in/uploads/product/Product_20220117_1642420992.jpg\",\n" +
-			"         \"product_desc\":\"<p>Grand Look</p>\"\n" +
-			"      },\n" +
-			"      {\n" +
-			"         \"product_id\":\"33\",\n" +
-			"         \"category_name\":\"Women Clothing\",\n" +
-			"         \"product_name\":\"Chudidar Suit\",\n" +
-			"         \"product_price\":\"800.00\",\n" +
-			"         \"product_image\":\"https://kkkamya.in/uploads/product/Product_20220119_1642615897.jpg\",\n" +
-			"         \"product_desc\":\"<p>Chudidar Suit<br></p>\"\n" +
-			"      },\n" +
-			"      {\n" +
-			"         \"product_id\":\"34\",\n" +
-			"         \"category_name\":\"Wedding-dresses\",\n" +
-			"         \"product_name\":\"Marrage joda\",\n" +
-			"         \"product_price\":\"1800.00\",\n" +
-			"         \"product_image\":\"https://kkkamya.in/uploads/product/Product_20220122_1642860583.jpg\",\n" +
-			"         \"product_desc\":\"<p>Marrage joda<br></p>\"\n" +
-			"      },\n" +
-			"      {\n" +
-			"         \"product_id\":\"36\",\n" +
-			"         \"category_name\":\"Ethnic ware\",\n" +
-			"         \"product_name\":\"Couple set\",\n" +
-			"         \"product_price\":\"800.00\",\n" +
-			"         \"product_image\":\"https://kkkamya.in/uploads/product/Product_20220125_1643132931.jpg\",\n" +
-			"         \"product_desc\":\"Couple set\"\n" +
-			"      },\n" +
-			"      {\n" +
-			"         \"product_id\":\"42\",\n" +
-			"         \"category_name\":\"Ladis Fashion\",\n" +
-			"         \"product_name\":\"Kurtis\",\n" +
-			"         \"product_price\":\"280.00\",\n" +
-			"         \"product_image\":\"https://kkkamya.in/uploads/product/Product_20220211_1644599438.jpg\",\n" +
-			"         \"product_desc\":\"<p>Kurtis<br></p>\"\n" +
-			"      },\n" +
-			"      {\n" +
-			"         \"product_id\":\"43\",\n" +
-			"         \"category_name\":\"Electronic\",\n" +
-			"         \"product_name\":\"Head phone\",\n" +
-			"         \"product_price\":\"320.00\",\n" +
-			"         \"product_image\":\"https://kkkamya.in/uploads/product/Product_20220211_1644602240.jpg\",\n" +
-			"         \"product_desc\":\"<p>Head phone<br></p>\"\n" +
-			"      },\n" +
-			"      {\n" +
-			"         \"product_id\":\"44\",\n" +
-			"         \"category_name\":\"Home Décor & Furniture\",\n" +
-			"         \"product_name\":\"Sofa cum Bed\",\n" +
-			"         \"product_price\":\"11500.00\",\n" +
-			"         \"product_image\":\"https://kkkamya.in/uploads/product/Product_20220211_1644603203.jpg\",\n" +
-			"         \"product_desc\":\"<p>Sofa cum Bed<br></p>\"\n" +
-			"      },\n" +
-			"      {\n" +
-			"         \"product_id\":\"49\",\n" +
-			"         \"category_name\":\"Ladis Fashion\",\n" +
-			"         \"product_name\":\"Goun\",\n" +
-			"         \"product_price\":\"360.00\",\n" +
-			"         \"product_image\":\"https://kkkamya.in/uploads/product/Product_20220226_1645888210.jpg\",\n" +
-			"         \"product_desc\":\"<p><span style=\\\"color: rgb(5, 5, 5); font-family: \\\"Segoe UI Historic\\\", \\\"Segoe UI\\\", Helvetica, Arial, sans-serif; font-size: 15px; white-space: pre-wrap;\\\">Ensemble Kurtis</span></p><p><span style=\\\"color: rgb(5, 5, 5); font-family: \\\"Segoe UI Historic\\\", \\\"Segoe UI\\\", Helvetica, Arial, sans-serif; font-size: 15px; white-space: pre-wrap;\\\">Get this fashionable and stylish kurta for you to wear in any occasion. This is a comfortable wear.  This Regular Kurta is a perfect partner for all your ethnic wear needs.  You can pair it up with any causal or ethnic bottoms and you're sure to make heads turn. </span></p>\"\n" +
-			"      }\n" +
-			"   ]\n" +
-			"}";
-	@NonNull
+	GridView new_grid;
+
+	private RequestNetwork re22;
+	private RequestNetwork.RequestListener _re_request_listener22;
+
+@NonNull
 	@Override
 	public View onCreateView(@NonNull LayoutInflater _inflater, @Nullable ViewGroup _container, @Nullable Bundle _savedInstanceState) {
 		View _view = _inflater.inflate(R.layout.home__fragment, _container, false);
@@ -269,51 +116,54 @@ public class Home_FragmentActivity extends  Fragment  {
 
 	private void initialize(Bundle _savedInstanceState, View _view) {
 
-		linear_g2 = (LinearLayout) _view.findViewById(R.id.linear_g2);
-		linear_g22 = (LinearLayout) _view.findViewById(R.id.linear_g3);
-		linear_g222 = (LinearLayout) _view.findViewById(R.id.linear_g4);
-		linear_g2222 = (LinearLayout) _view.findViewById(R.id.linear_g5);
+
+		new_grid = _view.findViewById(R.id.new_grid);
+
+		linear_g2 = _view.findViewById(R.id.linear_g2);
+		linear_g22 = _view.findViewById(R.id.linear_g3);
+		linear_g222 = _view.findViewById(R.id.linear_g4);
+		linear_g2222 = _view.findViewById(R.id.linear_g5);
 
 
 
-		listview1 = (ListView) _view.findViewById(R.id.listview1);
-		listview2 = (ListView) _view.findViewById(R.id.listview2);
-		listview3 = (ListView) _view.findViewById(R.id.listview3);
-		listview4 = (ListView) _view.findViewById(R.id.listview4);
+		listview1 = _view.findViewById(R.id.listview1);
+		listview2 = _view.findViewById(R.id.listview2);
+		listview3 = _view.findViewById(R.id.listview3);
+		listview4 = _view.findViewById(R.id.listview4);
 
 
-		bg = (LinearLayout) _view.findViewById(R.id.bg);
-		linear2 = (LinearLayout) _view.findViewById(R.id.linear2);
-		vscroll1 = (ScrollView) _view.findViewById(R.id.vscroll1);
-		linear4 = (LinearLayout) _view.findViewById(R.id.linear4);
-		search = (LinearLayout) _view.findViewById(R.id.search);
-		linear5 = (LinearLayout) _view.findViewById(R.id.linear5);
-		cart_count = (TextView) _view.findViewById(R.id.cart_count);
-		imageview3 = (ImageView) _view.findViewById(R.id.imageview3);
+		bg = _view.findViewById(R.id.bg);
+		linear2 = _view.findViewById(R.id.linear2);
+		//vscroll1 = (ScrollView) _view.findViewById(R.id.vscroll1);
+		linear4 = _view.findViewById(R.id.linear4);
+		search = _view.findViewById(R.id.search);
+		linear5 = _view.findViewById(R.id.linear5);
+		cart_count = _view.findViewById(R.id.cart_count);
+		imageview3 = _view.findViewById(R.id.imageview3);
 
-		menu = (ImageView) _view.findViewById(R.id.menu);
+		menu = _view.findViewById(R.id.menu);
 
-		welcome = (TextView) _view.findViewById(R.id.welcome);
-		user_name = (TextView) _view.findViewById(R.id.user_name);
-		imageview2 = (ImageView) _view.findViewById(R.id.imageview2);
-		search_textview = (TextView) _view.findViewById(R.id.search_textview);
-		scroll = (LinearLayout) _view.findViewById(R.id.scroll);
-		viewpager1 = (ViewPager) _view.findViewById(R.id.viewpager1);
-		viewpager2 = (ViewPager) _view.findViewById(R.id.viewpager2);
-		viewpager3 = (ViewPager) _view.findViewById(R.id.viewpager3);
-		slider_layout = (LinearLayout) _view.findViewById(R.id.slider_layout);
-		gridview1 = (GridView) _view.findViewById(R.id.gridview1);
-		title_layout = (LinearLayout) _view.findViewById(R.id.title_layout);
+		welcome = _view.findViewById(R.id.welcome);
+		user_name = _view.findViewById(R.id.user_name);
+		imageview2 = _view.findViewById(R.id.imageview2);
+		search_textview = _view.findViewById(R.id.search_textview);
+		scroll = _view.findViewById(R.id.scroll);
+		viewpager1 = _view.findViewById(R.id.viewpager1);
+		viewpager2 = _view.findViewById(R.id.viewpager2);
+		viewpager3 = _view.findViewById(R.id.viewpager3);
+		slider_layout = _view.findViewById(R.id.slider_layout);
+		gridview1 = _view.findViewById(R.id.gridview1);
+		title_layout = _view.findViewById(R.id.title_layout);
 
-		title = (TextView) _view.findViewById(R.id.title);
-		title2 = (TextView) _view.findViewById(R.id.title2);
-		title3 = (TextView) _view.findViewById(R.id.title22);
-		title4 = (TextView) _view.findViewById(R.id.title3);
+		title = _view.findViewById(R.id.title);
+		title2 = _view.findViewById(R.id.title2);
+		title3 = _view.findViewById(R.id.title22);
+		title4 = _view.findViewById(R.id.title3);
 
-		show_more = (TextView) _view.findViewById(R.id.show_more);
-		show_more2 = (TextView) _view.findViewById(R.id.show_more2);
-		show_more3 = (TextView) _view.findViewById(R.id.show_more23);
-		show_more4 = (TextView) _view.findViewById(R.id.show_more3);
+		show_more = _view.findViewById(R.id.show_more);
+		show_more2 = _view.findViewById(R.id.show_more2);
+		show_more3 = _view.findViewById(R.id.show_more23);
+		show_more4 = _view.findViewById(R.id.show_more3);
 
 
 menu.setOnClickListener(new OnClickListener() {
@@ -326,6 +176,8 @@ menu.setOnClickListener(new OnClickListener() {
 });
 
 		re = new RequestNetwork((Activity)getContext());
+
+		re22 = new RequestNetwork((Activity)getContext());
 
 		search_textview.setOnLongClickListener(new View.OnLongClickListener() {
 			@Override
@@ -353,11 +205,34 @@ menu.setOnClickListener(new OnClickListener() {
 
 			}
 		};
+
+		_re_request_listener22 = new RequestNetwork.RequestListener() {
+			@Override
+			public void onResponse(String _param1, String _param2, HashMap<String, Object> _param3) {
+				final String _tag = _param1;
+				final String _response = _param2;
+				final HashMap<String, Object> _responseHeaders = _param3;
+
+				//Toast.makeText(getActivity(), "RESPONSE CATE \n\n"+_response, Toast.LENGTH_SHORT).show();
+				_show_response_categories(_response);
+			}
+
+			@Override
+			public void onErrorResponse(String _param1, String _param2) {
+				final String _tag = _param1;
+				final String _message = _param2;
+
+			}
+		};
+
 	}
 
 
 
 	private void initializeLogic() {
+
+
+
 		SharedPreferences sh = this.getActivity().getSharedPreferences("MySharedPref", 0);
 
 		try{
@@ -425,6 +300,25 @@ menu.setOnClickListener(new OnClickListener() {
 
 			}
 		});
+
+		time2 = new TimerTask() {
+			@Override
+			public void run() {
+				getActivity().runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+
+
+						_api_request_categories();
+
+						time2.cancel();
+					}
+				});
+			}
+		};
+		_timer.schedule(time2, 1500);
+
+
 
 	}
 
@@ -507,7 +401,7 @@ menu.setOnClickListener(new OnClickListener() {
 				});
 			}
 		};
-		_timer.scheduleAtFixedRate(srcoll_timer, (int)(1500), (int)(3000));
+		_timer.scheduleAtFixedRate(srcoll_timer, 1500, 3000);
 	}
 
 
@@ -610,21 +504,21 @@ menu.setOnClickListener(new OnClickListener() {
 		@Override
 		public CharSequence getPageTitle(int pos) {
 			// use the activitiy event (onTabLayoutNewTabAdded) in order to use this method
-			return "page " + String.valueOf(pos);
+			return "page " + pos;
 		}
 
 		@Override
 		public  Object instantiateItem(ViewGroup _container,  final int _position) {
 			View _view = LayoutInflater.from(_context).inflate(R.layout.custom_slider, _container, false);
 
-			final androidx.cardview.widget.CardView cardview1 = (androidx.cardview.widget.CardView) _view.findViewById(R.id.cardview1);
-			final ImageView imageview1 = (ImageView) _view.findViewById(R.id.imageview1);
+			final androidx.cardview.widget.CardView cardview1 = _view.findViewById(R.id.cardview1);
+			final ImageView imageview1 = _view.findViewById(R.id.imageview1);
 
 
 
 
 			Glide.with(Objects.requireNonNull(getContext()))
-					.load(Uri.parse(listmap.get((int)_position).get("image").toString()))
+					.load(Uri.parse(listmap.get(_position).get("image").toString()))
 					.error(R.drawable.pyramids)
 					.placeholder(R.drawable.pyramids)
 					.thumbnail(0.01f)
@@ -635,65 +529,6 @@ menu.setOnClickListener(new OnClickListener() {
 		}
 	}
 
-/*
-	public class Gridview1Adapter extends BaseAdapter {
-		ArrayList<HashMap<String, Object>> _data;
-		public Gridview1Adapter(ArrayList<HashMap<String, Object>> _arr) {
-			_data = _arr;
-		}
-
-		@Override
-		public int getCount() {
-			return _data.size();
-		}
-
-		@Override
-		public HashMap<String, Object> getItem(int _index) {
-			return _data.get(_index);
-		}
-
-		@Override
-		public long getItemId(int _index) {
-			return _index;
-		}
-		@Override
-		public View getView(final int _position, View _v, ViewGroup _container) {
-			LayoutInflater _inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			View _view = _v;
-			if (_view == null) {
-				_view = _inflater.inflate(R.layout.product_cus, null);
-			}
-
-			final androidx.cardview.widget.CardView cardview1 = (androidx.cardview.widget.CardView) _view.findViewById(R.id.cardview1);
-			final RelativeLayout relative = (RelativeLayout) _view.findViewById(R.id.relative);
-			final LinearLayout bottom = (LinearLayout) _view.findViewById(R.id.bottom);
-			final LinearLayout top = (LinearLayout) _view.findViewById(R.id.top);
-			final ImageView product_image = (ImageView) _view.findViewById(R.id.product_image);
-			final TextView product_name = (TextView) _view.findViewById(R.id.product_name);
-			final LinearLayout linear1 = (LinearLayout) _view.findViewById(R.id.linear1);
-			final TextView qty = (TextView) _view.findViewById(R.id.qty);
-			final TextView price = (TextView) _view.findViewById(R.id.price);
-			final ImageView wish_btn = (ImageView) _view.findViewById(R.id.wish_btn);
-
-			product_name.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), 1);
-			qty.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), 0);
-			price.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), 0);
-			price.setText(results.get((int)_position).get("product_price").toString());
-			product_name.setText(results.get((int)_position).get("product_name").toString());
-			Glide.with(getContext()).load(Uri.parse(results.get((int)_position).get("product_image").toString())).into(product_image);
-			wish_btn.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b) { this.setCornerRadius(a); this.setColor(b); return this; } }.getIns((int)100, 0xFFFFFFFF));
-			product_desc = results.get((int)_position).get("product_desc").toString();
-			wish_btn.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View _view) {
-					Util.showMessage(getContext(), "Wishlist Added");
-				}
-			});
-
-			return _view;
-		}
-	}
-*/
 
 
 	public void _grid_from_list (final ArrayList<HashMap<String, Object>> _listmap) {
@@ -912,16 +747,16 @@ Code By EPIC Technical Tricks on 26th April 2022
 				_view = _inflater.inflate(R.layout.product_cus, null);
 			}
 
-			final androidx.cardview.widget.CardView cardview1 = (androidx.cardview.widget.CardView) _view.findViewById(R.id.cardview1);
-			final RelativeLayout relative = (RelativeLayout) _view.findViewById(R.id.relative);
-			final LinearLayout bottom = (LinearLayout) _view.findViewById(R.id.bottom);
-			final LinearLayout top = (LinearLayout) _view.findViewById(R.id.top);
-			final ImageView product_image = (ImageView) _view.findViewById(R.id.product_image);
-			final TextView product_name = (TextView) _view.findViewById(R.id.product_name);
-			final LinearLayout linear1 = (LinearLayout) _view.findViewById(R.id.linear1);
-			final TextView qty = (TextView) _view.findViewById(R.id.qty);
-			final TextView price = (TextView) _view.findViewById(R.id.price);
-			final ImageView wish_btn = (ImageView) _view.findViewById(R.id.wish_btn);
+			final androidx.cardview.widget.CardView cardview1 = _view.findViewById(R.id.cardview1);
+			final RelativeLayout relative = _view.findViewById(R.id.relative);
+			final LinearLayout bottom = _view.findViewById(R.id.bottom);
+			final LinearLayout top = _view.findViewById(R.id.top);
+			final ImageView product_image = _view.findViewById(R.id.product_image);
+			final TextView product_name = _view.findViewById(R.id.product_name);
+			final LinearLayout linear1 = _view.findViewById(R.id.linear1);
+			final TextView qty = _view.findViewById(R.id.qty);
+			final TextView price = _view.findViewById(R.id.price);
+			final ImageView wish_btn = _view.findViewById(R.id.wish_btn);
 
 			try{
 
@@ -929,14 +764,14 @@ Code By EPIC Technical Tricks on 26th April 2022
 				qty.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
 				price.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
 
-				price.setText("₹"+ Objects.requireNonNull(results.get((int) _position).get("product_price")).toString().replaceAll("[.]00",""));
-				product_name.setText(results.get((int)_position).get("product_name").toString());
+				price.setText("₹"+ Objects.requireNonNull(results.get(_position).get("product_price")).toString().replaceAll("[.]00",""));
+				product_name.setText(results.get(_position).get("product_name").toString());
 
 
 
 
 				Glide.with(getContext())
-						.load(Uri.parse(results.get((int)_position).get("product_image").toString()))
+						.load(Uri.parse(results.get(_position).get("product_image").toString()))
 						.error(R.drawable.pyramids)
 						.placeholder(R.drawable.pyramids)
 						.thumbnail(0.01f)
@@ -961,10 +796,12 @@ Code By EPIC Technical Tricks on 26th April 2022
 
 						Intent in = new Intent();
 						in.setClass(getContext(),ViewProductActivity.class);
-						in.putExtra("imageURL", Objects.requireNonNull(results.get((int) _position).get("product_image")).toString());
+						in.putExtra("product_id", Objects.requireNonNull(results.get(_position).get("product_id")).toString());
+
+						in.putExtra("imageURL", Objects.requireNonNull(results.get(_position).get("product_image")).toString());
 						//in.putExtra("desc",Objects.requireNonNull(results.get((int) _position).get("product_desc")).toString());
 						in.putExtra("price",price.getText());
-						in.putExtra("cat_name", Objects.requireNonNull(results.get((int) _position).get("category_name")).toString());
+						in.putExtra("cat_name", Objects.requireNonNull(results.get(_position).get("category_name")).toString());
 						in.putExtra("name",product_name.getText());
 
 						_ActivityTransition(product_name, "p", in);
@@ -1021,28 +858,28 @@ Code By EPIC Technical Tricks on 26th April 2022
 				_view = _inflater.inflate(R.layout.product_cus, null);
 			}
 
-			final androidx.cardview.widget.CardView cardview1 = (androidx.cardview.widget.CardView) _view.findViewById(R.id.cardview1);
-			final RelativeLayout relative = (RelativeLayout) _view.findViewById(R.id.relative);
-			final LinearLayout bottom = (LinearLayout) _view.findViewById(R.id.bottom);
-			final LinearLayout top = (LinearLayout) _view.findViewById(R.id.top);
-			final ImageView product_image = (ImageView) _view.findViewById(R.id.product_image);
-			final TextView product_name = (TextView) _view.findViewById(R.id.product_name);
-			final LinearLayout linear1 = (LinearLayout) _view.findViewById(R.id.linear1);
-			final TextView qty = (TextView) _view.findViewById(R.id.qty);
-			final TextView price = (TextView) _view.findViewById(R.id.price);
-			final ImageView wish_btn = (ImageView) _view.findViewById(R.id.wish_btn);
+			final androidx.cardview.widget.CardView cardview1 = _view.findViewById(R.id.cardview1);
+			final RelativeLayout relative = _view.findViewById(R.id.relative);
+			final LinearLayout bottom = _view.findViewById(R.id.bottom);
+			final LinearLayout top = _view.findViewById(R.id.top);
+			final ImageView product_image = _view.findViewById(R.id.product_image);
+			final TextView product_name = _view.findViewById(R.id.product_name);
+			final LinearLayout linear1 = _view.findViewById(R.id.linear1);
+			final TextView qty = _view.findViewById(R.id.qty);
+			final TextView price = _view.findViewById(R.id.price);
+			final ImageView wish_btn = _view.findViewById(R.id.wish_btn);
 
 			product_name.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.BOLD);
 			qty.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
 			price.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
-			price.setText("₹"+results.get((int)_position).get("product_price").toString().replaceAll("[.]00",""));
-			product_name.setText(results.get((int)_position).get("product_name").toString());
+			price.setText("₹"+results.get(_position).get("product_price").toString().replaceAll("[.]00",""));
+			product_name.setText(results.get(_position).get("product_name").toString());
 
 
 
 
 			Glide.with(getContext())
-					.load(Uri.parse(results.get((int)_position).get("product_image").toString()))
+					.load(Uri.parse(results.get(_position).get("product_image").toString()))
 					.error(R.drawable.pyramids)
 					.placeholder(R.drawable.pyramids)
 					.thumbnail(0.01f)
@@ -1092,28 +929,28 @@ Code By EPIC Technical Tricks on 26th April 2022
 				_view = _inflater.inflate(R.layout.product_cus, null);
 			}
 
-			final androidx.cardview.widget.CardView cardview1 = (androidx.cardview.widget.CardView) _view.findViewById(R.id.cardview1);
-			final RelativeLayout relative = (RelativeLayout) _view.findViewById(R.id.relative);
-			final LinearLayout bottom = (LinearLayout) _view.findViewById(R.id.bottom);
-			final LinearLayout top = (LinearLayout) _view.findViewById(R.id.top);
-			final ImageView product_image = (ImageView) _view.findViewById(R.id.product_image);
-			final TextView product_name = (TextView) _view.findViewById(R.id.product_name);
-			final LinearLayout linear1 = (LinearLayout) _view.findViewById(R.id.linear1);
-			final TextView qty = (TextView) _view.findViewById(R.id.qty);
-			final TextView price = (TextView) _view.findViewById(R.id.price);
-			final ImageView wish_btn = (ImageView) _view.findViewById(R.id.wish_btn);
+			final androidx.cardview.widget.CardView cardview1 = _view.findViewById(R.id.cardview1);
+			final RelativeLayout relative = _view.findViewById(R.id.relative);
+			final LinearLayout bottom = _view.findViewById(R.id.bottom);
+			final LinearLayout top = _view.findViewById(R.id.top);
+			final ImageView product_image = _view.findViewById(R.id.product_image);
+			final TextView product_name = _view.findViewById(R.id.product_name);
+			final LinearLayout linear1 = _view.findViewById(R.id.linear1);
+			final TextView qty = _view.findViewById(R.id.qty);
+			final TextView price = _view.findViewById(R.id.price);
+			final ImageView wish_btn = _view.findViewById(R.id.wish_btn);
 
 			product_name.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.BOLD);
 			qty.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
 			price.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
-			price.setText("₹"+results.get((int)_position).get("product_price").toString().replaceAll("[.]00",""));
-			product_name.setText(results.get((int)_position).get("product_name").toString());
+			price.setText("₹"+results.get(_position).get("product_price").toString().replaceAll("[.]00",""));
+			product_name.setText(results.get(_position).get("product_name").toString());
 
 
 
 
 			Glide.with(getContext())
-					.load(Uri.parse(results.get((int)_position).get("product_image").toString()))
+					.load(Uri.parse(results.get(_position).get("product_image").toString()))
 					.error(R.drawable.pyramids)
 					.placeholder(R.drawable.pyramids)
 					.thumbnail(0.01f)
@@ -1162,28 +999,28 @@ Code By EPIC Technical Tricks on 26th April 2022
 				_view = _inflater.inflate(R.layout.product_cus, null);
 			}
 
-			final androidx.cardview.widget.CardView cardview1 = (androidx.cardview.widget.CardView) _view.findViewById(R.id.cardview1);
-			final RelativeLayout relative = (RelativeLayout) _view.findViewById(R.id.relative);
-			final LinearLayout bottom = (LinearLayout) _view.findViewById(R.id.bottom);
-			final LinearLayout top = (LinearLayout) _view.findViewById(R.id.top);
-			final ImageView product_image = (ImageView) _view.findViewById(R.id.product_image);
-			final TextView product_name = (TextView) _view.findViewById(R.id.product_name);
-			final LinearLayout linear1 = (LinearLayout) _view.findViewById(R.id.linear1);
-			final TextView qty = (TextView) _view.findViewById(R.id.qty);
-			final TextView price = (TextView) _view.findViewById(R.id.price);
-			final ImageView wish_btn = (ImageView) _view.findViewById(R.id.wish_btn);
+			final androidx.cardview.widget.CardView cardview1 = _view.findViewById(R.id.cardview1);
+			final RelativeLayout relative = _view.findViewById(R.id.relative);
+			final LinearLayout bottom = _view.findViewById(R.id.bottom);
+			final LinearLayout top = _view.findViewById(R.id.top);
+			final ImageView product_image = _view.findViewById(R.id.product_image);
+			final TextView product_name = _view.findViewById(R.id.product_name);
+			final LinearLayout linear1 = _view.findViewById(R.id.linear1);
+			final TextView qty = _view.findViewById(R.id.qty);
+			final TextView price = _view.findViewById(R.id.price);
+			final ImageView wish_btn = _view.findViewById(R.id.wish_btn);
 
 			product_name.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.BOLD);
 			qty.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
 			price.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
-			price.setText("₹"+results.get((int)_position).get("product_price").toString().replaceAll("[.]00",""));
-			product_name.setText(results.get((int)_position).get("product_name").toString());
+			price.setText("₹"+results.get(_position).get("product_price").toString().replaceAll("[.]00",""));
+			product_name.setText(results.get(_position).get("product_name").toString());
 
 
 
 
 			Glide.with(getContext())
-					.load(Uri.parse(results.get((int)_position).get("product_image").toString()))
+					.load(Uri.parse(results.get(_position).get("product_image").toString()))
 					.error(R.drawable.pyramids)
 					.placeholder(R.drawable.pyramids)
 					.thumbnail(0.01f)
@@ -1210,4 +1047,101 @@ Code By EPIC Technical Tricks on 26th April 2022
 	public float getDip(int _input){
 		return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, _input, getResources().getDisplayMetrics());
 	}
+
+	public void _api_request_categories () {
+		api_map.clear();
+		results.clear();
+		api_map.put("method", "allcategories");
+		re.setParams(api_map, RequestNetworkController.REQUEST_PARAM);
+		re.startRequestNetwork(RequestNetworkController.GET, "https://kkkamya.in/index.php/Api_request/api_list?", "", _re_request_listener22);
+	}
+
+
+	public void _show_response_categories (final String _response) {
+		try {
+			api_map.clear();
+			results.clear();
+			if (_response.contains("200")) {
+				api_map = new Gson().fromJson(_response, new TypeToken<HashMap<String, Object>>(){}.getType());
+				// must add resultSet
+				//" list " is a String datatype
+				list = (new Gson()).toJson(api_map.get("0"), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+				results = new Gson().fromJson(list, new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+				// refresh the list or recycle or grid
+				new_grid.setAdapter(new NewGridAdapter(results));
+			}
+		} catch(Exception e) {
+			Util.showMessage(getContext(), "Error ");
+		}
+	}
+
+
+	public class NewGridAdapter extends BaseAdapter {
+		ArrayList<HashMap<String, Object>> _data;
+		public  NewGridAdapter(ArrayList<HashMap<String, Object>> _arr) {
+			_data = _arr;
+		}
+
+		@Override
+		public int getCount() {
+			return _data.size();
+		}
+
+		@Override
+		public HashMap<String, Object> getItem(int _index) {
+			return _data.get(_index);
+		}
+
+		@Override
+		public long getItemId(int _index) {
+			return _index;
+		}
+		@Override
+		public View getView(final int _position, View _v, ViewGroup _container) {
+			LayoutInflater _inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			View _view = _v;
+			if (_view == null) {
+				_view = _inflater.inflate(R.layout.catagory_custom, null);
+			}
+
+			final androidx.cardview.widget.CardView cardview1 = _view.findViewById(R.id.cardview1);
+			final LinearLayout bg = _view.findViewById(R.id.bg);
+			final ImageView categori_image = _view.findViewById(R.id.categori_image);
+			final TextView name = _view.findViewById(R.id.name);
+
+
+
+			Glide.with(getContext())
+					.load(Uri.parse(Objects.requireNonNull(results.get(_position).get("category_image")).toString()))
+					.error(R.drawable.pyramids)
+					.placeholder(R.drawable.pyramids)
+					.thumbnail(0.01f)
+					.into(categori_image);
+
+			name.setText(Objects.requireNonNull(results.get(_position).get("category_name")).toString());
+			android.view.animation.Animation animation = new android.view.animation.ScaleAnimation(0f, 1f, 0, 1f, android.view.animation.Animation.RELATIVE_TO_SELF, 0f, android.view.animation.Animation.RELATIVE_TO_SELF, 1f);
+			animation.setFillAfter(true);
+			animation.setDuration(300);
+			cardview1.setAnimation(animation);
+			name.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.BOLD);
+
+			cardview1.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View view) {
+
+				Intent i = new Intent();
+				i.setClass(getContext(),SeeMoreActivity.class);
+				i.putExtra("type","");
+				startActivity(i);
+				}
+			});
+
+
+			return _view;
+		}
+	}
+
+
+
+
 }
