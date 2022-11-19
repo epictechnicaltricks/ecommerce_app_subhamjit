@@ -275,8 +275,8 @@ public class LayoutActivity extends  AppCompatActivity  {
 		_fab.performClick();
 
 		_changeActivityFont("google_sans_medium");
-		/*getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-		getWindow().setStatusBarColor(0xFFFFFFFF);*/
+		getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+		getWindow().setStatusBarColor(0xFFFFFFFF);
 
 
 

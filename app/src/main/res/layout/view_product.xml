@@ -167,6 +167,8 @@
 
 
 					</LinearLayout>
+
+
 					<TextView
 						android:id="@+id/product_avl"
 						android:layout_width="wrap_content"
@@ -180,7 +182,69 @@
 						android:textStyle="bold"
 						android:textColor="#F44336"/>
 
+					<!-- This a layout -->
+
+
 					<LinearLayout
+
+						android:layout_marginBottom="10dp"
+						android:id="@+id/slider_layout2"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="vertical">
+
+						<LinearLayout
+							android:id="@+id/title_layout2"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:orientation="horizontal"
+							android:padding="0dp">
+
+							<TextView
+
+								android:id="@+id/title2"
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:layout_weight="1"
+								android:padding="8dp"
+								android:text="Select Variant"
+								android:textColor="#00041C"
+								android:textSize="16sp"
+								android:textStyle="bold" />
+
+								</LinearLayout>
+
+						<HorizontalScrollView
+							android:padding="8dp"
+							android:scrollbars="none"
+							android:id="@+id/hscroll2"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:paddingBottom="17dp">
+							<LinearLayout
+
+								android:id="@+id/linear_g2"
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:orientation="horizontal">
+								<ListView
+									android:scrollbars="none"
+									android:id="@+id/listview1"
+									android:layout_width="match_parent"
+									android:layout_height="match_parent"
+
+
+									android:choiceMode="none"/>
+							</LinearLayout>
+						</HorizontalScrollView>
+					</LinearLayout>
+
+
+					<!-- This a layout -->
+
+					<LinearLayout
+
+
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:padding="5dp"

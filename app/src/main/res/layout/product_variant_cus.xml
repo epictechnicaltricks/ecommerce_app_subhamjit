@@ -1,0 +1,45 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<androidx.cardview.widget.CardView
+
+
+		android:layout_gravity="start"
+		android:id="@+id/bg_variant"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_margin="5dp"
+		app:cardCornerRadius="10dp"
+		app:cardBackgroundColor="#F8FFFF"
+		app:cardElevation="3dp">
+		<LinearLayout
+			android:id="@+id/bottom"
+
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:padding="8dp">
+
+			<TextView
+
+				android:id="@+id/product_attr_name"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:ellipsize="end"
+				android:focusable="false"
+				android:singleLine="true"
+				android:text="500gm"
+				android:textColor="#000000"
+				android:textSize="14sp"
+				android:textStyle="normal" />
+
+
+		</LinearLayout>
+
+	</androidx.cardview.widget.CardView>
+
+
+</LinearLayout>

@@ -6,13 +6,13 @@
 		android:id="@+id/bg"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:background="#E0EBFF"
+		android:background="#FFFFFF"
 		android:orientation="vertical">
 		<LinearLayout
 			android:id="@+id/title_bg"
 			android:layout_width="match_parent"
 			android:layout_height="50dp"
-			android:layout_marginTop="45dp"
+
 			android:padding="8dp"
 			android:gravity="left|center_vertical"
 			android:orientation="horizontal">

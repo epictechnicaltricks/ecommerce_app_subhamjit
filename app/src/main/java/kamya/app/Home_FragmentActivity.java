@@ -461,7 +461,7 @@ menu.setOnClickListener(new OnClickListener() {
 			}
 		} catch(Exception e) {
 
-			Util.showMessage(getContext(), "Error \n\n"+e);
+			Util.showMessage(getContext(), "Error on parameter \n\n"+_response);
 		}
 	}
 
@@ -1053,7 +1053,9 @@ Code By EPIC Technical Tricks on 26th April 2022
 		results.clear();
 		api_map.put("method", "allcategories");
 		re.setParams(api_map, RequestNetworkController.REQUEST_PARAM);
-		re.startRequestNetwork(RequestNetworkController.GET, "https://kkkamya.in/index.php/Api_request/api_list?", "", _re_request_listener22);
+		re.startRequestNetwork(RequestNetworkController.GET,
+				"https://kkkamya.in/index.php/Api_request/api_list?",
+				"", _re_request_listener22);
 	}
 
 
