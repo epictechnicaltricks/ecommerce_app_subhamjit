@@ -30,6 +30,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -104,6 +105,8 @@ public class Home_FragmentActivity extends  Fragment  {
 
 	private RequestNetwork re22;
 	private RequestNetwork.RequestListener _re_request_listener22;
+	private LottieAnimationView loading;
+
 
 @NonNull
 	@Override
@@ -116,7 +119,7 @@ public class Home_FragmentActivity extends  Fragment  {
 
 	private void initialize(Bundle _savedInstanceState, View _view) {
 
-
+		loading = _view.findViewById(R.id.lottie_loading);
 		new_grid = _view.findViewById(R.id.new_grid);
 
 		linear_g2 = _view.findViewById(R.id.linear_g2);
@@ -213,6 +216,7 @@ menu.setOnClickListener(new OnClickListener() {
 				final String _response = _param2;
 				final HashMap<String, Object> _responseHeaders = _param3;
 
+				loading.setVisibility(View.GONE);
 				//Toast.makeText(getActivity(), "RESPONSE CATE \n\n"+_response, Toast.LENGTH_SHORT).show();
 				_show_response_categories(_response);
 			}
@@ -231,9 +235,9 @@ menu.setOnClickListener(new OnClickListener() {
 
 	private void initializeLogic() {
 
+/////////////////////////////////////////////////////////////
 
-
-		SharedPreferences sh = this.getActivity().getSharedPreferences("MySharedPref", 0);
+		SharedPreferences sh = Objects.requireNonNull(this.getActivity()).getSharedPreferences("MySharedPref", 0);
 
 		try{
 
@@ -255,7 +259,9 @@ menu.setOnClickListener(new OnClickListener() {
 			e.printStackTrace();
 		}
 
+	//	DRAWER LAYOUT
 
+/////////////////////////////////////////////////////////////////
 
 
 
@@ -301,6 +307,7 @@ menu.setOnClickListener(new OnClickListener() {
 			}
 		});
 
+
 		time2 = new TimerTask() {
 			@Override
 			public void run() {
@@ -316,11 +323,12 @@ menu.setOnClickListener(new OnClickListener() {
 				});
 			}
 		};
-		_timer.schedule(time2, 1500);
-
+		_timer.schedule(time2, 800);
 
 
 	}
+
+
 
 	@Override
 	public void onActivityResult(int _requestCode, int _resultCode, Intent _data) {
@@ -339,12 +347,15 @@ menu.setOnClickListener(new OnClickListener() {
 	public void onPause() {
 		super.onPause();
 		srcoll_timer.cancel();
+		time2.cancel();
+		// dont remove this it will show an error if you remove
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
 		_slider();
+
 	}
 	public void _slider () {
 		{

@@ -35,6 +35,9 @@ dependencies {
 	implementation 'dev.atharvakulkarni:TastyToast:1.1'
 
 
+	//Lottie
+	implementation "com.airbnb.android:lottie:3.4.0"
+
 
 
 }

@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -35,12 +36,12 @@ public class Category_FragmentActivity extends  Fragment  {
 	private HashMap<String, Object> api_map = new HashMap<>();
 	private String list = "";
 
-	private ArrayList<HashMap<String, Object>> listmap = new ArrayList<>();
+	private final ArrayList<HashMap<String, Object>> listmap = new ArrayList<>();
 	private ArrayList<HashMap<String, Object>> results = new ArrayList<>();
-	private ArrayList<HashMap<String, Object>> map = new ArrayList<>();
+	private final ArrayList<HashMap<String, Object>> map = new ArrayList<>();
 
 	private LinearLayout bg;
-	private LinearLayout title_bg;
+	//private LinearLayout title_bg;
 	private GridView gridview1;
 	private LinearLayout linear2;
 	private TextView textview1;
@@ -48,8 +49,8 @@ public class Category_FragmentActivity extends  Fragment  {
 
 	private RequestNetwork re;
 	private RequestNetwork.RequestListener _re_request_listener;
-	
 
+	private LottieAnimationView loading;
 
 @NonNull
 	@Override
@@ -62,14 +63,15 @@ public class Category_FragmentActivity extends  Fragment  {
 
 	private void initialize(Bundle _savedInstanceState, View _view) {
 
-		bg = (LinearLayout) _view.findViewById(R.id.bg);
-		title_bg = (LinearLayout) _view.findViewById(R.id.title_bg);
-		gridview1 = (GridView) _view.findViewById(R.id.gridview1);
-		linear2 = (LinearLayout) _view.findViewById(R.id.linear2);
-		textview1 = (TextView) _view.findViewById(R.id.textview1);
-		progressbar1 = (ProgressBar) _view.findViewById(R.id.progressbar1);
-		re = new RequestNetwork((Activity)getContext());
 
+	    loading = _view.findViewById(R.id.lottie_loading);
+		bg = _view.findViewById(R.id.bg);
+		//title_bg = _view.findViewById(R.id.title_bg);
+		gridview1 = _view.findViewById(R.id.gridview1);
+		linear2 = _view.findViewById(R.id.linear2);
+		textview1 = _view.findViewById(R.id.textview1);
+		progressbar1 = _view.findViewById(R.id.progressbar1);
+		re = new RequestNetwork((Activity)getContext());
 
 
 
@@ -81,6 +83,7 @@ public class Category_FragmentActivity extends  Fragment  {
 				final String _tag = _param1;
 				final String _response = _param2;
 				final HashMap<String, Object> _responseHeaders = _param3;
+				loading.setVisibility(View.GONE);
 				_show_response(_response);
 			}
 
@@ -95,12 +98,22 @@ public class Category_FragmentActivity extends  Fragment  {
 
 	private void initializeLogic() {
 
+		//_api_request();
 		_api_request();
-		gridview1.setVerticalSpacing((int)0);
-		gridview1.setHorizontalSpacing((int)0);
+		gridview1.setVerticalSpacing(0);
+		gridview1.setHorizontalSpacing(0);
 
-		title_bg.setElevation((float)10);
-		textview1.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.BOLD);
+		//title_bg.setElevation((float)10);
+
+		textview1.setTypeface(Typeface.createFromAsset(Objects.requireNonNull(getContext()).getAssets(),"fonts/google_sans_medium.ttf"), Typeface.BOLD);
+
+
+}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+
 	}
 
 	@Override
@@ -131,6 +144,8 @@ public class Category_FragmentActivity extends  Fragment  {
 				results = new Gson().fromJson(list, new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
 				// refresh the list or recycle or grid
 				gridview1.setAdapter(new Gridview1Adapter(results));
+
+
 			}
 		} catch(Exception e) {
 		         Util.showMessage(getContext(), "Error ");
@@ -166,21 +181,21 @@ public class Category_FragmentActivity extends  Fragment  {
 				_view = _inflater.inflate(R.layout.catagory_custom, null);
 			}
 
-			final androidx.cardview.widget.CardView cardview1 = (androidx.cardview.widget.CardView) _view.findViewById(R.id.cardview1);
-			final LinearLayout bg = (LinearLayout) _view.findViewById(R.id.bg);
-			final ImageView categori_image = (ImageView) _view.findViewById(R.id.categori_image);
-			final TextView name = (TextView) _view.findViewById(R.id.name);
+			final androidx.cardview.widget.CardView cardview1 = _view.findViewById(R.id.cardview1);
+			final LinearLayout bg = _view.findViewById(R.id.bg);
+			final ImageView categori_image = _view.findViewById(R.id.categori_image);
+			final TextView name = _view.findViewById(R.id.name);
 
 
 
 			Glide.with(getContext())
-					.load(Uri.parse(Objects.requireNonNull(results.get((int) _position).get("category_image")).toString()))
+					.load(Uri.parse(Objects.requireNonNull(results.get(_position).get("category_image")).toString()))
 					.error(R.drawable.pyramids)
 					.placeholder(R.drawable.pyramids)
 					.thumbnail(0.01f)
 					.into(categori_image);
 
-			name.setText(Objects.requireNonNull(results.get((int) _position).get("category_name")).toString());
+			name.setText(Objects.requireNonNull(results.get(_position).get("category_name")).toString());
 			android.view.animation.Animation animation = new android.view.animation.ScaleAnimation(0f, 1f, 0, 1f, android.view.animation.Animation.RELATIVE_TO_SELF, 0f, android.view.animation.Animation.RELATIVE_TO_SELF, 1f);
 			animation.setFillAfter(true);
 			animation.setDuration(300);

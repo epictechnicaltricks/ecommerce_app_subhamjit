@@ -343,6 +343,22 @@ attr listPreferredItemPaddingRight
 attr listPreferredItemPaddingStart
 attr logo
 attr logoDescription
+attr lottie_autoPlay
+attr lottie_cacheComposition
+attr lottie_colorFilter
+attr lottie_enableMergePathsForKitKatAndAbove
+attr lottie_fallbackRes
+attr lottie_fileName
+attr lottie_imageAssetsFolder
+attr lottie_loop
+attr lottie_progress
+attr lottie_rawRes
+attr lottie_renderMode
+attr lottie_repeatCount
+attr lottie_repeatMode
+attr lottie_scale
+attr lottie_speed
+attr lottie_url
 attr materialButtonStyle
 attr materialCardViewStyle
 attr maxActionInlineWidth
@@ -1023,6 +1039,7 @@ drawable left
 drawable logo
 drawable map
 drawable menu
+drawable minus
 drawable mtrl_snackbar_background
 drawable mtrl_tabs_default_indicator
 drawable navigation_empty_icon
@@ -1040,6 +1057,7 @@ drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable phone
 drawable placeholder_image
+drawable plus
 drawable pyramids
 drawable red_heart
 drawable refresh
@@ -1063,6 +1081,7 @@ id RelativeTop
 id SHIFT
 id SYM
 id _app_bar
+id _cart_count
 id _coordinator
 id _drawer
 id _fab
@@ -1128,13 +1147,16 @@ id all_layout
 id always
 id async
 id auto
+id automatic
 id back
 id background2
+id barline
 id beginning
 id bg
 id bg_
 id bg_img
 id bg_layout
+id bg_variant
 id bill_id
 id blocking
 id bottom
@@ -1155,6 +1177,7 @@ id center_horizontal
 id center_vertical
 id checkbox
 id checked
+id checkout
 id chronometer
 id clip_horizontal
 id clip_vertical
@@ -1169,6 +1192,7 @@ id custom
 id customPanel
 id decor_content_parent
 id default_activity_button
+id delete
 id delivery_type
 id delivery_type2
 id description
@@ -1201,6 +1225,7 @@ id ghost_view
 id glide_custom_view_target_tag
 id gridview1
 id group_divider
+id hardware
 id home
 id homeAsUp
 id hscroll2
@@ -1243,6 +1268,7 @@ id linear2
 id linear3
 id linear4
 id linear5
+id linear6
 id linear7
 id linear8
 id linear9
@@ -1259,11 +1285,14 @@ id listview4
 id loading
 id login_txt
 id logo
+id lottie_layer_name
+id lottie_loading
 id masked
 id menu
 id message
 id middle
 id mini
+id minus
 id minus_
 id mobile
 id mtrl_child_content_container
@@ -1292,10 +1321,15 @@ id password_layout
 id phone_layout
 id phone_no
 id pin
+id plus
 id plus_
 id price
+id pro_price_and_qty
+id product_attr_name
+id product_attr_val
 id product_avl
 id product_image
+id product_img
 id product_name
 id progress_circular
 id progress_horizontal
@@ -1304,9 +1338,12 @@ id progressbar1
 id qty
 id qty_product
 id radio
+id recyclerview4
 id refer_code
 id relative
 id resend_otp
+id restart
+id reverse
 id right
 id right_icon
 id right_side
@@ -1351,6 +1388,7 @@ id snackbar_action
 id snackbar_text
 id snap
 id snapMargins
+id software
 id spacer
 id split_action_bar
 id src_atop
@@ -1360,6 +1398,7 @@ id start
 id stretch
 id submenuarrow
 id submit_area
+id subtotal
 id tabMode
 id tag_accessibility_actions
 id tag_accessibility_clickable_spans
@@ -1399,6 +1438,7 @@ id title_layout6
 id title_template
 id top
 id topPanel
+id total_price
 id touch_outside
 id transition_current_scene
 id transition_layout_save
@@ -1413,6 +1453,7 @@ id useLogo
 id user_id
 id user_name
 id user_name_layout
+id varient
 id view_offset_helper
 id viewpager1
 id viewpager2
@@ -1481,6 +1522,7 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout account__fragment
 layout cart__fragment
+layout cart_cus
 layout catagory_custom
 layout category__fragment
 layout custom_dialog
@@ -1514,6 +1556,7 @@ layout notification_template_icon_group
 layout notification_template_part_chronometer
 layout notification_template_part_time
 layout product_cus
+layout product_variant_cus
 layout see_more
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
@@ -2116,6 +2159,7 @@ styleable GradientColorItem android_color android_offset
 styleable LinearLayoutCompat android_gravity android_orientation android_baselineAligned android_baselineAlignedChildIndex android_weightSum divider dividerPadding measureWithLargestChild showDividers
 styleable LinearLayoutCompat_Layout android_layout_gravity android_layout_width android_layout_height android_layout_weight
 styleable ListPopupWindow android_dropDownHorizontalOffset android_dropDownVerticalOffset
+styleable LottieAnimationView lottie_autoPlay lottie_cacheComposition lottie_colorFilter lottie_enableMergePathsForKitKatAndAbove lottie_fallbackRes lottie_fileName lottie_imageAssetsFolder lottie_loop lottie_progress lottie_rawRes lottie_renderMode lottie_repeatCount lottie_repeatMode lottie_scale lottie_speed lottie_url
 styleable MaterialButton android_insetLeft android_insetRight android_insetTop android_insetBottom backgroundTint backgroundTintMode cornerRadius icon iconGravity iconPadding iconSize iconTint iconTintMode rippleColor strokeColor strokeWidth
 styleable MaterialCardView strokeColor strokeWidth
 styleable MaterialComponentsTheme bottomSheetDialogTheme bottomSheetStyle chipGroupStyle chipStandaloneStyle chipStyle colorAccent colorBackgroundFloating colorPrimary colorPrimaryDark colorSecondary editTextStyle floatingActionButtonStyle materialButtonStyle materialCardViewStyle navigationViewStyle scrimBackground snackbarButtonStyle tabStyle textAppearanceBody1 textAppearanceBody2 textAppearanceButton textAppearanceCaption textAppearanceHeadline1 textAppearanceHeadline2 textAppearanceHeadline3 textAppearanceHeadline4 textAppearanceHeadline5 textAppearanceHeadline6 textAppearanceOverline textAppearanceSubtitle1 textAppearanceSubtitle2 textInputStyle

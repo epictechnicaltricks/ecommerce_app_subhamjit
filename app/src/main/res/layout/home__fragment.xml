@@ -3,6 +3,7 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
     <RelativeLayout
         android:id="@+id/relative"
@@ -179,14 +180,27 @@
                         android:textColor="#212121"/>
 
 
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/lottie_loading"
+                        android:layout_width="match_parent"
+                        android:layout_height="450dp"
+                        android:layout_weight="1"
+                        android:layout_centerInParent="true"
+                        android:padding="8dp"
+                        android:scaleType="fitCenter"
+                        android:scaleX="1.3"
+                        android:scaleY="1.3"
+                        app:lottie_autoPlay="true"
+                        app:lottie_fileName="shimmer.json"
+                        app:lottie_loop="true" />
 
                     <GridView
                         android:scrollbars="none"
                         android:id="@+id/new_grid"
-                        android:layout_width="match_parent"
-
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
                         android:numColumns="auto_fit"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:layout_marginBottom="55dp"
                         android:paddingLeft="8dp"
                         android:paddingTop="8dp"

@@ -186,14 +186,18 @@ androidx/drawerlayout/R.java
  androidx.drawerlayout.R$styleable
 androidx/versionedparcelable/R.java
  androidx.versionedparcelable.R
-kamya/app/LayoutActivity.java
- kamya.app.LayoutActivity
- kamya.app.LayoutActivity$1
- kamya.app.LayoutActivity$2
- kamya.app.LayoutActivity$3
- kamya.app.LayoutActivity$4
- kamya.app.LayoutActivity$5
- kamya.app.LayoutActivity$MyFragmentAdapter
+androidx/vectordrawable/animated/R.java
+ androidx.vectordrawable.animated.R
+ androidx.vectordrawable.animated.R$attr
+ androidx.vectordrawable.animated.R$color
+ androidx.vectordrawable.animated.R$dimen
+ androidx.vectordrawable.animated.R$drawable
+ androidx.vectordrawable.animated.R$id
+ androidx.vectordrawable.animated.R$integer
+ androidx.vectordrawable.animated.R$layout
+ androidx.vectordrawable.animated.R$string
+ androidx.vectordrawable.animated.R$style
+ androidx.vectordrawable.animated.R$styleable
 androidx/lifecycle/viewmodel/R.java
  androidx.lifecycle.viewmodel.R
 kamya/app/SeeMoreActivity.java
@@ -220,8 +224,8 @@ com/bumptech/glide/R.java
  com.bumptech.glide.R$styleable
 kamya/app/Wishlist_FragmentActivity.java
  kamya.app.Wishlist_FragmentActivity
-kamya/app/Cart_FragmentActivity.java
- kamya.app.Cart_FragmentActivity
+androidx/localbroadcastmanager/R.java
+ androidx.localbroadcastmanager.R
 com/bumptech/glide/gifdecoder/R.java
  com.bumptech.glide.gifdecoder.R
 androidx/cursoradapter/R.java
@@ -309,6 +313,11 @@ kamya/app/ViewProductActivity.java
  kamya.app.ViewProductActivity$12
  kamya.app.ViewProductActivity$13
  kamya.app.ViewProductActivity$14
+ kamya.app.ViewProductActivity$15
+ kamya.app.ViewProductActivity$16
+ kamya.app.ViewProductActivity$17
+ kamya.app.ViewProductActivity$18
+ kamya.app.ViewProductActivity$19
  kamya.app.ViewProductActivity$2
  kamya.app.ViewProductActivity$3
  kamya.app.ViewProductActivity$4
@@ -317,6 +326,8 @@ kamya/app/ViewProductActivity.java
  kamya.app.ViewProductActivity$7
  kamya.app.ViewProductActivity$8
  kamya.app.ViewProductActivity$9
+ kamya.app.ViewProductActivity$Listview1Adapter
+ kamya.app.ViewProductActivity$Listview1Adapter$1
 androidx/appcompat/R.java
  androidx.appcompat.R
  androidx.appcompat.R$anim
@@ -435,13 +446,20 @@ androidx/slidingpanelayout/R.java
  androidx.slidingpanelayout.R$styleable
 kamya/app/FileUtil.java
  kamya.app.FileUtil
-kamya/app/Category_FragmentActivity.java
- kamya.app.Category_FragmentActivity
- kamya.app.Category_FragmentActivity$1
- kamya.app.Category_FragmentActivity$2
- kamya.app.Category_FragmentActivity$3
- kamya.app.Category_FragmentActivity$4
- kamya.app.Category_FragmentActivity$Gridview1Adapter
+com/airbnb/lottie/R.java
+ com.airbnb.lottie.R
+ com.airbnb.lottie.R$anim
+ com.airbnb.lottie.R$attr
+ com.airbnb.lottie.R$bool
+ com.airbnb.lottie.R$color
+ com.airbnb.lottie.R$dimen
+ com.airbnb.lottie.R$drawable
+ com.airbnb.lottie.R$id
+ com.airbnb.lottie.R$integer
+ com.airbnb.lottie.R$layout
+ com.airbnb.lottie.R$string
+ com.airbnb.lottie.R$style
+ com.airbnb.lottie.R$styleable
 androidx/viewpager/R.java
  androidx.viewpager.R
  androidx.viewpager.R$attr
@@ -454,17 +472,34 @@ androidx/viewpager/R.java
  androidx.viewpager.R$string
  androidx.viewpager.R$style
  androidx.viewpager.R$styleable
-androidx/localbroadcastmanager/R.java
- androidx.localbroadcastmanager.R
-androidx/vectordrawable/animated/R.java
- androidx.vectordrawable.animated.R
- androidx.vectordrawable.animated.R$attr
- androidx.vectordrawable.animated.R$color
- androidx.vectordrawable.animated.R$dimen
- androidx.vectordrawable.animated.R$drawable
- androidx.vectordrawable.animated.R$id
- androidx.vectordrawable.animated.R$integer
- androidx.vectordrawable.animated.R$layout
- androidx.vectordrawable.animated.R$string
- androidx.vectordrawable.animated.R$style
- androidx.vectordrawable.animated.R$styleable
+kamya/app/Category_FragmentActivity.java
+ kamya.app.Category_FragmentActivity
+ kamya.app.Category_FragmentActivity$1
+ kamya.app.Category_FragmentActivity$2
+ kamya.app.Category_FragmentActivity$3
+ kamya.app.Category_FragmentActivity$4
+ kamya.app.Category_FragmentActivity$Gridview1Adapter
+kamya/app/Cart_FragmentActivity.java
+ kamya.app.Cart_FragmentActivity
+ kamya.app.Cart_FragmentActivity$1
+ kamya.app.Cart_FragmentActivity$2
+ kamya.app.Cart_FragmentActivity$3
+ kamya.app.Cart_FragmentActivity$4
+ kamya.app.Cart_FragmentActivity$5
+ kamya.app.Cart_FragmentActivity$6
+ kamya.app.Cart_FragmentActivity$7
+ kamya.app.Cart_FragmentActivity$7$1
+ kamya.app.Cart_FragmentActivity$Recyclerview4Adapter
+ kamya.app.Cart_FragmentActivity$Recyclerview4Adapter$1
+ kamya.app.Cart_FragmentActivity$Recyclerview4Adapter$2
+ kamya.app.Cart_FragmentActivity$Recyclerview4Adapter$3
+ kamya.app.Cart_FragmentActivity$Recyclerview4Adapter$4
+ kamya.app.Cart_FragmentActivity$Recyclerview4Adapter$ViewHolder
+kamya/app/LayoutActivity.java
+ kamya.app.LayoutActivity
+ kamya.app.LayoutActivity$1
+ kamya.app.LayoutActivity$2
+ kamya.app.LayoutActivity$3
+ kamya.app.LayoutActivity$4
+ kamya.app.LayoutActivity$5
+ kamya.app.LayoutActivity$MyFragmentAdapter

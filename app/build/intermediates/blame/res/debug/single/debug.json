@@ -700,6 +700,10 @@
         "source": "C:\\Users\\RAM\\.gradle\\caches\\transforms-3\\137892dcd36f9af54fadd977b323839c\\transformed\\res\\drawable-xhdpi-v4\\abc_ic_menu_share_mtrl_alpha.png"
     },
     {
+        "merged": "C:\\Users\\RAM\\Downloads\\Kamya_by_jeet\\app\\build\\intermediates\\res\\merged\\debug\\layout_cart_cus.xml.flat",
+        "source": "C:\\Users\\RAM\\Downloads\\Kamya_by_jeet\\app\\src\\main\\res\\layout\\cart_cus.xml"
+    },
+    {
         "merged": "C:\\Users\\RAM\\Downloads\\Kamya_by_jeet\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_textfield_search_default_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\RAM\\.gradle\\caches\\transforms-3\\137892dcd36f9af54fadd977b323839c\\transformed\\res\\drawable-xhdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png"
     },
@@ -892,6 +896,10 @@
         "source": "C:\\Users\\RAM\\.gradle\\caches\\transforms-3\\137892dcd36f9af54fadd977b323839c\\transformed\\res\\drawable-hdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png"
     },
     {
+        "merged": "C:\\Users\\RAM\\Downloads\\Kamya_by_jeet\\app\\build\\intermediates\\res\\merged\\debug\\layout_product_variant_cus.xml.flat",
+        "source": "C:\\Users\\RAM\\Downloads\\Kamya_by_jeet\\app\\src\\main\\res\\layout\\product_variant_cus.xml"
+    },
+    {
         "merged": "C:\\Users\\RAM\\Downloads\\Kamya_by_jeet\\app\\build\\intermediates\\res\\merged\\debug\\drawable_red_heart.png.flat",
         "source": "C:\\Users\\RAM\\Downloads\\Kamya_by_jeet\\app\\src\\main\\res\\drawable\\red_heart.png"
     },
@@ -1050,6 +1058,10 @@
     {
         "merged": "C:\\Users\\RAM\\Downloads\\Kamya_by_jeet\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_grid.webp.flat",
         "source": "C:\\Users\\RAM\\Downloads\\Kamya_by_jeet\\app\\src\\main\\res\\drawable-xhdpi\\grid.webp"
+    },
+    {
+        "merged": "C:\\Users\\RAM\\Downloads\\Kamya_by_jeet\\app\\build\\intermediates\\res\\merged\\debug\\drawable_plus.png.flat",
+        "source": "C:\\Users\\RAM\\Downloads\\Kamya_by_jeet\\app\\src\\main\\res\\drawable\\plus.png"
     },
     {
         "merged": "C:\\Users\\RAM\\Downloads\\Kamya_by_jeet\\app\\build\\intermediates\\res\\merged\\debug\\layout_product_cus.xml.flat",
@@ -1836,6 +1848,10 @@
         "source": "C:\\Users\\RAM\\.gradle\\caches\\transforms-3\\137892dcd36f9af54fadd977b323839c\\transformed\\res\\drawable-xxhdpi-v4\\abc_ic_star_half_black_48dp.png"
     },
     {
+        "merged": "C:\\Users\\RAM\\Downloads\\Kamya_by_jeet\\app\\build\\intermediates\\res\\merged\\debug\\drawable_minus.png.flat",
+        "source": "C:\\Users\\RAM\\Downloads\\Kamya_by_jeet\\app\\src\\main\\res\\drawable\\minus.png"
+    },
+    {
         "merged": "C:\\Users\\RAM\\Downloads\\Kamya_by_jeet\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_btn_check_to_on_mtrl_000.png.flat",
         "source": "C:\\Users\\RAM\\.gradle\\caches\\transforms-3\\137892dcd36f9af54fadd977b323839c\\transformed\\res\\drawable-xhdpi-v4\\abc_btn_check_to_on_mtrl_000.png"
     },
@@ -1998,6 +2014,10 @@
     {
         "merged": "C:\\Users\\RAM\\Downloads\\Kamya_by_jeet\\app\\build\\intermediates\\res\\merged\\debug\\drawable_abc_list_selector_background_transition_holo_light.xml.flat",
         "source": "C:\\Users\\RAM\\.gradle\\caches\\transforms-3\\137892dcd36f9af54fadd977b323839c\\transformed\\res\\drawable\\abc_list_selector_background_transition_holo_light.xml"
+    },
+    {
+        "merged": "C:\\Users\\RAM\\Downloads\\Kamya_by_jeet\\app\\build\\intermediates\\res\\merged\\debug\\drawable_trash.png.flat",
+        "source": "C:\\Users\\RAM\\Downloads\\Kamya_by_jeet\\app\\src\\main\\res\\drawable\\trash.png"
     },
     {
         "merged": "C:\\Users\\RAM\\Downloads\\Kamya_by_jeet\\app\\build\\intermediates\\res\\merged\\debug\\layout_abc_list_menu_item_layout.xml.flat",

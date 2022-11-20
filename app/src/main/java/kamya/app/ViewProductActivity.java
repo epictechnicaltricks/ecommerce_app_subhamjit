@@ -589,6 +589,7 @@ Code By EPIC Technical Tricks on 26th April 2022
 	}
 
 	public void _api_request_product_attr (String _product_id) {
+
 		api_map.clear();
 		results.clear();
 		api_map.put("method", "product_attr");
@@ -603,6 +604,7 @@ Code By EPIC Technical Tricks on 26th April 2022
 
 	public void _show_response_product_attr (final String _response) {
 		try {
+
 			map2.clear();
 			results2.clear();
 			//HashMap<String, Object> map2;
