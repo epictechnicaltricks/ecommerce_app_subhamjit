@@ -39,7 +39,8 @@
 		<activity android:name=".HomeLayout" android:theme="@style/NoActionBar"/>
 		<activity android:name=".ViewProductActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 		<activity android:name=".SeeMoreActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-
+         <activity android:name=".MyOrdersActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+		<activity android:name=".CheckoutActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
 		<uses-library
 			android:name="org.apache.http.legacy"

@@ -272,6 +272,10 @@ public class LayoutActivity extends  AppCompatActivity  {
 		bottomnavigation1.getMenu().add(0, 4, 0, "Account").setIcon(R.drawable.user2);
 		//bottomnavigation1.getMenu().add(0, 5, 0, "Account").setIcon(R.drawable.user);
 
+		//_transparent_satus();
+		_shape(100, 100, 0, 0, "#ffffff", "#bdbdbd", 0, bottomnavigation1);
+		bottomnavigation1.setElevation((float)15);
+
 		_fab.performClick();
 
 		_changeActivityFont("google_sans_medium");
@@ -314,10 +318,7 @@ public class LayoutActivity extends  AppCompatActivity  {
 
 		_setTransitionName(_fab, "p");
 
-		//_transparent_satus();
-		_shape(100, 100, 0, 0, "#ffffff", "#bdbdbd", 2, bottomnavigation1);
-		bottomnavigation1.setElevation((float)15);
-        _UI();
+		   _UI();
 		//bottomnavigation1.getBar().setBackgroundColor(0xFF000000);
 		//bottomnavigation1.setActiveTabColor("#FFFFFE");
 		try{ Objects.requireNonNull(getSupportActionBar()).hide(); }

@@ -1,0 +1,115 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/bg"
+        android:elevation="3dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="5dp"
+        android:background="#FFFFFF"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/linear2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/product_img"
+                android:focusable="false"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="#CFD8DC"
+                android:src="@drawable/pyramids"
+                android:scaleType="centerInside"/>
+            <LinearLayout
+                android:id="@+id/linear3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/pname"
+                    android:focusable="false"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="8dp"
+                    android:paddingTop="8dp"
+                    android:paddingRight="8dp"
+                    android:text="Mango 馃キ 2KG"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:maxLines="2"
+                    android:ellipsize="end"/>
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/order_date"
+                    android:focusable="false"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:paddingBottom="5dp"
+                    android:text="Order on 17 Nov 2022 16:06PM"
+                    android:textSize="13sp"
+                    android:textColor="#7F8081"/>
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_marginTop="12dp"
+                    android:id="@+id/linear5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+
+                        android:textSize="14sp"
+                        android:layout_weight="1"
+                        android:id="@+id/view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="0dp"
+
+                        android:gravity="left"
+                        android:text="VIEW DETAILS"
+
+                      android:layout_marginLeft="8dp"
+                        android:textColor="#2B81DC" />
+
+
+                     <TextView
+                         android:visibility="gone"
+                         android:layout_weight="1"
+                        android:id="@+id/textview6"
+                        android:focusable="false"
+                         android:gravity="right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
+                        android:text="Status: "
+                        android:textSize="12sp"
+                        android:textColor="#000000"/>
+                    <TextView
+
+                        android:id="@+id/status"
+                        android:focusable="false"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="6dp"
+                        android:paddingLeft="3dp"
+                        android:paddingTop="3dp"
+                        android:paddingRight="8dp"
+                        android:paddingBottom="3dp"
+                        android:text="Processing.."
+                        android:textSize="12sp"
+                        android:textColor="#2E4334"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

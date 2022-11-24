@@ -46,13 +46,22 @@
 
 		</LinearLayout>
 
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+	android:layout_marginBottom="55dp"
+	android:id="@+id/swiperefreshlayout1"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@android:color/transparent">
 
-				<androidx.recyclerview.widget.RecyclerView
+	<androidx.recyclerview.widget.RecyclerView
 			android:id="@+id/recyclerview4"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:padding="8dp"
-			android:layout_weight="1"/>
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:padding="8dp"
+		android:layout_weight="1"/>
+
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 		<com.airbnb.lottie.LottieAnimationView
 			android:id="@+id/lottie_loading"

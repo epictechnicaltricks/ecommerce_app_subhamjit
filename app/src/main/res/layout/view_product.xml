@@ -170,6 +170,7 @@
 
 
 					<TextView
+						android:visibility="gone"
 						android:id="@+id/product_avl"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
@@ -203,6 +204,7 @@
 							<TextView
 
 								android:id="@+id/title2"
+								android:layout_marginTop="10dp"
 								android:layout_width="wrap_content"
 								android:layout_height="wrap_content"
 								android:layout_weight="1"
@@ -244,6 +246,7 @@
 
 					<LinearLayout
 
+						android:visibility="gone"
 
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
@@ -314,6 +317,9 @@
 						-->
 					</LinearLayout>
 					<LinearLayout
+						android:visibility="gone"
+
+
 						android:id="@+id/linear12"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"

@@ -31,7 +31,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.example.tastytoast.TastyToast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -90,13 +89,14 @@ public class ViewProductActivity extends  AppCompatActivity  {
 	private HashMap<String, Object> api_map = new HashMap<>();
 	private HashMap<String, Object> map = new HashMap<>();
 	private HashMap<String, Object> map2 = new HashMap<>();
+	private HashMap<String, Object> map3 = new HashMap<>();
 	String list="";
 
 	private TextView plus_,minus_,qty_product,title2;
 	int qty_count=1;
 
 	String product_id_variable = "";
-	String attr_id = "1";
+	String attr_id = "";
 
 	private LinearLayout linear_g2;
 	private ListView listview1;
@@ -221,8 +221,9 @@ public class ViewProductActivity extends  AppCompatActivity  {
 			public void onResponse(String _param1, String _param2, HashMap<String, Object> _param3) {
 				final String _response = _param2;
 
-				TastyToast.success(getApplicationContext(),"Added to Cart                                        ", TastyToast. LENGTH_LONG, TastyToast.SHAPE_RECTANGLE,false);
-				//Toast.makeText(getActivity(), _response, Toast.LENGTH_SHORT).show();
+				Toast.makeText(ViewProductActivity.this, _response, Toast.LENGTH_SHORT).show();
+				//TastyToast.success(getApplicationContext(),"Added to Cart                                        ", TastyToast. LENGTH_LONG, TastyToast.SHAPE_RECTANGLE,false);
+				Toast.makeText(getApplicationContext(), "Added to Cart ", Toast.LENGTH_LONG).show();
 
 			}
 
@@ -343,9 +344,11 @@ public class ViewProductActivity extends  AppCompatActivity  {
 		textview2.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
+
+				Toast.makeText(ViewProductActivity.this, product_id_variable+"\n\n"+qty_product.getText()+"\n\n"+attr_id, Toast.LENGTH_SHORT).show();
 				_api_request_add_to_cart(product_id_variable,qty_product.getText().toString(),attr_id);
 				// here attr_id means variant of products like 500gm or 1kg
-				// default attr_id is 1
+				// default attr_id is blank
 
 							}
 		});
@@ -380,15 +383,20 @@ description_layout.setBackground(new GradientDrawable() { public GradientDrawabl
 
 
 		//Toast.makeText(this, _qty+"\n"+_attrVals+"\n"+_product_id, Toast.LENGTH_SHORT).show();
-		HashMap<String,Object> map2 = new HashMap<>();
-		map2.put("method", "addtocart");
-		map2.put("product_id", _product_id);
-		map2.put("qty", _qty);
-		map2.put("attrVals", _attrVals);
 
-		req_add_to_cart.setParams(map2, RequestNetworkController.REQUEST_PARAM);
-		req_add_to_cart.startRequestNetwork(
-				RequestNetworkController.GET,
+
+		map3 = new HashMap<>();
+		map3.put("method", "addtocart");
+		map3.put("product_id", _product_id);
+		map3.put("qty", _qty);
+
+		if(!_attrVals.equals("")) {
+			map3.put("attrVals", _attrVals);
+		}
+
+
+		//req_add_to_cart.setParams(map3, RequestNetworkController.REQUEST_PARAM);
+		req_add_to_cart.startRequestNetwork(RequestNetworkController.GET,
 				"https://kkkamya.in/index.php/Api_request/api_list?"
 				, ""
 				, _req_add_to_cart_listener);
@@ -542,22 +550,7 @@ Code By EPIC Technical Tricks on 26th April 2022
 
 				product_attr_name.setText(Objects.requireNonNull(results2.get(_position).get("attribute_value")).toString());
 
-
-				/*if(_position==0){bg_variant.setCardBackgroundColor(0xFFDEFCFF);}
-				else {bg_variant.setCardBackgroundColor(0xFFFFFFFF);}*/
-
-
-/*Glide.with(getContext())
-						.load(Uri.parse(results.get(_position).get("product_image").toString()))
-						.error(R.drawable.pyramids)
-						.placeholder(R.drawable.pyramids)
-						.thumbnail(0.01f)
-						.into(product_image);
-*/
-
-
-
-
+				
 				bg_variant.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View _view) {
@@ -621,8 +614,7 @@ Code By EPIC Technical Tricks on 26th April 2022
 				//Collections.shuffle(results);
 
 				_grid_from_list(results2);
-
-
+				
 				//gridview1.setAdapter(new Gridview1Adapter(results));
 				//gridview1.setNumColumns((int)100);
 				//Util.showMessage(getContext(), _response);

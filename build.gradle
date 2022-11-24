@@ -1,4 +1,12 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+repositories
+		{
+			maven
+					{
+						url 'https://maven.cashfree.com/release'
+					}
+		}
+
 
 buildscript {
 	repositories {

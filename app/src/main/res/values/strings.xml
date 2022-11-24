@@ -1,3 +1,4 @@
 <resources>
 	<string	name="app_name"	translatable="false">Kamya</string>
+	<string name="live_api_url" translatable="false">https://kkkamya.in/index.php/Api_request/api_list?</string>
 </resources>

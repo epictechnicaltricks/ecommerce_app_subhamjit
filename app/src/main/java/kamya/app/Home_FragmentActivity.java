@@ -308,22 +308,7 @@ menu.setOnClickListener(new OnClickListener() {
 		});
 
 
-		time2 = new TimerTask() {
-			@Override
-			public void run() {
-				getActivity().runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
 
-
-						_api_request_categories();
-
-						time2.cancel();
-					}
-				});
-			}
-		};
-		_timer.schedule(time2, 800);
 
 
 	}
@@ -352,11 +337,42 @@ menu.setOnClickListener(new OnClickListener() {
 	}
 
 	@Override
+	public void onStop() {
+		super.onStop();
+
+	}
+
+	@Override
 	public void onResume() {
 		super.onResume();
 		_slider();
+		requ_categories();
+
 
 	}
+
+
+	private void requ_categories()
+	{
+		time2 = new TimerTask() {
+			@Override
+			public void run() {
+				getActivity().runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+
+
+						_api_request_categories();
+
+						time2.cancel();
+					}
+				});
+			}
+		};
+		_timer.schedule(time2, 800);
+
+	}
+
 	public void _slider () {
 		{
 			HashMap<String, Object> _item = new HashMap<>();
@@ -472,7 +488,8 @@ menu.setOnClickListener(new OnClickListener() {
 			}
 		} catch(Exception e) {
 
-			Util.showMessage(getContext(), "Error on parameter \n\n"+_response);
+
+		//	Util.showMessage(getActivity(), "Error on parameter \n\n"+_response);
 		}
 	}
 
@@ -526,6 +543,15 @@ menu.setOnClickListener(new OnClickListener() {
 			final ImageView imageview1 = _view.findViewById(R.id.imageview1);
 
 
+
+			cardview1.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View view) {
+
+					startActivity(new Intent(getContext(),MyOrdersActivity.class));
+
+				}
+			});
 
 
 			Glide.with(Objects.requireNonNull(getContext()))
@@ -1084,7 +1110,7 @@ Code By EPIC Technical Tricks on 26th April 2022
 				new_grid.setAdapter(new NewGridAdapter(results));
 			}
 		} catch(Exception e) {
-			Util.showMessage(getContext(), "Error ");
+			Util.showMessage(getContext(), "Error on categories show homefragme ");
 		}
 	}
 

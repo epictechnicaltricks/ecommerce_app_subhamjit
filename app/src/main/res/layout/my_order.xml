@@ -23,7 +23,7 @@
 				android:layout_marginLeft="15dp"
 				android:layout_marginTop="15dp"
 				android:padding="8dp"
-				android:text="Wishlist"
+				android:text="My Orders"
 				android:textSize="25sp"
 				android:textStyle="bold"
 				android:textColor="#000000"/>
@@ -32,7 +32,7 @@
 		</LinearLayout>
 
 
-		<androidx.recyclerview.widget.RecyclerView
+				<androidx.recyclerview.widget.RecyclerView
 			android:id="@+id/recyclerview4"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
@@ -55,6 +55,6 @@
 
 
 
+					</LinearLayout>
 	</LinearLayout>
-</LinearLayout>
 

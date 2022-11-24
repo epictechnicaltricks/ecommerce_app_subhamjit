@@ -22,7 +22,7 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/bgg"
                 android:scaleType="centerCrop"
-                android:alpha="0.05"/>
+                android:alpha="0.00"/>
         </LinearLayout>
 
         <LinearLayout
