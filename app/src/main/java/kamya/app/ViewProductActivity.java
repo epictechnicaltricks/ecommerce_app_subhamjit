@@ -395,7 +395,7 @@ description_layout.setBackground(new GradientDrawable() { public GradientDrawabl
 		}
 
 
-		//req_add_to_cart.setParams(map3, RequestNetworkController.REQUEST_PARAM);
+		req_add_to_cart.setParams(map3, RequestNetworkController.REQUEST_PARAM);
 		req_add_to_cart.startRequestNetwork(RequestNetworkController.GET,
 				"https://kkkamya.in/index.php/Api_request/api_list?"
 				, ""

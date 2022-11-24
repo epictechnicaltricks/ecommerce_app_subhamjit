@@ -1,11 +1,10 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-48:12
-INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-48:12
-INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-48:12
-INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-48:12
+ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-49:12
+INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-49:12
+INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-49:12
+INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-49:12
 MERGED from [com.google.android.material:material:1.0.0] C:\Users\RAM\.gradle\caches\transforms-3\3e85f37074ee1ec80e7c16de0c3d4021\transformed\AndroidManifest.xml:17:1-24:12
-MERGED from [dev.atharvakulkarni:TastyToast:1.1] C:\Users\RAM\.gradle\caches\transforms-3\dfe1decc68ff83d9836301a0d4fbe540\transformed\AndroidManifest.xml:2:1-11:12
 MERGED from [com.airbnb.android:lottie:3.4.0] C:\Users\RAM\.gradle\caches\transforms-3\b30a68e05d405a90bf393d1b75009f5e\transformed\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\RAM\.gradle\caches\transforms-3\137892dcd36f9af54fadd977b323839c\transformed\AndroidManifest.xml:17:1-24:12
 MERGED from [com.github.bumptech.glide:glide:4.12.0] C:\Users\RAM\.gradle\caches\transforms-3\63390206ee348d0c69d725999c0a6f75\transformed\AndroidManifest.xml:2:1-12:12
@@ -42,20 +41,20 @@ MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\RAM\.gradle\caches\t
 MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\RAM\.gradle\caches\transforms-3\e4fb049e4e1cd33167cf26067d5f15e3\transformed\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\RAM\.gradle\caches\transforms-3\76b58420d7a1fa6adca5131a0613dbdb\transformed\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\RAM\.gradle\caches\transforms-3\ccb946b8fbeab096a38c77a9fbfe717d\transformed\AndroidManifest.xml:17:1-22:12
-INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-48:12
-INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-48:12
-INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-48:12
+INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-49:12
+INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-49:12
+INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-49:12
 	package
 		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:4:2-21
 		INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-48:12
+		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-49:12
 		INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-48:12
+		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-49:12
 		INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:3:2-60
@@ -72,7 +71,7 @@ ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml
 	android:name
 		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:7:19-74
 application
-ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:8:2-47:16
+ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:8:2-48:16
 MERGED from [com.google.android.material:material:1.0.0] C:\Users\RAM\.gradle\caches\transforms-3\3e85f37074ee1ec80e7c16de0c3d4021\transformed\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.0.0] C:\Users\RAM\.gradle\caches\transforms-3\3e85f37074ee1ec80e7c16de0c3d4021\transformed\AndroidManifest.xml:22:5-20
 MERGED from [com.airbnb.android:lottie:3.4.0] C:\Users\RAM\.gradle\caches\transforms-3\b30a68e05d405a90bf393d1b75009f5e\transformed\AndroidManifest.xml:9:5-20
@@ -159,20 +158,30 @@ ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml
 		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:41:45-101
 	android:name
 		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:41:13-44
-uses-library#org.apache.http.legacy
-ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:44:3-46:30
-	android:required
-		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:46:4-28
+activity#kamya.app.MyOrdersActivity
+ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:42:10-111
+	android:theme
+		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:42:53-109
 	android:name
-		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:45:4-41
+		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:42:20-52
+activity#kamya.app.CheckoutActivity
+ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:43:3-104
+	android:theme
+		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:43:46-102
+	android:name
+		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:43:13-45
+uses-library#org.apache.http.legacy
+ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:45:3-47:30
+	android:required
+		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:47:4-28
+	android:name
+		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:46:4-41
 uses-sdk
 INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml
 INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml
 MERGED from [com.google.android.material:material:1.0.0] C:\Users\RAM\.gradle\caches\transforms-3\3e85f37074ee1ec80e7c16de0c3d4021\transformed\AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.material:material:1.0.0] C:\Users\RAM\.gradle\caches\transforms-3\3e85f37074ee1ec80e7c16de0c3d4021\transformed\AndroidManifest.xml:20:5-44
-MERGED from [dev.atharvakulkarni:TastyToast:1.1] C:\Users\RAM\.gradle\caches\transforms-3\dfe1decc68ff83d9836301a0d4fbe540\transformed\AndroidManifest.xml:7:5-9:41
-MERGED from [dev.atharvakulkarni:TastyToast:1.1] C:\Users\RAM\.gradle\caches\transforms-3\dfe1decc68ff83d9836301a0d4fbe540\transformed\AndroidManifest.xml:7:5-9:41
 MERGED from [com.airbnb.android:lottie:3.4.0] C:\Users\RAM\.gradle\caches\transforms-3\b30a68e05d405a90bf393d1b75009f5e\transformed\AndroidManifest.xml:5:5-7:41
 MERGED from [com.airbnb.android:lottie:3.4.0] C:\Users\RAM\.gradle\caches\transforms-3\b30a68e05d405a90bf393d1b75009f5e\transformed\AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\RAM\.gradle\caches\transforms-3\137892dcd36f9af54fadd977b323839c\transformed\AndroidManifest.xml:20:5-22:41

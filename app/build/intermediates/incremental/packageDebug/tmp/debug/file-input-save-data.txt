@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Sun Nov 20 20:25:25 IST 2022
+#Tue Nov 22 08:56:09 IST 2022
 3.set=ASSET
 3.path=fonts/google_sans_medium.ttf
 2.base=C\:\\Users\\RAM\\Downloads\\Kamya_by_jeet\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\out
