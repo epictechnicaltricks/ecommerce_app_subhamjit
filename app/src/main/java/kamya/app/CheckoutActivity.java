@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.gson.Gson;
@@ -95,29 +96,31 @@ public class CheckoutActivity extends  AppCompatActivity  {
 	private RequestNetwork re;
 	private RequestNetwork.RequestListener _re_request_listener;
 
+	private LottieAnimationView loading;
 
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
 		super.onCreate(_savedInstanceState);
-		setContentView(R.layout.main);
+		setContentView(R.layout.checkout);
 		initialize(_savedInstanceState);
 		initializeLogic();
 	}
 	
 	private void initialize(Bundle _savedInstanceState) {
-		
+
+		loading = findViewById(R.id.lottie_loading);
+
+		re = new RequestNetwork(this);
+		req_add_to_cart = new RequestNetwork(this);
+		req_delete_cart = new RequestNetwork(this);
+
+
 		_app_bar = (AppBarLayout) findViewById(R.id._app_bar);
 		_coordinator = (CoordinatorLayout) findViewById(R.id._coordinator);
-		_toolbar = (Toolbar) findViewById(R.id._toolbar);
-		setSupportActionBar(_toolbar);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		getSupportActionBar().setHomeButtonEnabled(true);
-		_toolbar.setNavigationOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View _v) {
-				onBackPressed();
-			}
-		});
+
+
+
+
 		linear1 = (LinearLayout) findViewById(R.id.linear1);
 		linear2 = (LinearLayout) findViewById(R.id.linear2);
 		linear3 = (LinearLayout) findViewById(R.id.linear3);
@@ -163,8 +166,8 @@ public class CheckoutActivity extends  AppCompatActivity  {
 				final String _tag = _param1;
 				final String _response = _param2;
 				final HashMap<String, Object> _responseHeaders = _param3;
-
-
+				loading.setVisibility(View.GONE);
+				Toast.makeText(CheckoutActivity.this, "add to cart \n"+_response, Toast.LENGTH_SHORT).show();
 				_show_response(_response);
 			}
 
@@ -224,26 +227,25 @@ public class CheckoutActivity extends  AppCompatActivity  {
 
 
 
-
-
-
-
-
-
 	}
 	
 	private void initializeLogic() {
+
+
 		textview4.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_medium.ttf"), Typeface.BOLD);
 
 		SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
 		user_id = sh.getString("user_id", "");
+		_api_request(user_id);
 
-			_changeActivityFont("google_sans_medium");
+
+		_changeActivityFont("google_sans_medium");
 		recyclerview1.stopScroll();
-		
-		
-		/*
-*/
+
+
+
+
+
 	}
 	
 	@Override
@@ -301,8 +303,6 @@ public class CheckoutActivity extends  AppCompatActivity  {
 
 	public void _api_request (String user_id) {
 
-
-
 		map.clear();
 		results.clear();
 		map.put("method", "cart_itemlist");
@@ -311,6 +311,7 @@ public class CheckoutActivity extends  AppCompatActivity  {
 		re.startRequestNetwork(RequestNetworkController.GET,
 				"https://kkkamya.in/index.php/Api_request/api_list?",
 				"", _re_request_listener);
+
 	}
 
 	public void request_update_cart(String _product_id, String _qty, String _attrVals) {
@@ -339,11 +340,11 @@ public class CheckoutActivity extends  AppCompatActivity  {
 
 
 	public void _api_request_delete_cart_item (String _cart_id) {
-		map.clear();
+		map2.clear();
 		results.clear();
-		map.put("method", "deletecartitem");
-		map.put("cart_id", _cart_id );
-		re.setParams(map, RequestNetworkController.REQUEST_PARAM);
+		map2.put("method", "deletecartitem");
+		map2.put("cart_id", _cart_id );
+		re.setParams(map2, RequestNetworkController.REQUEST_PARAM);
 		re.startRequestNetwork(RequestNetworkController.GET,
 				"https://kkkamya.in/index.php/Api_request/api_list?",
 				"", _req_delete_cart_listener);
@@ -356,6 +357,7 @@ public class CheckoutActivity extends  AppCompatActivity  {
 			api_map.clear();
 			results.clear();
 
+			loading.setVisibility(View.GONE);
 
 			if (_response.contains("200")) {
 				api_map = new Gson().fromJson(_response, new TypeToken<HashMap<String, Object>>(){}.getType());
@@ -364,6 +366,7 @@ public class CheckoutActivity extends  AppCompatActivity  {
 				list = (new Gson()).toJson(api_map.get("res"), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
 
 				results = new Gson().fromJson(list, new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+
 				// refresh the list or recycle or grid
 
 			/*	if(results.size()==0){
@@ -379,7 +382,9 @@ public class CheckoutActivity extends  AppCompatActivity  {
 
 					}
 
-				}*/
+				}
+
+				*/
 
 
 
@@ -404,7 +409,8 @@ public class CheckoutActivity extends  AppCompatActivity  {
 
 
 	public void _reftesh () {
-		_hight_of_scroll_in_listview(recyclerview1, results.size() * Util.getDip(getApplicationContext(), (int)(100)));
+
+		_hight_of_scroll_in_listview(recyclerview1, results.size() * Util.getDip(getApplicationContext(), (int)(170)));
 
 		recyclerview1.setAdapter(new Recyclerview1Adapter(results));
 		recyclerview1.setLayoutManager(new LinearLayoutManager(this));
@@ -449,6 +455,7 @@ public class CheckoutActivity extends  AppCompatActivity  {
 			final TextView total_price = _view.findViewById(R.id.total_price);
 
 			try {
+
 				bg.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b) { this.setCornerRadius(a); this.setColor(b); return this; } }.getIns((int)50, 0xFFECEFF1));
 				name.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_medium.ttf"), Typeface.BOLD);
 				pro_price_and_qty.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
@@ -478,6 +485,7 @@ public class CheckoutActivity extends  AppCompatActivity  {
 
 					}
 				});
+
 				minus.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View _view) {
@@ -493,12 +501,13 @@ public class CheckoutActivity extends  AppCompatActivity  {
 
 					}
 				});
+
+
 				delete.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View _view) {
 
-						Toast.makeText(getApplicationContext(), "delete", Toast.LENGTH_SHORT).show();
-						_api_request_delete_cart_item(Objects.requireNonNull(results.get(_position).get("cart_id")).toString());
+								_api_request_delete_cart_item(Objects.requireNonNull(results.get(_position).get("cart_id")).toString());
 					}
 				});
 

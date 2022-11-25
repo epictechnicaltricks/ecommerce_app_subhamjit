@@ -2,6 +2,7 @@ package kamya.app;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -37,11 +38,16 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
-public class ViewProductActivity extends  AppCompatActivity  { 
-	
-	
+public class ViewProductActivity extends  AppCompatActivity  {
+
+	private TimerTask time;
+	private final Timer _timer = new Timer();
+
+
 	private LinearLayout bg;
 	private LinearLayout bottom_layout;
 	private ScrollView vscroll1;
@@ -102,6 +108,8 @@ public class ViewProductActivity extends  AppCompatActivity  {
 	private ListView listview1;
 
 
+	String user_id;
+
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
 		super.onCreate(_savedInstanceState);
@@ -111,6 +119,9 @@ public class ViewProductActivity extends  AppCompatActivity  {
 	}
 	
 	private void initialize(Bundle _savedInstanceState) {
+
+
+
 
 		title2 = findViewById(R.id.title2);
 		re = new RequestNetwork(this);
@@ -162,6 +173,36 @@ public class ViewProductActivity extends  AppCompatActivity  {
 		qty_product = findViewById(R.id.qty_product);
 		plus_ = findViewById(R.id.plus_);
 		minus_ = findViewById(R.id.minus_);
+
+
+
+
+		_req_add_to_cart_listener = new RequestNetwork.RequestListener() {
+			@Override
+			public void onResponse(String _param1, String _param2, HashMap<String, Object> _param3) {
+				final String _response = _param2;
+
+
+				// THIS REQUEST FOR UPDATE CART VALUE
+				// WHEN USER CLICK ON PLUS OR MINUS BUTTON ON PRODUCT
+				// PROJECT BY SHUBHAMJIT DT 20 NOV 2022 6.37PM
+				//Toast.makeText(getActivity(), _response, Toast.LENGTH_SHORT).show();
+
+			}
+
+			@Override
+			public void onErrorResponse(String _param1, String _param2) {
+				final String _message = _param2;
+
+				Toast.makeText(getApplicationContext(), "Cart not updated, No Internet !\n\n"+_message, Toast.LENGTH_LONG).show();
+
+			}
+		};
+
+
+
+
+
 
 		back.setOnClickListener(new OnClickListener() {
 			@Override
@@ -257,8 +298,22 @@ public class ViewProductActivity extends  AppCompatActivity  {
 
 
 	}
-	
+
+
+
+
+
+
+
+
+
+
+
 	private void initializeLogic() {
+
+
+		SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+		user_id = sh.getString("user_id", "");
 
 		description.setText("Loading..");
 
@@ -345,12 +400,17 @@ public class ViewProductActivity extends  AppCompatActivity  {
 			@Override
 			public void onClick(View view) {
 
-				Toast.makeText(ViewProductActivity.this, product_id_variable+"\n\n"+qty_product.getText()+"\n\n"+attr_id, Toast.LENGTH_SHORT).show();
-				_api_request_add_to_cart(product_id_variable,qty_product.getText().toString(),attr_id);
+
+				request_update_cart(product_id_variable,qty_product.getText().toString(),attr_id);
+
+
+				//Toast.makeText(ViewProductActivity.this, product_id_variable+"\n\n"+qty_product.getText()+"\n\n"+attr_id, Toast.LENGTH_SHORT).show();
+				//_api_request_add_to_cart(product_id_variable,qty_product.getText().toString(),attr_id);
 				// here attr_id means variant of products like 500gm or 1kg
 				// default attr_id is blank
 
-							}
+
+			}
 		});
 
 		/*
@@ -367,6 +427,7 @@ description_layout.setBackground(new GradientDrawable() { public GradientDrawabl
 	public void _api_request_product (String _product_id) {
 		map.clear();
 		results.clear();
+
 		map.put("method", "product_details");
 		map.put("product_id", _product_id);
 
@@ -378,14 +439,14 @@ description_layout.setBackground(new GradientDrawable() { public GradientDrawabl
 				_re_request_listener);
 	}
 
-
+/*
 	public void _api_request_add_to_cart (String _product_id, String _qty, String _attrVals) {
 
 
 		//Toast.makeText(this, _qty+"\n"+_attrVals+"\n"+_product_id, Toast.LENGTH_SHORT).show();
 
+		map3.clear();
 
-		map3 = new HashMap<>();
 		map3.put("method", "addtocart");
 		map3.put("product_id", _product_id);
 		map3.put("qty", _qty);
@@ -400,7 +461,7 @@ description_layout.setBackground(new GradientDrawable() { public GradientDrawabl
 				"https://kkkamya.in/index.php/Api_request/api_list?"
 				, ""
 				, _req_add_to_cart_listener);
-	}
+	}*/
 
 	public void _show_response_product (final String _response) {
 		try {
@@ -630,6 +691,51 @@ Code By EPIC Technical Tricks on 26th April 2022
 	}
 
 
+
+	private void request_update_cart(final String _produbt_id, final String _qty, final String _attrVal) {
+		if(time!=null)
+		{
+			time.cancel();
+			// dont remove this line
+		}
+
+		time = new TimerTask() {
+			@Override
+			public void run() {
+			runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+
+
+
+						_api_request_update_to_cart(_produbt_id,_qty,_attrVal);
+
+						time.cancel();
+					}
+				});
+			}
+		};
+		_timer.schedule(time, 1200);
+	}
+
+	public void _api_request_update_to_cart (String _product_id, String _qty, String _attrVals) {
+
+
+		HashMap<String, Object> map3 = new HashMap<>();
+		map3.put("method", "addtocart");
+		map3.put("product_id", _product_id);
+		map3.put("qty", _qty);
+		if(!_attrVals.equals("")) {
+			map3.put("attrVals", _attrVals);
+		}
+
+		req_add_to_cart.setParams(map3, RequestNetworkController.REQUEST_PARAM);
+		req_add_to_cart.startRequestNetwork(
+				RequestNetworkController.GET,
+				"https://kkkamya.in/index.php/Api_request/api_list?"
+				, ""
+				, _req_add_to_cart_listener);
+	}
 
 
 }

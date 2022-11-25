@@ -106,6 +106,22 @@
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:padding="8dp"/>
+
+					<com.airbnb.lottie.LottieAnimationView
+						android:id="@+id/lottie_loading"
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:layout_centerInParent="true"
+						android:layout_weight="1"
+						android:padding="8dp"
+						android:scaleType="fitCenter"
+						android:scaleX="3"
+						android:scaleY="3"
+						app:lottie_autoPlay="true"
+						app:lottie_fileName="shimmer.json"
+						app:lottie_loop="true" />
+
+
 					<LinearLayout
 						android:id="@+id/price_details"
 						android:layout_width="match_parent"

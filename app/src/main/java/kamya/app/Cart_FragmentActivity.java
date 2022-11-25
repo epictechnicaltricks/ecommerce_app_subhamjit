@@ -98,7 +98,7 @@ public class Cart_FragmentActivity extends  Fragment  {
 		swiperefreshlayout1 = (SwipeRefreshLayout) _view.findViewById(R.id.swiperefreshlayout1);
 
 		cart_count = _view.findViewById(R.id._cart_count);
-		req_add_to_cart = new RequestNetwork(getActivity());
+
 		loading = _view.findViewById(R.id.lottie_loading);
 		linear1 = _view.findViewById(R.id.linear1);
 		textview1 = _view.findViewById(R.id.textview1);
@@ -109,7 +109,10 @@ public class Cart_FragmentActivity extends  Fragment  {
 		checkout = _view.findViewById(R.id.checkout);
 		subtotal = _view.findViewById(R.id.subtotal);
 		total_price = _view.findViewById(R.id.total_price);
+
 		re = new RequestNetwork((Activity)getContext());
+		req_add_to_cart = new RequestNetwork(getActivity());
+		req_delete_cart= new RequestNetwork(getActivity());
 		
 		_re_request_listener = new RequestNetwork.RequestListener() {
 			@Override
@@ -242,8 +245,8 @@ public class Cart_FragmentActivity extends  Fragment  {
 		results.clear();
 		map.put("method", "deletecartitem");
 		map.put("cart_id", _cart_id );
-		re.setParams(map, RequestNetworkController.REQUEST_PARAM);
-		re.startRequestNetwork(RequestNetworkController.GET,
+		req_delete_cart.setParams(map, RequestNetworkController.REQUEST_PARAM);
+		req_delete_cart.startRequestNetwork(RequestNetworkController.GET,
 				"https://kkkamya.in/index.php/Api_request/api_list?",
 				"", _req_delete_cart_listener);
 	}
@@ -393,7 +396,7 @@ public class Cart_FragmentActivity extends  Fragment  {
 						if(qty_count<99){
 							qty.setText(String.valueOf(++qty_count));
 
-							_api_request_update_to_cart(results.get(_position).get("product_id").toString(),qty.getText().toString(),"");
+							request_update_cart(results.get(_position).get("product_id").toString(),qty.getText().toString(),"");
 
 						}
 
@@ -407,8 +410,7 @@ public class Cart_FragmentActivity extends  Fragment  {
 						if(qty_count>1){
 
 							qty.setText(String.valueOf(--qty_count));
-							_api_request_update_to_cart(Objects.requireNonNull(results.get(_position).get("product_id")).toString(),qty.getText().toString(),"");
-							Toast.makeText(getContext(), qty.getText().toString(), Toast.LENGTH_SHORT).show();
+							request_update_cart(Objects.requireNonNull(results.get(_position).get("product_id")).toString(),qty.getText().toString(),"");
 
 						}
 
