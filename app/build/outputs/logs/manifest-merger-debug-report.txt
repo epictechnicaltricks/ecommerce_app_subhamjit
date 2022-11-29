@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-100:12
-INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-100:12
-INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-100:12
-INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-100:12
+ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-108:12
+INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-108:12
+INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-108:12
+INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-108:12
 MERGED from [com.airbnb.android:lottie:3.4.0] C:\Users\RAM\.gradle\caches\transforms-3\b30a68e05d405a90bf393d1b75009f5e\transformed\AndroidManifest.xml:2:1-11:12
 MERGED from [com.cashfree.pg:android-sdk:1.7.26] C:\Users\RAM\.gradle\caches\transforms-3\59c7fec9acfddad9199e6a87ccb00b4a\transformed\AndroidManifest.xml:2:1-68:12
 MERGED from [com.google.android.material:material:1.2.1] C:\Users\RAM\.gradle\caches\transforms-3\bd035a9d122aba10bf609b3e77dc708f\transformed\AndroidManifest.xml:17:1-24:12
@@ -57,20 +57,20 @@ MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\RAM\.gradle\c
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.0] C:\Users\RAM\.gradle\caches\transforms-3\db3572ad3dcf517e268eafe85f8848ab\transformed\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.arch.core:core-runtime:2.1.0] C:\Users\RAM\.gradle\caches\transforms-3\f1ecbe7e954379199963fbadddf8665c\transformed\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.annotation:annotation-experimental:1.0.0] C:\Users\RAM\.gradle\caches\transforms-3\a20a73c6fcfa6a9b63b4b8e40c1b2b38\transformed\AndroidManifest.xml:17:1-24:12
-INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-100:12
-INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-100:12
-INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-100:12
+INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-108:12
+INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-108:12
+INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-108:12
 	package
 		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:4:2-21
 		INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-100:12
+		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-108:12
 		INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-100:12
+		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:2:1-108:12
 		INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:3:2-60
@@ -91,7 +91,7 @@ ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml
 	android:name
 		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:10:19-74
 application
-ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:11:2-96:16
+ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:11:2-104:16
 MERGED from [com.airbnb.android:lottie:3.4.0] C:\Users\RAM\.gradle\caches\transforms-3\b30a68e05d405a90bf393d1b75009f5e\transformed\AndroidManifest.xml:9:5-20
 MERGED from [com.airbnb.android:lottie:3.4.0] C:\Users\RAM\.gradle\caches\transforms-3\b30a68e05d405a90bf393d1b75009f5e\transformed\AndroidManifest.xml:9:5-20
 MERGED from [com.cashfree.pg:android-sdk:1.7.26] C:\Users\RAM\.gradle\caches\transforms-3\59c7fec9acfddad9199e6a87ccb00b4a\transformed\AndroidManifest.xml:19:5-66:19
@@ -276,12 +276,24 @@ ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml
 		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:86:4-97
 	android:name
 		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:85:4-36
-uses-library#org.apache.http.legacy
-ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:93:3-95:30
-	android:required
-		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:95:4-28
+activity#kamya.app.MyAddress_EDIT_Activity
+ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:92:3-97:42
+	android:screenOrientation
+		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:97:4-40
+	android:hardwareAccelerated
+		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:95:4-38
+	android:supportsPictureInPicture
+		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:96:4-43
+	android:configChanges
+		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:94:4-97
 	android:name
-		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:94:4-41
+		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:93:4-43
+uses-library#org.apache.http.legacy
+ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:101:3-103:30
+	android:required
+		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:103:4-28
+	android:name
+		ADDED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml:102:4-41
 uses-sdk
 INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\RAM\Downloads\Kamya_by_jeet\app\src\main\AndroidManifest.xml

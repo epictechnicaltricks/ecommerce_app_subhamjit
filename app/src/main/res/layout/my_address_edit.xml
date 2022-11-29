@@ -1,0 +1,236 @@
+<FrameLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:elevation="10dp"
+		android:id="@+id/l"
+		android:gravity="center"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:padding="10dp"
+
+		android:orientation="horizontal">
+
+		<ImageView
+			android:onClick="close"
+			android:layout_marginLeft="15dp"
+			android:layout_marginTop="0dp"
+
+			android:id="@+id/back"
+			android:layout_width="25dp"
+			android:layout_height="20dp"
+
+			android:src="@drawable/left"
+			android:scaleType="center"/>
+
+
+		<TextView
+			android:layout_weight="1"
+			android:id="@+id/textview1"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="15dp"
+			android:layout_marginTop="0dp"
+			android:padding="8dp"
+			android:text="Edit or Add Address"
+			android:textSize="25sp"
+			android:textStyle="bold"
+			android:textColor="#000000"/>
+	</LinearLayout>
+
+
+	<LinearLayout
+		android:layout_marginTop="80dp"
+		android:orientation="vertical"
+		android:padding="10dp"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+
+		<EditText
+
+
+			android:maxLines="1"
+			android:layout_margin="4dp"
+
+
+			android:id="@+id/name"
+			android:paddingTop="12dp"
+
+			android:background="@drawable/shape"
+			android:textSize="16sp"
+			android:layout_width="match_parent"
+			android:layout_height="40dp"
+			android:padding="8dp"
+
+			android:textColor="#000000"
+			android:hint="Full name * "
+			android:textColorHint="#607D8B"/>
+
+		<EditText
+
+			android:maxLines="1"
+			android:layout_margin="4dp"
+
+
+			android:id="@+id/mobile"
+			android:paddingTop="12dp"
+
+			android:background="@drawable/shape"
+			android:textSize="16sp"
+			android:layout_width="match_parent"
+			android:layout_height="40dp"
+			android:padding="8dp"
+			android:textColor="#000000"
+			android:hint="Mobile Number *"
+			android:textColorHint="#607D8B"/>
+		<EditText
+
+			android:maxLines="1"
+			android:layout_margin="4dp"
+			android:id="@+id/email"
+			android:paddingTop="12dp"
+			android:background="@drawable/shape"
+			android:textSize="16sp"
+			android:layout_width="match_parent"
+			android:layout_height="40dp"
+			android:padding="8dp"
+
+			android:textColor="#000000"
+			android:hint="Block no, Apartment, House No. *"
+			android:textColorHint="#607D8B"/>
+
+
+
+		<EditText
+
+			android:maxLines="1"
+			android:layout_margin="4dp"
+			android:id="@+id/national"
+			android:paddingTop="12dp"
+
+			android:background="@drawable/shape"
+			android:textSize="16sp"
+			android:layout_width="match_parent"
+			android:layout_height="40dp"
+			android:padding="8dp"
+
+			android:textColor="#000000"
+			android:hint="Address Line 2, Near by, Landmark"
+			android:textColorHint="#607D8B"/>
+
+
+		<EditText
+
+			android:maxLines="1"
+			android:layout_margin="4dp"
+			android:id="@+id/city"
+			android:paddingTop="12dp"
+
+			android:background="@drawable/shape"
+			android:textSize="16sp"
+			android:layout_width="match_parent"
+			android:layout_height="40dp"
+			android:padding="8dp"
+
+			android:textColor="#000000"
+			android:hint="City *"
+			android:textColorHint="#607D8B"/>
+
+		<EditText
+
+			android:maxLines="1"
+			android:layout_margin="4dp"
+			android:id="@+id/program"
+			android:paddingTop="12dp"
+
+			android:background="@drawable/shape"
+			android:textSize="16sp"
+			android:layout_width="match_parent"
+			android:layout_height="40dp"
+			android:padding="8dp"
+
+			android:textColor="#000000"
+			android:hint="PIN Code *"
+			android:textColorHint="#607D8B"/>
+
+		<EditText
+
+			android:maxLines="1"
+			android:layout_margin="4dp"
+			android:id="@+id/subject"
+			android:paddingTop="12dp"
+
+			android:background="@drawable/shape"
+			android:textSize="16sp"
+			android:layout_width="match_parent"
+			android:layout_height="40dp"
+			android:padding="8dp"
+
+			android:textColor="#000000"
+			android:hint="Address Type e.g. Home, Office, Other"
+			android:textColorHint="#607D8B"/>
+
+		<LinearLayout
+			android:layout_marginTop="40dp"
+			android:elevation="10dp"
+			android:id="@+id/l2"
+		      android:gravity="center"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:padding="0dp"
+
+			android:orientation="horizontal">
+
+
+			<Button
+				android:padding="17dp"
+				android:layout_marginLeft="30dp"
+				android:onClick="go_check"
+				android:backgroundTint="#3154DA"
+				android:id="@+id/save"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+
+				android:background="#008DCD"
+				android:layout_gravity="center_horizontal|center_vertical"
+
+				android:gravity="center_horizontal|center_vertical"
+				android:text="Save Address"
+				android:textSize="12sp"
+				android:textColor="#FFFFFF" />
+
+			<Button
+				android:layout_marginLeft="30dp"
+				android:onClick="go_check"
+				android:backgroundTint="#3154DA"
+				android:id="@+id/payment"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:padding="17dp"
+				android:background="#008DCD"
+				android:layout_gravity="center_horizontal|center_vertical"
+
+				android:gravity="center_horizontal|center_vertical"
+				android:text="AUTO LOCATION "
+				android:textSize="12sp"
+				android:textColor="#FFFFFF" />
+
+
+
+		</LinearLayout>
+
+
+
+
+
+	</LinearLayout>
+
+
+
+
+
+</FrameLayout>

@@ -60,7 +60,7 @@ Button place_order;
     String amt = "1";
     String order_id = "order001";
 
-    String app_id= "";
+    String app_id= "21054006fdf9a3c2f38752ec9a045012";
     String secret_key="";
     String msg="";
 

@@ -307,6 +307,16 @@ public class CheckoutActivity extends  AppCompatActivity  {
 			}
 		};
 
+
+		textview9.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+
+				startActivity(new Intent(CheckoutActivity.this, MyAddress_EDIT_Activity.class));
+
+			}
+		});
+
 	}
 
 	private void request_pin_code(String _pin){

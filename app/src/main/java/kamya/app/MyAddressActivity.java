@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MyAddressActivity extends  AppCompatActivity  { 
 	
 	
-	private TextView textview1;
+	private TextView textview1,text9;
 	String fontName="";
 
 	@Override
@@ -31,6 +31,18 @@ public class MyAddressActivity extends  AppCompatActivity  {
 	private void initialize(Bundle _savedInstanceState) {
 		
 		textview1 = (TextView) findViewById(R.id.textview1);
+		text9 = findViewById(R.id.textview9);
+
+		text9.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+
+				startActivity(new Intent(getApplicationContext(), MyAddress_EDIT_Activity.class));
+
+
+			}
+		});
+
 	}
 
 
