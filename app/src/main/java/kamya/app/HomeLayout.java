@@ -172,7 +172,9 @@ Glide.with(getApplicationContext()).load(Uri.parse("tggfxd")).into(bg);
 			break;
 		}
 	}
-	
+
+
+
 	public void _transparentStatusAndNavigation () {
 		getWindow().getDecorView().setSystemUiVisibility(
 				View.SYSTEM_UI_FLAG_LAYOUT_STABLE

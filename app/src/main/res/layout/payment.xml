@@ -1,0 +1,387 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/_coordinator"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical"
+		app:layout_behavior="@string/appbar_scrolling_view_behavior">
+		<LinearLayout
+			android:gravity="center"
+			android:id="@+id/linear1"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:padding="8dp"
+			android:orientation="horizontal">
+
+				<ImageView
+					android:onClick="close"
+					android:id="@+id/imageview1"
+					android:layout_width="25dp"
+					android:layout_height="20dp"
+					android:layout_marginLeft="10dp"
+					android:src="@drawable/left"
+					android:scaleType="center"/>
+
+
+			<TextView
+				android:layout_weight="1"
+				android:id="@+id/textview4"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="15dp"
+				android:layout_marginTop="0dp"
+				android:padding="8dp"
+				android:text="Payments"
+				android:textSize="25sp"
+				android:textStyle="bold"
+				android:textColor="#000000"/>
+		</LinearLayout>
+		<LinearLayout
+			android:id="@+id/linear2"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			android:layout_weight="1">
+			<ScrollView
+				android:id="@+id/vscroll2"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:scrollbars="none">
+				<LinearLayout
+					android:id="@+id/inside_scroll"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:orientation="vertical">
+
+					<LinearLayout
+						android:id="@+id/delivery_select"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="10dp"
+
+						android:padding="20dp"
+						android:background="#FFFFFF"
+						android:orientation="vertical">
+						<TextView
+
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:padding="8dp"
+							android:text="Order Type"
+							android:textSize="16sp"
+							android:textStyle="bold"
+							android:textColor="#1A237E"/>
+
+						<RadioGroup
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:id="@+id/radioGroup2">
+
+							<RadioButton
+								android:id="@+id/del"
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:text="  Delivery"
+								android:layout_marginTop="10dp"
+								android:checked="false"
+								android:textSize="15dp" />
+
+
+							<RadioButton
+								android:id="@+id/pick"
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:text="  Pickup"
+								android:layout_marginTop="10dp"
+								android:checked="false"
+								android:textSize="15dp" />
+
+						</RadioGroup>
+
+					</LinearLayout>
+
+
+					<LinearLayout
+
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="10dp"
+						android:layout_marginBottom="20dp"
+						android:padding="20dp"
+						android:background="#FFFFFF"
+						android:orientation="vertical">
+						<TextView
+							android:id="@+id/delivery_tiitle"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:padding="8dp"
+							android:text="Payment Method"
+							android:textSize="16sp"
+							android:textStyle="bold"
+							android:textColor="#1A237E"/>
+
+						<RadioGroup
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:id="@+id/radioGroup">
+
+							<RadioButton
+								android:id="@+id/radioCOD"
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:text="  Cash on Delivery"
+								android:layout_marginTop="10dp"
+								android:checked="false"
+								android:textSize="15dp" />
+
+
+							<RadioButton
+								android:id="@+id/radio_Online"
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:text="  Pay online"
+								android:layout_marginTop="10dp"
+								android:checked="false"
+								android:textSize="15dp" />
+
+						</RadioGroup>
+
+					</LinearLayout>
+
+					<LinearLayout
+						android:id="@+id/pin_layout"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="10dp"
+						android:layout_marginBottom="20dp"
+						android:padding="8dp"
+						android:background="#FFFFFF"
+						android:orientation="vertical">
+						<TextView
+							android:id="@+id/coun_title"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:padding="8dp"
+							android:text="Have a coupon code?"
+							android:textSize="16sp"
+							android:textStyle="bold"
+							android:textColor="#000000"/>
+						<LinearLayout
+							android:id="@+id/coupon"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:padding="5dp"
+							android:gravity="left|center_vertical"
+							android:orientation="horizontal">
+							<ImageView
+								android:layout_marginLeft="5dp"
+								android:layout_marginRight="5dp"
+								android:id="@+id/imageview1"
+								android:layout_width="20dp"
+								android:alpha="0.9"
+								android:layout_height="20dp"
+
+								android:src="@drawable/ticket"
+								android:scaleType="centerInside"/>
+							<EditText
+
+
+								android:singleLine="true"
+								android:id="@+id/coupon_code"
+								android:layout_width="wrap_content"
+								android:layout_height="50dp"
+								android:padding="8dp"
+								android:textSize="15sp"
+								android:textColor="#000000"
+								android:hint="Enter Coupon Code"
+								android:textColorHint="#607D8B"
+								android:layout_weight="1"/>
+							<Button
+
+								android:id="@+id/materialbutton2"
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:padding="8dp"
+								android:background="#000000"
+								android:gravity="center_horizontal|center_vertical"
+								android:text="APPLY"
+								android:textSize="12sp"
+								android:textColor="#FFFFFF" />
+						</LinearLayout>
+
+
+					</LinearLayout>
+
+
+
+					<LinearLayout
+						android:id="@+id/price_details"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="10dp"
+						android:layout_marginBottom="20dp"
+						android:padding="8dp"
+						android:background="#FFFFFF"
+						android:orientation="vertical">
+						<TextView
+							android:id="@+id/textview11"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:padding="8dp"
+							android:text="Price Details "
+							android:textSize="16sp"
+							android:textStyle="bold"
+							android:textColor="#1A237E"/>
+						<LinearLayout
+							android:id="@+id/linear10"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:orientation="horizontal">
+							<TextView
+								android:id="@+id/textview12"
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:padding="8dp"
+								android:text="Price"
+								android:textSize="14sp"
+								android:textColor="#000000"
+								android:layout_weight="1"/>
+							<TextView
+								android:id="@+id/textview17"
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:padding="8dp"
+								android:text="₹29398"
+								android:textSize="16sp"
+								android:textColor="#000000"/>
+						</LinearLayout>
+						<LinearLayout
+							android:id="@+id/linear8"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:orientation="horizontal">
+							<TextView
+								android:id="@+id/textview14"
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:padding="8dp"
+								android:text="Discount "
+								android:textSize="14sp"
+								android:textColor="#000000"/>
+							<TextView
+								android:id="@+id/textview18"
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:padding="8dp"
+								android:gravity="right"
+								android:text="- ₹2700"
+								android:textSize="16sp"
+								android:textColor="#388E3C"
+								android:layout_weight="1"/>
+						</LinearLayout>
+						<LinearLayout
+							android:id="@+id/linear11"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:orientation="horizontal">
+							<TextView
+								android:id="@+id/textview15"
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:padding="8dp"
+								android:text="Delivery Charges "
+								android:textSize="14sp"
+								android:textColor="#000000"
+								android:layout_weight="1"/>
+							<TextView
+								android:id="@+id/textview19"
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:padding="8dp"
+								android:text="Free"
+								android:textSize="16sp"
+								android:textColor="#000000"/>
+						</LinearLayout>
+					</LinearLayout>
+
+
+					<TextView
+						android:id="@+id/textview13"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="18dp"
+						android:padding="8dp"
+						android:text="100% Secure Payment"
+						android:textSize="22sp"
+						android:textStyle="bold"
+						android:textColor="#B2068F1D"
+						android:layout_gravity="center_horizontal|center_vertical"/>
+				</LinearLayout>
+			</ScrollView>
+		</LinearLayout>
+		<LinearLayout
+			android:id="@+id/linear333"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:padding="0dp"
+			android:orientation="horizontal">
+
+
+			<LinearLayout
+				android:background="#fff"
+				android:id="@+id/linear30"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+
+				android:padding="13dp"
+				android:gravity="center_horizontal|center_vertical"
+				android:orientation="horizontal">
+				<LinearLayout
+					android:id="@+id/linear3"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:gravity="left"
+					android:orientation="vertical"
+					android:layout_weight="1">
+
+					<TextView
+						android:id="@+id/total_price"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:paddingTop="3dp"
+						android:paddingRight="8dp"
+						android:text="₹29389"
+						android:textSize="25sp"
+						android:textStyle="bold"
+						android:textColor="#43A047"/>
+					<TextView
+						android:id="@+id/subtotal"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="View Checkout"
+						android:textSize="14sp"
+						android:textColor="#3472BD"/>
+				</LinearLayout>
+				<Button
+
+
+					android:backgroundTint="#3154DA"
+					android:id="@+id/place_order_"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:padding="15dp"
+					android:background="#008DCD"
+					android:gravity="center_horizontal|center_vertical"
+					android:text="PLACE ORDER"
+					android:textSize="14sp"
+					android:textColor="#FFFFFF"
+					/>
+			</LinearLayout>
+
+
+				</LinearLayout>
+	</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

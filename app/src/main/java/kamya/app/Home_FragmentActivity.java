@@ -568,6 +568,7 @@ menu.setOnClickListener(new OnClickListener() {
 
 
 
+
 	public void _grid_from_list (final ArrayList<HashMap<String, Object>> _listmap) {
 		GridView gridView = new GridView(getActivity());
 
@@ -1095,6 +1096,9 @@ Code By EPIC Technical Tricks on 26th April 2022
 				"", _re_request_listener22);
 	}
 
+	public void _hight_of_scroll_in_listview (final View _view, final double _hight) {
+		_view.getLayoutParams().height=(int)(_hight);
+	}
 
 	public void _show_response_categories (final String _response) {
 		try {
@@ -1107,7 +1111,9 @@ Code By EPIC Technical Tricks on 26th April 2022
 				list = (new Gson()).toJson(api_map.get("0"), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
 				results = new Gson().fromJson(list, new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
 				// refresh the list or recycle or grid
+
 				new_grid.setAdapter(new NewGridAdapter(results));
+				_hight_of_scroll_in_listview(new_grid,results.size()*190*2);
 			}
 		} catch(Exception e) {
 			Util.showMessage(getContext(), "Error on categories show homefragme ");

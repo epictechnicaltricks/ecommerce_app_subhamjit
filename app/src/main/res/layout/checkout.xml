@@ -8,25 +8,44 @@
 		android:layout_height="match_parent"
 		android:orientation="vertical"
 		app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
 		<LinearLayout
 			android:id="@+id/linear1"
+			android:gravity="center"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:padding="8dp"
+			android:padding="10dp"
+
 			android:orientation="horizontal">
+
+			<ImageView
+				android:layout_marginLeft="15dp"
+				android:layout_marginTop="0dp"
+				android:onClick="close"
+				android:id="@+id/back"
+				android:layout_width="25dp"
+				android:layout_height="20dp"
+
+				android:src="@drawable/left"
+				android:scaleType="center"/>
+
+
 			<TextView
 				android:layout_weight="1"
 				android:id="@+id/textview4"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginLeft="15dp"
-				android:layout_marginTop="15dp"
+				android:layout_marginTop="0dp"
 				android:padding="8dp"
 				android:text="Checkout"
 				android:textSize="25sp"
 				android:textStyle="bold"
 				android:textColor="#000000"/>
 		</LinearLayout>
+
+
 		<LinearLayout
 			android:id="@+id/linear2"
 			android:layout_width="match_parent"
@@ -56,7 +75,7 @@
 							android:id="@+id/linear7"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:padding="5dp"
+							android:padding="0dp"
 							android:orientation="horizontal">
 							<TextView
 								android:id="@+id/textview6"
@@ -64,7 +83,7 @@
 								android:layout_height="wrap_content"
 								android:padding="8dp"
 								android:text="Delivery to"
-								android:textSize="14sp"
+								android:textSize="15sp"
 								android:textStyle="bold"
 								android:textColor="#000000"
 								android:layout_weight="1"/>
@@ -88,7 +107,7 @@
 							android:text="Subhamjit dash"
 							android:textSize="14sp"
 							android:textStyle="bold"
-							android:textColor="#000000"/>
+							android:textColor="#616161"/>
 						<TextView
 							android:id="@+id/textview8"
 							android:layout_width="wrap_content"
@@ -100,6 +119,74 @@
 							android:text="31, Gr Floor, Welfare Chambers, Sector 17, Vashi, Navi Mumbai\nMumbai, Maharashtra, 400703\n\n9752963258"
 							android:textSize="14sp"
 							android:textColor="#757575"/>
+
+						<LinearLayout
+							android:id="@+id/coupon_layout"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="10dp"
+							android:layout_marginBottom="20dp"
+							android:padding="8dp"
+							android:background="#FFFFFF"
+							android:orientation="vertical">
+							<TextView
+								android:id="@+id/check_pin"
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:padding="8dp"
+								android:text="Check PIN code availability"
+								android:textSize="16sp"
+								android:textStyle="bold"
+								android:textColor="#000000"/>
+							<LinearLayout
+								android:id="@+id/coupon2"
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:padding="5dp"
+								android:gravity="left|center_vertical"
+								android:orientation="horizontal">
+								<ImageView
+									android:layout_marginLeft="5dp"
+									android:layout_marginRight="5dp"
+									android:id="@+id/imageview2"
+									android:layout_width="20dp"
+									android:alpha="0.9"
+									android:layout_height="20dp"
+
+									android:src="@drawable/map"
+									android:scaleType="centerInside"/>
+								<EditText
+
+									android:digits="0123456789"
+									android:inputType="numberSigned"
+									android:singleLine="true"
+									android:id="@+id/pin_code"
+									android:layout_width="wrap_content"
+									android:layout_height="50dp"
+									android:padding="8dp"
+									android:textSize="15sp"
+									android:textColor="#000000"
+									android:hint="Enter 6 digit pin code"
+									android:textColorHint="#607D8B"
+									android:layout_weight="1"/>
+								<Button
+
+									android:id="@+id/verify_pin_"
+									android:layout_width="wrap_content"
+									android:layout_height="wrap_content"
+									android:padding="8dp"
+									android:background="#000000"
+									android:gravity="center_horizontal|center_vertical"
+									android:text="CHECK PIN"
+									android:textSize="12sp"
+									android:textColor="#FFFFFF" />
+							</LinearLayout>
+
+
+						</LinearLayout>
+
+
+
 					</LinearLayout>
 					<androidx.recyclerview.widget.RecyclerView
 						android:id="@+id/recyclerview1"
@@ -120,6 +207,14 @@
 						app:lottie_autoPlay="true"
 						app:lottie_fileName="shimmer.json"
 						app:lottie_loop="true" />
+
+			<!--		coupon_layout -->
+
+
+				<!--	coupon_layout-->
+
+
+
 
 
 					<LinearLayout
@@ -211,6 +306,8 @@
 								android:textColor="#000000"/>
 						</LinearLayout>
 					</LinearLayout>
+
+
 					<TextView
 						android:id="@+id/textview13"
 						android:layout_width="wrap_content"
@@ -267,8 +364,9 @@
 						android:textStyle="bold"
 						android:textColor="#43A047"/>
 				</LinearLayout>
-				<com.google.android.material.button.MaterialButton
-					android:id="@+id/checkout"
+				<Button
+				    android:backgroundTint="#3154DA"
+					android:id="@+id/payment"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:padding="15dp"
@@ -276,9 +374,7 @@
 					android:gravity="center_horizontal|center_vertical"
 					android:text="GO TO payment"
 					android:textSize="14sp"
-					android:textColor="#FFFFFF"
-					android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
-					style="@style/Widget.MaterialComponents.Button"/>
+					android:textColor="#FFFFFF" />
 			</LinearLayout>
 
 

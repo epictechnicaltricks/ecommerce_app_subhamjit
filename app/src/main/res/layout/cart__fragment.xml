@@ -114,18 +114,17 @@
 					android:textStyle="bold"
 					android:textColor="#43A047"/>
 			</LinearLayout>
-			<com.google.android.material.button.MaterialButton
-				android:id="@+id/checkout"
+			<Button
+				android:backgroundTint="#3154DA"
+				android:id="@+id/checkout_"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:padding="15dp"
 				android:background="#008DCD"
 				android:gravity="center_horizontal|center_vertical"
-				android:text="Checkout"
+				android:text="CHECKOUT"
 				android:textSize="14sp"
-				android:textColor="#FFFFFF"
-				android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
-				style="@style/Widget.MaterialComponents.Button"/>
+				android:textColor="#FFFFFF" />
 		</LinearLayout>
 	</LinearLayout>
 </LinearLayout>

@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -82,6 +83,7 @@ public class Cart_FragmentActivity extends  Fragment  {
 
 	private TextView cart_count;
 
+	Button checkout_1;
 
 	@NonNull
 	@Override
@@ -106,7 +108,7 @@ public class Cart_FragmentActivity extends  Fragment  {
 		progressbar1 = _view.findViewById(R.id.progressbar1);
 		linear2 = _view.findViewById(R.id.linear2);
 		linear3 = _view.findViewById(R.id.linear3);
-		checkout = _view.findViewById(R.id.checkout);
+		checkout_1 = _view.findViewById(R.id.checkout_);
 		subtotal = _view.findViewById(R.id.subtotal);
 		total_price = _view.findViewById(R.id.total_price);
 
@@ -178,11 +180,11 @@ public class Cart_FragmentActivity extends  Fragment  {
 		};
 
 
-		checkout.setOnClickListener(new OnClickListener() {
+		checkout_1.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
 
-                startActivity(new Intent(getContext(),CheckoutActivity.class));
+                startActivity(new Intent(getContext(),MyAddressActivity.class));
 			}
 		});
 
@@ -207,7 +209,7 @@ public class Cart_FragmentActivity extends  Fragment  {
 		cart_count.setTypeface(Typeface.createFromAsset(Objects.requireNonNull(getContext()).getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
 
 		textview1.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.BOLD);
-		checkout.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.BOLD);
+		checkout_1.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.BOLD);
 		total_price.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.BOLD);
 		subtotal.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
 	}

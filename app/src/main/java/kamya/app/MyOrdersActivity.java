@@ -100,7 +100,13 @@ public class MyOrdersActivity extends  AppCompatActivity  {
 
 
 	}
-	
+
+	/** Called when the user touches the button */
+	public void close(View view)
+	{
+		finish();
+	}
+
 	private void initializeLogic() {
 
 		SharedPreferences sh = Objects.requireNonNull(getSharedPreferences("MySharedPref", MODE_PRIVATE));

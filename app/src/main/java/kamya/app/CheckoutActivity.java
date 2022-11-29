@@ -3,6 +3,7 @@ package kamya.app;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
@@ -11,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -44,17 +47,24 @@ public class CheckoutActivity extends  AppCompatActivity  {
 	private AppBarLayout _app_bar;
 	private CoordinatorLayout _coordinator;
 	private String fontName = "";
-	private String typeace = "";
+	private final String typeace = "";
 	
 	private ArrayList<HashMap<String, Object>> results = new ArrayList<>();
+
+	private ArrayList<HashMap<String, Object>> results2 = new ArrayList<>();
+
+
 	private final HashMap<String, Object> map = new HashMap<>();
 
 	private final HashMap<String, Object> map2 = new HashMap<>();
 
 	private HashMap<String, Object> api_map = new HashMap<>();
 
+	private HashMap<String, Object> api_map2 = new HashMap<>();
+
 	String list="";
 
+	boolean pin=false;
 
 	private LinearLayout linear1;
 	private LinearLayout linear2;
@@ -98,6 +108,15 @@ public class CheckoutActivity extends  AppCompatActivity  {
 
 	private LottieAnimationView loading;
 
+	Button payment;
+
+	Button verify_pin;
+
+	private RequestNetwork pin_code_api;
+	private RequestNetwork.RequestListener _pin_code_request_listener;
+
+	EditText pin_code_;
+
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
 		super.onCreate(_savedInstanceState);
@@ -113,41 +132,44 @@ public class CheckoutActivity extends  AppCompatActivity  {
 		re = new RequestNetwork(this);
 		req_add_to_cart = new RequestNetwork(this);
 		req_delete_cart = new RequestNetwork(this);
+		pin_code_api = new RequestNetwork(this);
 
 
-		_app_bar = (AppBarLayout) findViewById(R.id._app_bar);
-		_coordinator = (CoordinatorLayout) findViewById(R.id._coordinator);
+		_app_bar = findViewById(R.id._app_bar);
+		_coordinator = findViewById(R.id._coordinator);
 
+		pin_code_ = findViewById(R.id.pin_code);
 
+		verify_pin = findViewById(R.id.verify_pin_);
 
+		payment = findViewById(R.id.payment);
+		linear1 = findViewById(R.id.linear1);
+		linear2 = findViewById(R.id.linear2);
+		linear3 = findViewById(R.id.linear3);
+		textview4 = findViewById(R.id.textview4);
+		textview2 = findViewById(R.id.textview2);
 
-		linear1 = (LinearLayout) findViewById(R.id.linear1);
-		linear2 = (LinearLayout) findViewById(R.id.linear2);
-		linear3 = (LinearLayout) findViewById(R.id.linear3);
-		textview4 = (TextView) findViewById(R.id.textview4);
-		textview2 = (TextView) findViewById(R.id.textview2);
-
-		vscroll2 = (ScrollView) findViewById(R.id.vscroll2);
-		inside_scroll = (LinearLayout) findViewById(R.id.inside_scroll);
-		linear6 = (LinearLayout) findViewById(R.id.linear6);
-		recyclerview1 = (RecyclerView) findViewById(R.id.recyclerview1);
-		price_details = (LinearLayout) findViewById(R.id.price_details);
-		textview13 = (TextView) findViewById(R.id.textview13);
-		linear7 = (LinearLayout) findViewById(R.id.linear7);
-		textview7 = (TextView) findViewById(R.id.textview7);
-		textview8 = (TextView) findViewById(R.id.textview8);
-		textview6 = (TextView) findViewById(R.id.textview6);
-		textview9 = (TextView) findViewById(R.id.textview9);
-		textview11 = (TextView) findViewById(R.id.textview11);
-		linear10 = (LinearLayout) findViewById(R.id.linear10);
-		linear8 = (LinearLayout) findViewById(R.id.linear8);
-		linear11 = (LinearLayout) findViewById(R.id.linear11);
-		textview14 = (TextView) findViewById(R.id.textview14);
-		textview18 = (TextView) findViewById(R.id.textview18);
-		textview12 = (TextView) findViewById(R.id.textview12);
-		textview17 = (TextView) findViewById(R.id.textview17);
-		textview15 = (TextView) findViewById(R.id.textview15);
-		textview19 = (TextView) findViewById(R.id.textview19);
+		vscroll2 = findViewById(R.id.vscroll2);
+		inside_scroll = findViewById(R.id.inside_scroll);
+		linear6 = findViewById(R.id.linear6);
+		recyclerview1 = findViewById(R.id.recyclerview1);
+		price_details = findViewById(R.id.price_details);
+		textview13 = findViewById(R.id.textview13);
+		linear7 = findViewById(R.id.linear7);
+		textview7 = findViewById(R.id.textview7);
+		textview8 = findViewById(R.id.textview8);
+		textview6 = findViewById(R.id.textview6);
+		textview9 = findViewById(R.id.textview9);
+		textview11 = findViewById(R.id.textview11);
+		linear10 = findViewById(R.id.linear10);
+		linear8 = findViewById(R.id.linear8);
+		linear11 = findViewById(R.id.linear11);
+		textview14 = findViewById(R.id.textview14);
+		textview18 = findViewById(R.id.textview18);
+		textview12 = findViewById(R.id.textview12);
+		textview17 = findViewById(R.id.textview17);
+		textview15 = findViewById(R.id.textview15);
+		textview19 = findViewById(R.id.textview19);
 		
 		textview9.setOnClickListener(new OnClickListener() {
 			@Override
@@ -158,6 +180,20 @@ public class CheckoutActivity extends  AppCompatActivity  {
 
 
 
+		payment.setOnClickListener(view -> {
+
+			if(pin){
+
+				Intent intent = new Intent();
+				intent.setClass(CheckoutActivity.this,Payment.class);
+				startActivity(intent);
+			}else {
+
+				showMessage("Please check pin code first");
+			}
+
+		});
+
 
 
 		_re_request_listener = new RequestNetwork.RequestListener() {
@@ -167,7 +203,7 @@ public class CheckoutActivity extends  AppCompatActivity  {
 				final String _response = _param2;
 				final HashMap<String, Object> _responseHeaders = _param3;
 				loading.setVisibility(View.GONE);
-				Toast.makeText(CheckoutActivity.this, "add to cart \n"+_response, Toast.LENGTH_SHORT).show();
+				//Toast.makeText(CheckoutActivity.this, "add to cart \n"+_response, Toast.LENGTH_SHORT).show();
 				_show_response(_response);
 			}
 
@@ -225,12 +261,91 @@ public class CheckoutActivity extends  AppCompatActivity  {
 
 
 
+		verify_pin.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+
+				if(pin_code_.length()==6){
+
+					request_pin_code(pin_code_.getText().toString());
+
+				}else {
+
+					payment.setAlpha(.5f);
+					payment.setEnabled(false);
+					showMessage("Invalid pin code");
+				}
+
+			}
+		});
+
+		_pin_code_request_listener = new RequestNetwork.RequestListener() {
+			@Override
+			public void onResponse(String tag, String response, HashMap<String, Object> responseHeaders) {
+
+				if(response.contains("200")){
+
+					pin = true;
+					payment.setAlpha(1f);
+					payment.setEnabled(true);
+					showMessage("Available on this PIN");
+					payment.setText("GO TO PAYMENT");
+
+				}else {
+
+					payment.setAlpha(.5f);
+					payment.setEnabled(false);
+					payment.setText("Delivery not available");
+					showMessage("Delivery not available on this PIN code");
+				}
+
+			}
+
+			@Override
+			public void onErrorResponse(String tag, String message) {
+
+			}
+		};
+
+	}
+
+	private void request_pin_code(String _pin){
+
+		    //api_map2.clear();
+			//results2.clear();
+			/*api_map2.put("method", "location");
+			api_map2.put("pincode", _pin);*/
+			//pin_code_api.setParams(api_map2, RequestNetworkController.REQUEST_PARAM);
+			pin_code_api.startRequestNetwork(RequestNetworkController.GET, "https://kkkamya.in/index.php/Api_request/api_list?method=location&pincode="+_pin, "", _pin_code_request_listener);
 
 
 	}
-	
+
+	public void _transparent_satus () {
+		Window w = this.getWindow();w.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+		getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+		getWindow().setStatusBarColor(Color.TRANSPARENT);
+	}
+
+
+
+
+	/** Called when the user touches the button */
+	public void close(View view)
+	{
+		finish();
+	}
+
 	private void initializeLogic() {
 
+		payment.setEnabled(true);
+		pin = false;
+		payment.setAlpha(.5f);
+		//payment.setEnabled(false);
+		_changeActivityFont("google_sans_medium");
+		//_transparent_satus();
+		getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+		getWindow().setStatusBarColor(0xFFFFFFFF);
 
 		textview4.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_medium.ttf"), Typeface.BOLD);
 
@@ -239,7 +354,7 @@ public class CheckoutActivity extends  AppCompatActivity  {
 		_api_request(user_id);
 
 
-		_changeActivityFont("google_sans_medium");
+
 		recyclerview1.stopScroll();
 
 
@@ -268,7 +383,7 @@ public class CheckoutActivity extends  AppCompatActivity  {
 		
 		try {
 			Typeface 
-			typeace = Typeface.createFromAsset(getAssets(), fontName);;
+			typeace = Typeface.createFromAsset(getAssets(), fontName);
 			if ((v instanceof ViewGroup)) {
 				ViewGroup vg = (ViewGroup) v;
 				for (int i = 0;
@@ -298,7 +413,7 @@ public class CheckoutActivity extends  AppCompatActivity  {
 		
 		{
 			Util.showMessage(getApplicationContext(), "Error Loading Font");
-		};
+		}
 	}
 
 	public void _api_request (String user_id) {
@@ -410,7 +525,7 @@ public class CheckoutActivity extends  AppCompatActivity  {
 
 	public void _reftesh () {
 
-		_hight_of_scroll_in_listview(recyclerview1, results.size() * Util.getDip(getApplicationContext(), (int)(170)));
+		_hight_of_scroll_in_listview(recyclerview1, results.size() * Util.getDip(getApplicationContext(), 170));
 
 		recyclerview1.setAdapter(new Recyclerview1Adapter(results));
 		recyclerview1.setLayoutManager(new LinearLayoutManager(this));
@@ -537,7 +652,7 @@ public class CheckoutActivity extends  AppCompatActivity  {
 
 	@Deprecated
 	public void showMessage(String _s) {
-		Toast.makeText(getApplicationContext(), _s, Toast.LENGTH_SHORT).show();
+		Toast.makeText(getApplicationContext(), _s, Toast.LENGTH_LONG).show();
 	}
 	
 
