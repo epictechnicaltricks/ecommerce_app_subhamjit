@@ -36,7 +36,7 @@
 				android:layout_marginRight="15dp"
 				android:layout_marginTop="15dp"
 				android:padding="8dp"
-				android:text="Total item: 20"
+				android:text="No item found."
 				android:textSize="14sp"
 				android:textStyle="normal"
 				android:textColor="#888888"/>
@@ -47,7 +47,6 @@
 		</LinearLayout>
 
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-	android:layout_marginBottom="55dp"
 	android:id="@+id/swiperefreshlayout1"
 	android:layout_weight="1"
 	android:layout_width="match_parent"

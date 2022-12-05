@@ -1,5 +1,6 @@
 package kamya.app;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -26,6 +27,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 
 public class Payment extends  AppCompatActivity  {
@@ -61,10 +63,31 @@ Button place_order;
     String order_id = "order001";
 
     String app_id= "21054006fdf9a3c2f38752ec9a045012";
-    String secret_key="";
+    String secret_key="8c9aaf8742455034b69952a8fb29c7bf3db9aaba";
     String msg="";
 
+    Button check_coupon;
+
+    String api ="https://kkkamya.in/index.php/Api_request/api_list?";
+
 	/** https://docs.cashfree.com/docs/android-sdk **/
+
+	///////////
+
+	private RequestNetwork coupon_api;
+	private RequestNetwork.RequestListener _coupon_api_listener;
+
+	HashMap<String, Object> coupon_map = new HashMap<>();
+	ArrayList<HashMap<String, Object>> coupon_listmap = new ArrayList<>();
+
+	EditText coupon_code;
+
+	private TextView total_price,total_price_2,discount,delivery,dis_percent,sub_total;
+	private SharedPreferences sh;
+
+	long total_price_of_cart_;
+	///
+
 
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
@@ -79,9 +102,25 @@ Button place_order;
 	//	loading = findViewById(R.id.lottie_loading);
 
 
+		sh = getSharedPreferences("sh", Activity.MODE_PRIVATE);
+
+sub_total = findViewById(R.id.subtotal);
+		dis_percent =findViewById(R.id.dis_percent);
+
+		total_price = findViewById(R.id.total_price);
+		total_price.setText("₹"+getIntent().getStringExtra("total_price"));
+
+		total_price_2 = findViewById(R.id.total_price_2);
+		total_price_2.setText("₹"+getIntent().getStringExtra("total_price"));
+
+		discount = findViewById(R.id.discount);
+		delivery = findViewById(R.id.delivery);
+
+		coupon_code = findViewById(R.id.coupon_code);
+		coupon_api = new RequestNetwork(this);
 		token_api = new RequestNetwork(this);
 
-
+check_coupon = findViewById(R.id.check_coupon);
 		_app_bar = findViewById(R.id._app_bar);
 		_coordinator = findViewById(R.id._coordinator);
 
@@ -92,7 +131,67 @@ Button place_order;
 		textview4 = findViewById(R.id.textview4);
 
 
+		sub_total.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
 
+				finish();
+			}
+		});
+
+
+check_coupon.setOnClickListener(new View.OnClickListener() {
+	@Override
+	public void onClick(View view) {
+        if(!coupon_code.getText().toString().trim().equals(""))
+
+		validate_coupon(coupon_code.getText().toString().trim(),"");
+        else showMessage("Please enter coupon code..");
+
+
+	}
+});
+
+      _coupon_api_listener = new RequestNetwork.RequestListener() {
+	@Override
+	public void onResponse(String tag, String _response, HashMap<String, Object> responseHeaders) {
+
+		try {
+			coupon_map.clear();
+			coupon_listmap.clear();
+			if (_response.contains("200")) {
+				coupon_map = new Gson().fromJson(_response, new TypeToken<HashMap<String, Object>>(){}.getType());
+				// must add resultSet
+				//" list " is a String datatype
+				String list2 = (new Gson()).toJson(coupon_map.get("res"), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+				coupon_listmap = new Gson().fromJson(list2, new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+				// refresh the list or recycle or grid
+
+				double totalprice = Double.parseDouble(total_price.getText().toString().replaceAll("₹",""));
+				if(Double.parseDouble(coupon_listmap.get(0).get("min_amount").toString()) <= totalprice )
+				{
+					double get_percent = Double.parseDouble(Objects.requireNonNull(coupon_listmap.get(0).get("discount")).toString());
+					double discount_price = totalprice * (get_percent / 100) ;
+					double last_price = totalprice - discount_price;
+					discount.setText("- ₹"+(int)(discount_price));
+					total_price.setText("₹"+(int)(last_price));
+					dis_percent.setText("Added "+(int)(get_percent)+"% off with Min. order of ₹"+(int)(Double.parseDouble(coupon_listmap.get(0).get("min_amount").toString())));
+				}
+
+
+			}
+		} catch(Exception e) {
+			Util.showMessage(getApplicationContext(), "Error on coupon\n\n"+e);
+		}
+
+
+	}
+
+	@Override
+	public void onErrorResponse(String tag, String message) {
+
+	}
+   };
 
 
 _token_api_listener = new RequestNetwork.RequestListener() {
@@ -103,8 +202,8 @@ _token_api_listener = new RequestNetwork.RequestListener() {
 
 			HashMap<String,Object> map = new HashMap<>();
 			map = new Gson().fromJson(response, new TypeToken<HashMap<String, Object>>(){}.getType());
-			//token_key = Objects.requireNonNull(map.get("cftoken")).toString();
-            token_key = "v79JCN4MzUIJiOicGbhJCLiQ1VKJiOiAXe0Jye.s79BTM0AjNwUDN1EjOiAHelJCLiIlTJJiOik3YuVmcyV3QyVGZy9mIsEjOiQnb19WbBJXZkJ3biwiIxADMwIXZkJ3TiojIklkclRmcvJye.K3NKICVS5DcEzXm2VQUO_ZagtWMIKKXzYOqPZ4x0r2P_N3-PRu2mowm-8UXoyqAgsG";
+			token_key = Objects.requireNonNull(map.get("cftoken")).toString();
+            //token_key = "v79JCN4MzUIJiOicGbhJCLiQ1VKJiOiAXe0Jye.s79BTM0AjNwUDN1EjOiAHelJCLiIlTJJiOik3YuVmcyV3QyVGZy9mIsEjOiQnb19WbBJXZkJ3biwiIxADMwIXZkJ3TiojIklkclRmcvJye.K3NKICVS5DcEzXm2VQUO_ZagtWMIKKXzYOqPZ4x0r2P_N3-PRu2mowm-8UXoyqAgsG";
 			doPayment(order_id,amt,token_key,"TEST");
 			// this is test  mode
 		} else {
@@ -142,6 +241,20 @@ _token_api_listener = new RequestNetwork.RequestListener() {
 		finish();
 	}
 
+	/*private long calculate_cart_total_price() {
+
+		for(int x=0; results.size()>x; x++)
+		{
+			long value = (long)(Double.parseDouble(results.get(x).get("quantity").toString()) * Double.parseDouble(Objects.requireNonNull(results.get(x).get("product_price")).toString()));
+			//results.get(_position).put("total_price",value);
+
+			total_price_of_cart_ = value +  total_price_of_cart_;
+
+		}
+		return total_price_of_cart_;
+	}
+*/
+
 
 	public void doPayment(String _order_id, String _amt, String _cftoken, String _stage) {
 
@@ -155,7 +268,7 @@ _token_api_listener = new RequestNetwork.RequestListener() {
 			//String _bill = sh.getString("bill_id", "");
 
 			HashMap<String, String> params = new HashMap<>();
-			params.put(CFPaymentService.PARAM_APP_ID, app_id);
+			params.put(CFPaymentService.PARAM_APP_ID, "21054006fdf9a3c2f38752ec9a045012");
 			params.put(CFPaymentService.PARAM_ORDER_ID,  _order_id);
 			params.put(CFPaymentService.PARAM_CUSTOMER_EMAIL,  _email);
 			params.put(CFPaymentService.PARAM_ORDER_AMOUNT, _amt);
@@ -176,14 +289,31 @@ _token_api_listener = new RequestNetwork.RequestListener() {
 
 	}
 
+	public void validate_coupon(String _coupon_code, String picktime) {
+
+
+		coupon_map.clear();
+		coupon_map = new HashMap<>();
+		coupon_map.put("method","validateCoupon");
+		coupon_map.put("picktime","2022-11-28");
+		coupon_map.put("promo_code",_coupon_code);
+
+
+		coupon_api.setParams(coupon_map, RequestNetworkController.REQUEST_PARAM);
+		coupon_api.startRequestNetwork(RequestNetworkController.GET,
+				api,
+				"",  _coupon_api_listener);
+
+
+	}
 
 
 	public void TokenGenerate(String _order_id, String _amt) {
 
 
 		HashMap<String, Object> header = new HashMap<>();
-		header.put("x-client-id",app_id);
-		header.put("x-client-secret",secret_key);
+		header.put("x-client-id","21054006fdf9a3c2f38752ec9a045012");
+		header.put("x-client-secret","8c9aaf8742455034b69952a8fb29c7bf3db9aaba");
 
 		HashMap<String, Object> order_param = new HashMap<>();
 		order_param.put("orderId",_order_id);
@@ -191,7 +321,7 @@ _token_api_listener = new RequestNetwork.RequestListener() {
 		order_param.put("orderCurrency","INR");
 
 		token_api.setHeaders(header);
-		token_api.setParams(order_param, RequestNetworkController.REQUEST_BODY);
+		token_api.setParams(order_param, RequestNetworkController.REQUEST_PARAM);
 		token_api.startRequestNetwork(RequestNetworkController.POST,
 				"https://test.cashfree.com/api/v2/cftoken/order",
 				"", _token_api_listener);

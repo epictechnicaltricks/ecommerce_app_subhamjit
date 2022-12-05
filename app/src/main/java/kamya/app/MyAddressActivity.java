@@ -2,6 +2,7 @@ package kamya.app;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -59,6 +60,29 @@ public class MyAddressActivity extends  AppCompatActivity  {
 	}
 	
 	private void initializeLogic() {
+
+
+
+			SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+
+						if(sh.getString("user_id", "").equals(""))
+						{
+							//Toast.makeText(this, "insdoe ", Toast.LENGTH_SHORT).show();
+							Intent in = new Intent();
+							in.setClass(getApplicationContext(),LoginActivity.class);
+							startActivity(in);
+
+
+						}
+
+						/*else {
+							//startActivity(new Intent(getApplicationContext(),HomeLayout.class));
+							in.setClass(getApplicationContext(),Activity.class);
+
+						}*/
+
+
+
 
 		_changeActivityFont("google_sans_medium");
 		textview1.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_medium.ttf"), Typeface.BOLD);

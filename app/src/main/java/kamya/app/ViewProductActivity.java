@@ -1,5 +1,6 @@
 package kamya.app;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -36,6 +37,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Timer;
@@ -90,12 +92,21 @@ public class ViewProductActivity extends  AppCompatActivity  {
 	private RequestNetwork req_product_attr;
 	private RequestNetwork.RequestListener req_product_attr_listener;
 
+	private RequestNetwork req_update_cart;
+	private RequestNetwork.RequestListener _req_update_cart_listener;
+
+
 	private ArrayList<HashMap<String, Object>> results = new ArrayList<>();
 	private ArrayList<HashMap<String, Object>> results2 = new ArrayList<>();
 	private HashMap<String, Object> api_map = new HashMap<>();
 	private HashMap<String, Object> map = new HashMap<>();
 	private HashMap<String, Object> map2 = new HashMap<>();
-	private HashMap<String, Object> map3 = new HashMap<>();
+	private HashMap<String, Object> api_map3 = new HashMap<>();
+
+	private ArrayList<HashMap<String, Object>> cart_data_listmap = new ArrayList<>();
+
+
+
 	String list="";
 
 	private TextView plus_,minus_,qty_product,title2;
@@ -110,6 +121,16 @@ public class ViewProductActivity extends  AppCompatActivity  {
 
 	String user_id;
 
+
+	/////////////////////////////////
+	// SAVE OFFLINE
+
+	private SharedPreferences sh;
+	ArrayList<HashMap<String, Object>> cart_listmap = new ArrayList<>();
+	HashMap<String, Object> cart_map_offline = new HashMap<>();
+
+//////////////////////////////////////
+
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
 		super.onCreate(_savedInstanceState);
@@ -122,6 +143,7 @@ public class ViewProductActivity extends  AppCompatActivity  {
 
 
 
+		sh = getSharedPreferences("sh", Activity.MODE_PRIVATE);
 
 		title2 = findViewById(R.id.title2);
 		re = new RequestNetwork(this);
@@ -129,6 +151,8 @@ public class ViewProductActivity extends  AppCompatActivity  {
 		req_add_to_cart = new RequestNetwork(this);
 
 		req_product_attr= new RequestNetwork(this);
+
+		req_update_cart = new RequestNetwork(this);
 
 		linear_g2 = findViewById(R.id.linear_g2);
 		listview1 = findViewById(R.id.listview1);
@@ -177,28 +201,21 @@ public class ViewProductActivity extends  AppCompatActivity  {
 
 
 
-		_req_add_to_cart_listener = new RequestNetwork.RequestListener() {
+		_req_update_cart_listener = new RequestNetwork.RequestListener() {
 			@Override
-			public void onResponse(String _param1, String _param2, HashMap<String, Object> _param3) {
-				final String _response = _param2;
+			public void onResponse(String tag, String response, HashMap<String, Object> responseHeaders) {
 
-
-				// THIS REQUEST FOR UPDATE CART VALUE
-				// WHEN USER CLICK ON PLUS OR MINUS BUTTON ON PRODUCT
-				// PROJECT BY SHUBHAMJIT DT 20 NOV 2022 6.37PM
-				//Toast.makeText(getActivity(), _response, Toast.LENGTH_SHORT).show();
+				showMessage(response);
 
 			}
 
 			@Override
-			public void onErrorResponse(String _param1, String _param2) {
-				final String _message = _param2;
+			public void onErrorResponse(String tag, String message) {
 
-				Toast.makeText(getApplicationContext(), "Cart not updated, No Internet !\n\n"+_message, Toast.LENGTH_LONG).show();
+				showMessage("No internet");
 
 			}
 		};
-
 
 
 
@@ -262,9 +279,34 @@ public class ViewProductActivity extends  AppCompatActivity  {
 			public void onResponse(String _param1, String _param2, HashMap<String, Object> _param3) {
 				final String _response = _param2;
 
-				Toast.makeText(ViewProductActivity.this, _response, Toast.LENGTH_SHORT).show();
+
+				if (_response.contains("200")) {
+					api_map.clear();
+					api_map = new Gson().fromJson(_response, new TypeToken<HashMap<String, Object>>(){}.getType());
+					// must add resultSet
+					//" list " is a String datatype
+					list = (new Gson()).toJson(api_map.get("res"), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+					cart_data_listmap = new Gson().fromJson(list, new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+
+					//Toast.makeText(ViewProductActivity.this, list, Toast.LENGTH_SHORT).show();
+
+					// refresh the list or recycle or grid
+					Toast.makeText(getApplicationContext(), "Added to Cart ", Toast.LENGTH_LONG).show();
+
+
+					Collections.reverse(cart_data_listmap);
+					save_offline(Objects.requireNonNull(cart_data_listmap.get(0).get("cart_id")).toString()
+							    ,Objects.requireNonNull(cart_data_listmap.get(0).get("bill_id")).toString()
+							    ,Objects.requireNonNull(cart_data_listmap.get(0).get("price")).toString()
+							    ,Objects.requireNonNull(cart_data_listmap.get(0).get("total_price")).toString());
+
+
+
+
+				}
+				//Toast.makeText(ViewProductActivity.this, Objects.requireNonNull(cart_data_listmap.get(0).get("price")).toString(), Toast.LENGTH_SHORT).show();
 				//TastyToast.success(getApplicationContext(),"Added to Cart                                        ", TastyToast. LENGTH_LONG, TastyToast.SHAPE_RECTANGLE,false);
-				Toast.makeText(getApplicationContext(), "Added to Cart ", Toast.LENGTH_LONG).show();
+						//_api_request_update_cart(user_id);
 
 			}
 
@@ -276,6 +318,7 @@ public class ViewProductActivity extends  AppCompatActivity  {
 
 			}
 		};
+
 
 		req_product_attr_listener = new RequestNetwork.RequestListener() {
 			@Override
@@ -401,7 +444,18 @@ public class ViewProductActivity extends  AppCompatActivity  {
 			public void onClick(View view) {
 
 
-				request_update_cart(product_id_variable,qty_product.getText().toString(),attr_id);
+				_api_request_add_to_cart(product_id_variable,qty_product.getText().toString(),attr_id);
+
+				/*	      _cart_id, String _bill_id, String _user_id,
+						String _product_id, String _product_attr,
+						String _product_qty, String _price,
+						String _total_price,String _cart_status,
+						String _delete_flag, String _created_on,
+						String _updated_on, String _created_by
+
+				*/
+
+				//request_update_cart(product_id_variable,qty_product.getText().toString(),attr_id);
 
 
 				//Toast.makeText(ViewProductActivity.this, product_id_variable+"\n\n"+qty_product.getText()+"\n\n"+attr_id, Toast.LENGTH_SHORT).show();
@@ -417,6 +471,27 @@ public class ViewProductActivity extends  AppCompatActivity  {
 description_layout.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)30, (int)3, 0xFF5C6BC0, 0xFFE8EAF6));
 
 */
+	}
+
+	private void save_offline(String _cart_id, String _bill_id, String _price, String _total_price)
+	{
+		cart_map_offline.clear();
+		cart_listmap.clear();
+		cart_map_offline = new HashMap<>();
+		cart_map_offline.put("cart_id", _cart_id);
+		cart_map_offline.put("bill_id", _bill_id);
+		cart_map_offline.put("product_id", product_id_variable);
+		cart_map_offline.put("product_price", _price);
+		cart_map_offline.put("total_price", _total_price);
+		cart_map_offline.put("quantity", qty_product.getText().toString());
+		cart_map_offline.put("product_name", title.getText().toString());
+		cart_map_offline.put("product_image",getIntent().getStringExtra("imageURL") );
+
+		cart_listmap = new Gson().fromJson(sh.getString("cart_data", ""), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+		cart_listmap.add(cart_map_offline);
+		sh.edit().putString("cart_data", new Gson().toJson(cart_listmap)).apply();
+
+
 	}
 
 	public void _setTransitionName (final View _view, final String _transitionName) {
@@ -612,7 +687,7 @@ Code By EPIC Technical Tricks on 26th April 2022
 				product_attr_name.setText(Objects.requireNonNull(results2.get(_position).get("attribute_value")).toString());
 
 				
-				bg_variant.setOnClickListener(new View.OnClickListener() {
+				bg_variant.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View _view) {
 
@@ -692,7 +767,7 @@ Code By EPIC Technical Tricks on 26th April 2022
 
 
 
-	private void request_update_cart(final String _produbt_id, final String _qty, final String _attrVal) {
+	/*private void request_update_cart(final String _produbt_id, final String _qty, final String _attrVal) {
 		if(time!=null)
 		{
 			time.cancel();
@@ -708,7 +783,8 @@ Code By EPIC Technical Tricks on 26th April 2022
 
 
 
-						_api_request_update_to_cart(_produbt_id,_qty,_attrVal);
+						//_api_request_update_to_cart(user_id);
+						//_api_request_update_to_cart(_produbt_id,_qty,_attrVal);
 
 						time.cancel();
 					}
@@ -717,25 +793,102 @@ Code By EPIC Technical Tricks on 26th April 2022
 		};
 		_timer.schedule(time, 1200);
 	}
+*/
 
-	public void _api_request_update_to_cart (String _product_id, String _qty, String _attrVals) {
 
 
-		HashMap<String, Object> map3 = new HashMap<>();
-		map3.put("method", "addtocart");
-		map3.put("product_id", _product_id);
-		map3.put("qty", _qty);
-		if(!_attrVals.equals("")) {
-			map3.put("attrVals", _attrVals);
-		}
+	public void _api_request_add_to_cart (String _product_id, String _qty, String _attrVals) {
 
-		req_add_to_cart.setParams(map3, RequestNetworkController.REQUEST_PARAM);
-		req_add_to_cart.startRequestNetwork(
-				RequestNetworkController.GET,
-				"https://kkkamya.in/index.php/Api_request/api_list?"
+
+		//Toast.makeText(this, _qty+"\n"+_attrVals+"\n"+_product_id, Toast.LENGTH_SHORT).show();
+
+		req_add_to_cart.startRequestNetwork(RequestNetworkController.GET,
+				"https://kkkamya.in/index.php/Api_request/api_list?method=addtocart&product_id="+_product_id+"&qty="+_qty+"+&attrVals="+_attrVals
 				, ""
 				, _req_add_to_cart_listener);
+
+
+		//api_map3.clear();
+		//api_map3 = new HashMap<>();
+		//api_map3.put("method", "addtocart");
+		//api_map3.put("product_id", _product_id);
+		//api_map3.put("qty", _qty);
+		//api_map3.put("attrVals", _attrVals);
+
+
+		//req_add_to_cart.setParams(api_map3, RequestNetworkController.REQUEST_PARAM);
+		//req_add_to_cart.startRequestNetwork(RequestNetworkController.GET,"https://kkkamya.in/index.php/Api_request/api_list?", "", _req_add_to_cart_listener);
 	}
+
+
+	public void _api_request_update_cart (String _user_id) {
+
+
+		//Toast.makeText(this, _qty+"\n"+_attrVals+"\n"+_product_id, Toast.LENGTH_SHORT).show();
+
+		HashMap<String, Object> map3 = new HashMap<>();
+		map3.put("method", "updatecart");
+		map3.put("user_id", _user_id);
+
+
+		req_update_cart.setParams(map3, RequestNetworkController.REQUEST_PARAM);
+		req_update_cart.startRequestNetwork(
+				RequestNetworkController.POST,
+				"https://kkkamya.in/index.php/Api_request/api_list?"
+				, ""
+				, _req_update_cart_listener);
+	}
+
+	private void save_add_to_cart_offline(String _cart_id, String _bill_id, String _user_id,
+										  String _product_id, String _product_attr,
+										  String _product_qty, String _price,
+										  String _total_price,String _cart_status,
+										  String _delete_flag, String _created_on,
+										  String _updated_on, String _created_by
+
+	){
+
+		SharedPreferences sharedPreferences = getSharedPreferences("cart_data", MODE_PRIVATE);
+		SharedPreferences.Editor myEdit = sharedPreferences.edit();
+
+
+		   myEdit.putString("cart_id", _cart_id );
+		   myEdit.putString("bill_id", _bill_id);
+		        myEdit.putString("user_id", _user_id);
+				myEdit.putString("product_id", _product_id);
+		myEdit.putString("product_attributes", _product_attr);
+		myEdit.putString("quantity", _product_qty);
+		myEdit.putString("price", _price);
+		myEdit.putString("total_price", _total_price);
+		myEdit.putString("cart_status", _cart_status);
+		myEdit.putString("deleted_flag", _delete_flag);
+		myEdit.putString("created_on", _created_on);
+		myEdit.putString("updated_on", _updated_on);
+		myEdit.putString("created_by", _created_by);
+		myEdit.apply();
+
+	}
+
+/*
+	SharedPreferences sharedPreferences = getSharedPreferences("cart_data", MODE_PRIVATE);
+	SharedPreferences.Editor myEdit = sharedPreferences.edit();
+
+	int _position = 0;
+		   myEdit.putString("cart_id", Objects.requireNonNull(results.get(_position).get("cart_id")).toString());
+		   myEdit.putString("bill_id", Objects.requireNonNull(results.get(_position).get("bill_id")).toString());
+		        myEdit.putString("user_id", Objects.requireNonNull(results.get(_position).get("user_id")).toString());
+				myEdit.putString("product_id", Objects.requireNonNull(results.get(_position).get("product_id")).toString());
+		myEdit.putString("product_attributes", Objects.requireNonNull(results.get(_position).get("product_attributes")).toString());
+		myEdit.putString("quantity", Objects.requireNonNull(results.get(_position).get("quantity")).toString());
+		myEdit.putString("price", Objects.requireNonNull(results.get(_position).get("price")).toString());
+		myEdit.putString("total_price", Objects.requireNonNull(results.get(_position).get("total_price")).toString());
+		myEdit.putString("cart_status", Objects.requireNonNull(results.get(_position).get("cart_status")).toString());
+		myEdit.putString("deleted_flag", Objects.requireNonNull(results.get(_position).get("deleted_flag")).toString());
+		myEdit.putString("created_on", Objects.requireNonNull(results.get(_position).get("created_on")).toString());
+		myEdit.putString("updated_on", Objects.requireNonNull(results.get(_position).get("updated_on")).toString());
+		myEdit.putString("created_by", Objects.requireNonNull(results.get(_position).get("created_by")).toString());
+		myEdit.apply();
+*/
 
 
 }

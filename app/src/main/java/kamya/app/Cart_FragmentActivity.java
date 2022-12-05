@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -69,6 +68,8 @@ public class Cart_FragmentActivity extends  Fragment  {
 
 
 	private LottieAnimationView loading;
+
+
 	int qty_count=1;
 
 	private RequestNetwork req_add_to_cart;
@@ -84,6 +85,10 @@ public class Cart_FragmentActivity extends  Fragment  {
 	private TextView cart_count;
 
 	Button checkout_1;
+
+	private SharedPreferences sh;
+
+	long total_price_of_cart_;
 
 	@NonNull
 	@Override
@@ -101,6 +106,9 @@ public class Cart_FragmentActivity extends  Fragment  {
 
 		cart_count = _view.findViewById(R.id._cart_count);
 
+
+		sh = getActivity().getSharedPreferences("sh", Activity.MODE_PRIVATE);
+
 		loading = _view.findViewById(R.id.lottie_loading);
 		linear1 = _view.findViewById(R.id.linear1);
 		textview1 = _view.findViewById(R.id.textview1);
@@ -115,7 +123,9 @@ public class Cart_FragmentActivity extends  Fragment  {
 		re = new RequestNetwork((Activity)getContext());
 		req_add_to_cart = new RequestNetwork(getActivity());
 		req_delete_cart= new RequestNetwork(getActivity());
-		
+
+
+
 		_re_request_listener = new RequestNetwork.RequestListener() {
 			@Override
 			public void onResponse(String _param1, String _param2, HashMap<String, Object> _param3) {
@@ -222,7 +232,7 @@ public class Cart_FragmentActivity extends  Fragment  {
 
 	@Override
 	public void onActivityResult(int _requestCode, int _resultCode, Intent _data) {
-		
+
 		super.onActivityResult(_requestCode, _resultCode, _data);
 
 	}
@@ -231,7 +241,7 @@ public class Cart_FragmentActivity extends  Fragment  {
 
 		swiperefreshlayout1.setRefreshing(true);
 		loading.setVisibility(View.VISIBLE);
-		map.clear();
+		//map.clear();
 		results.clear();
 		map.put("method", "cart_itemlist");
 		map.put("user_id", user_id);
@@ -240,6 +250,7 @@ public class Cart_FragmentActivity extends  Fragment  {
 				"https://kkkamya.in/index.php/Api_request/api_list?",
 				"", _re_request_listener);
 	}
+
 
 
 	public void _api_request_delete_cart_item (String _cart_id) {
@@ -253,7 +264,10 @@ public class Cart_FragmentActivity extends  Fragment  {
 				"", _req_delete_cart_listener);
 	}
 	
-	
+
+
+
+
 	public void _show_response (final String _response) {
 		try {
 			api_map.clear();
@@ -261,12 +275,23 @@ public class Cart_FragmentActivity extends  Fragment  {
 
 
 				if (_response.contains("200")) {
-				api_map = new Gson().fromJson(_response, new TypeToken<HashMap<String, Object>>(){}.getType());
-				// must add resultSet
-				//" list " is a String datatype
-				list = (new Gson()).toJson(api_map.get("res"), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
 
-					results = new Gson().fromJson(list, new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+
+				//api_map = new Gson().fromJson(_response, new TypeToken<HashMap<String, Object>>(){}.getType());
+				//// must add resultSet
+				////" list " is a String datatype
+				//list = (new Gson()).toJson(api_map.get("res"), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+
+
+
+
+					//Collections.reverse(listmap);
+
+					//recyclerview1.setAdapter(new Recyclerview1Adapter(listmap));
+					//recyclerview1.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
+					results = new Gson().fromJson(sh.getString("cart_data", ""), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
 					// refresh the list or recycle or grid
 
 					if(results.size()==0){
@@ -284,7 +309,9 @@ public class Cart_FragmentActivity extends  Fragment  {
 
 					}
 
+					total_price_of_cart_ = 0; // dont remove
 
+					total_price.setText("₹"+ calculate_cart_total_price());
 
 					_reftesh();
 
@@ -292,6 +319,7 @@ public class Cart_FragmentActivity extends  Fragment  {
 
 
 			}else {
+					cart_count.setVisibility(View.GONE);
 					Toast.makeText(getContext(), "No data found", Toast.LENGTH_LONG).show();
 				}
 
@@ -304,8 +332,21 @@ public class Cart_FragmentActivity extends  Fragment  {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
+
+	private long calculate_cart_total_price()
+	{
+
+		for(int x=0; results.size()>x; x++)
+		{
+			long value = (long)(Double.parseDouble(results.get(x).get("quantity").toString()) * Double.parseDouble(Objects.requireNonNull(results.get(x).get("product_price")).toString()));
+			//results.get(_position).put("total_price",value);
+
+			total_price_of_cart_ = value +  total_price_of_cart_;
+
+		}
+		return total_price_of_cart_;
+	}
 	public void _reftesh () {
 		recyclerview4.setAdapter(new Recyclerview4Adapter(results));
 		recyclerview4.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -313,6 +354,8 @@ public class Cart_FragmentActivity extends  Fragment  {
 
 
 
+
+/*
 	public void _api_request_update_to_cart (String _product_id, String _qty, String _attrVals) {
 
 
@@ -336,6 +379,32 @@ public class Cart_FragmentActivity extends  Fragment  {
 				, ""
 				, _req_add_to_cart_listener);
 	}
+*/
+
+
+
+	public void _api_request_add_to_cart (String _product_id, String _qty, String _attrVals) {
+
+
+		//Toast.makeText(this, _qty+"\n"+_attrVals+"\n"+_product_id, Toast.LENGTH_SHORT).show();
+
+		HashMap<String, Object> map3 = new HashMap<>();
+		map3.put("method", "addtocart");
+		map3.put("product_id", _product_id);
+		map3.put("qty", _qty);
+		if(!_attrVals.equals("")) {
+			map3.put("attrVals", _attrVals);
+		}
+
+		req_add_to_cart.setParams(map3, RequestNetworkController.REQUEST_PARAM);
+		req_add_to_cart.startRequestNetwork(
+				RequestNetworkController.POST,
+				"https://kkkamya.in/index.php/Api_request/api_list?"
+				, ""
+				, _req_add_to_cart_listener);
+	}
+
+
 
 	public class Recyclerview4Adapter extends Adapter<Recyclerview4Adapter.ViewHolder> {
 		ArrayList<HashMap<String, Object>> _data;
@@ -383,7 +452,11 @@ public class Cart_FragmentActivity extends  Fragment  {
 				qty.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
 				varient.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
 
-				Glide.with(getContext()).load(Uri.parse("https://kkkamya.in/uploads/product/".concat(results.get(_position).get("product_image").toString()))).into(product_img);
+				//Glide.with(getContext()).load(Uri.parse("https://kkkamya.in/uploads/product/".concat(results.get(_position).get("product_image").toString()))).into(product_img);
+
+				Glide.with(getContext()).load(Objects.requireNonNull(results.get(_position).get("product_image")).toString()).into(product_img);
+
+
 
 				name.setText(results.get(_position).get("product_name").toString());
 				qty.setText(results.get(_position).get("quantity").toString());
@@ -397,8 +470,13 @@ public class Cart_FragmentActivity extends  Fragment  {
 
 						if(qty_count<99){
 							qty.setText(String.valueOf(++qty_count));
+							results.get(_position).put("quantity",qty.getText().toString());
 
-							request_update_cart(results.get(_position).get("product_id").toString(),qty.getText().toString(),"");
+							String value = String.valueOf((long)(Double.parseDouble(qty.getText().toString()) * Double.parseDouble(Objects.requireNonNull(results.get(_position).get("product_price")).toString())));
+							results.get(_position).put("total_price",value);
+
+							sh.edit().putString("cart_data", new Gson().toJson(results)).apply();
+							request_add_cart(Objects.requireNonNull(results.get(_position).get("product_id")).toString(),qty.getText().toString(),"");
 
 						}
 
@@ -412,7 +490,16 @@ public class Cart_FragmentActivity extends  Fragment  {
 						if(qty_count>1){
 
 							qty.setText(String.valueOf(--qty_count));
-							request_update_cart(Objects.requireNonNull(results.get(_position).get("product_id")).toString(),qty.getText().toString(),"");
+							results.get(_position).put("quantity",qty.getText().toString());
+
+							String value = String.valueOf((long)(Double.parseDouble(qty.getText().toString()) * Double.parseDouble(Objects.requireNonNull(results.get(_position).get("product_price")).toString())));
+							results.get(_position).put("total_price",value);
+
+
+							sh.edit().putString("cart_data", new Gson().toJson(results)).apply();
+
+
+							request_add_cart(Objects.requireNonNull(results.get(_position).get("product_id")).toString(),qty.getText().toString(),"");
 
 						}
 
@@ -422,9 +509,21 @@ public class Cart_FragmentActivity extends  Fragment  {
 					@Override
 					public void onClick(View _view) {
 
-						Toast.makeText(getActivity(), "delete", Toast.LENGTH_SHORT).show();
-						_api_request_delete_cart_item(Objects.requireNonNull(results.get(_position).get("cart_id")).toString());
-					}
+						try{
+
+							results.remove(_position);
+							sh.edit().putString("cart_data", new Gson().toJson(results)).apply();
+							_api_request_delete_cart_item(Objects.requireNonNull(results.get(_position).get("cart_id")).toString());
+
+
+
+						}catch (Exception e){
+
+						}
+
+
+						//Toast.makeText(getActivity(), "delete", Toast.LENGTH_SHORT).show();
+							}
 				});
 
 				delete.setColorFilter(0xFFD50000);
@@ -466,7 +565,7 @@ public class Cart_FragmentActivity extends  Fragment  {
 
 
 
-	private void request_update_cart(final String _produbt_id, final String _qty, final String _attrVal) {
+	private void request_add_cart(final String _produbt_id, final String _qty, final String _attrVal) {
 		if(time!=null)
 		{
 			time.cancel();
@@ -482,16 +581,15 @@ public class Cart_FragmentActivity extends  Fragment  {
 
 
 
-						_api_request_update_to_cart(_produbt_id,_qty,_attrVal);
+						_api_request_add_to_cart(_produbt_id,_qty,_attrVal);
 
 						time.cancel();
 					}
 				});
 			}
 		};
-		_timer.schedule(time, 1200);
+		_timer.schedule(time, 1600);
 	}
-
 
 
 }

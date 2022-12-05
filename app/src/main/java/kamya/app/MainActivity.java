@@ -32,6 +32,10 @@ public class MainActivity extends  Activity {
 	
 	private TimerTask time;
 	private final Intent in = new Intent();
+
+
+	private SharedPreferences sh;
+
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
 		super.onCreate(_savedInstanceState);
@@ -64,6 +68,10 @@ public class MainActivity extends  Activity {
 		front = findViewById(R.id.front);
 		logo = findViewById(R.id.logo);
 		bg = findViewById(R.id.bg);
+
+		sh = getSharedPreferences("sh", Activity.MODE_PRIVATE);
+
+
 	}
 
 	@Override
@@ -73,6 +81,12 @@ public class MainActivity extends  Activity {
 	}
 
 	private void initializeLogic() {
+
+		if (sh.getString("cart_data", "").equals("")) {
+			sh.edit().putString("cart_data", "[]").apply();
+		}
+
+
 		/*
 bg.setImageBitmap(FileUtil.decodeSampleBitmapFromPath(FileUtil.readFile("ggfd"), 1024, 1024));
 Glide.with(getApplicationContext()).load(Uri.parse("tggfxd")).into(bg);
@@ -84,8 +98,12 @@ Glide.with(getApplicationContext()).load(Uri.parse("tggfxd")).into(bg);
 					@Override
 					public void run() {
 
+						in.setClass(getApplicationContext(),LayoutActivity.class);
+						_ActivityTransition(logo, "p", in);
+						finish();
 
-						SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+
+						/*SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
 
 						if(sh.getString("user_id", "").equals(""))
 						{
@@ -102,7 +120,7 @@ Glide.with(getApplicationContext()).load(Uri.parse("tggfxd")).into(bg);
 						_ActivityTransition(logo, "p", in);
 						finish();
 
-
+*/
 						time.cancel();
 					}
 				});

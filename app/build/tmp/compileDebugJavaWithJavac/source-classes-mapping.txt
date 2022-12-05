@@ -12,24 +12,18 @@ androidx/transition/R.java
  androidx.transition.R$styleable
 androidx/print/R.java
  androidx.print.R
-kamya/app/CheckoutActivity.java
- kamya.app.CheckoutActivity
- kamya.app.CheckoutActivity$1
- kamya.app.CheckoutActivity$10
- kamya.app.CheckoutActivity$2
- kamya.app.CheckoutActivity$3
- kamya.app.CheckoutActivity$4
- kamya.app.CheckoutActivity$5
- kamya.app.CheckoutActivity$6
- kamya.app.CheckoutActivity$7
- kamya.app.CheckoutActivity$8
- kamya.app.CheckoutActivity$9
- kamya.app.CheckoutActivity$Recyclerview1Adapter
- kamya.app.CheckoutActivity$Recyclerview1Adapter$1
- kamya.app.CheckoutActivity$Recyclerview1Adapter$2
- kamya.app.CheckoutActivity$Recyclerview1Adapter$3
- kamya.app.CheckoutActivity$Recyclerview1Adapter$4
- kamya.app.CheckoutActivity$Recyclerview1Adapter$ViewHolder
+androidx/viewpager2/R.java
+ androidx.viewpager2.R
+ androidx.viewpager2.R$attr
+ androidx.viewpager2.R$color
+ androidx.viewpager2.R$dimen
+ androidx.viewpager2.R$drawable
+ androidx.viewpager2.R$id
+ androidx.viewpager2.R$integer
+ androidx.viewpager2.R$layout
+ androidx.viewpager2.R$string
+ androidx.viewpager2.R$style
+ androidx.viewpager2.R$styleable
 androidx/vectordrawable/R.java
  androidx.vectordrawable.R
  androidx.vectordrawable.R$attr
@@ -335,9 +329,7 @@ kamya/app/Cart_FragmentActivity.java
  kamya.app.Cart_FragmentActivity$5
  kamya.app.Cart_FragmentActivity$6
  kamya.app.Cart_FragmentActivity$7
- kamya.app.Cart_FragmentActivity$8
- kamya.app.Cart_FragmentActivity$9
- kamya.app.Cart_FragmentActivity$9$1
+ kamya.app.Cart_FragmentActivity$7$1
  kamya.app.Cart_FragmentActivity$Recyclerview4Adapter
  kamya.app.Cart_FragmentActivity$Recyclerview4Adapter$1
  kamya.app.Cart_FragmentActivity$Recyclerview4Adapter$2
@@ -395,21 +387,22 @@ kamya/app/Home_FragmentActivity.java
  kamya.app.Home_FragmentActivity$1
  kamya.app.Home_FragmentActivity$10
  kamya.app.Home_FragmentActivity$11
- kamya.app.Home_FragmentActivity$11$1
  kamya.app.Home_FragmentActivity$12
+ kamya.app.Home_FragmentActivity$12$1
  kamya.app.Home_FragmentActivity$13
  kamya.app.Home_FragmentActivity$14
  kamya.app.Home_FragmentActivity$15
  kamya.app.Home_FragmentActivity$16
  kamya.app.Home_FragmentActivity$17
+ kamya.app.Home_FragmentActivity$18
  kamya.app.Home_FragmentActivity$2
  kamya.app.Home_FragmentActivity$3
  kamya.app.Home_FragmentActivity$4
  kamya.app.Home_FragmentActivity$5
  kamya.app.Home_FragmentActivity$6
  kamya.app.Home_FragmentActivity$7
- kamya.app.Home_FragmentActivity$7$1
  kamya.app.Home_FragmentActivity$8
+ kamya.app.Home_FragmentActivity$8$1
  kamya.app.Home_FragmentActivity$9
  kamya.app.Home_FragmentActivity$Listview1Adapter
  kamya.app.Home_FragmentActivity$Listview1Adapter$1
@@ -444,11 +437,13 @@ kamya/app/ViewProductActivity.java
  kamya.app.ViewProductActivity$2
  kamya.app.ViewProductActivity$20
  kamya.app.ViewProductActivity$21
- kamya.app.ViewProductActivity$21$1
  kamya.app.ViewProductActivity$3
  kamya.app.ViewProductActivity$4
  kamya.app.ViewProductActivity$5
  kamya.app.ViewProductActivity$6
+ kamya.app.ViewProductActivity$6$1
+ kamya.app.ViewProductActivity$6$2
+ kamya.app.ViewProductActivity$6$3
  kamya.app.ViewProductActivity$7
  kamya.app.ViewProductActivity$8
  kamya.app.ViewProductActivity$9
@@ -506,12 +501,18 @@ androidx/customview/R.java
  androidx.customview.R$string
  androidx.customview.R$style
  androidx.customview.R$styleable
-kamya/app/Payment.java
- kamya.app.Payment
- kamya.app.Payment$1
- kamya.app.Payment$1$1
- kamya.app.Payment$2
- kamya.app.Payment$3
+androidx/vectordrawable/animated/R.java
+ androidx.vectordrawable.animated.R
+ androidx.vectordrawable.animated.R$attr
+ androidx.vectordrawable.animated.R$color
+ androidx.vectordrawable.animated.R$dimen
+ androidx.vectordrawable.animated.R$drawable
+ androidx.vectordrawable.animated.R$id
+ androidx.vectordrawable.animated.R$integer
+ androidx.vectordrawable.animated.R$layout
+ androidx.vectordrawable.animated.R$string
+ androidx.vectordrawable.animated.R$style
+ androidx.vectordrawable.animated.R$styleable
 androidx/exifinterface/R.java
  androidx.exifinterface.R
 androidx/loader/R.java
@@ -648,27 +649,31 @@ androidx/browser/R.java
 androidx/lifecycle/viewmodel/savedstate/R.java
  androidx.lifecycle.viewmodel.savedstate.R
  androidx.lifecycle.viewmodel.savedstate.R$id
-androidx/vectordrawable/animated/R.java
- androidx.vectordrawable.animated.R
- androidx.vectordrawable.animated.R$attr
- androidx.vectordrawable.animated.R$color
- androidx.vectordrawable.animated.R$dimen
- androidx.vectordrawable.animated.R$drawable
- androidx.vectordrawable.animated.R$id
- androidx.vectordrawable.animated.R$integer
- androidx.vectordrawable.animated.R$layout
- androidx.vectordrawable.animated.R$string
- androidx.vectordrawable.animated.R$style
- androidx.vectordrawable.animated.R$styleable
-androidx/viewpager2/R.java
- androidx.viewpager2.R
- androidx.viewpager2.R$attr
- androidx.viewpager2.R$color
- androidx.viewpager2.R$dimen
- androidx.viewpager2.R$drawable
- androidx.viewpager2.R$id
- androidx.viewpager2.R$integer
- androidx.viewpager2.R$layout
- androidx.viewpager2.R$string
- androidx.viewpager2.R$style
- androidx.viewpager2.R$styleable
+kamya/app/CheckoutActivity.java
+ kamya.app.CheckoutActivity
+ kamya.app.CheckoutActivity$1
+ kamya.app.CheckoutActivity$2
+ kamya.app.CheckoutActivity$3
+ kamya.app.CheckoutActivity$4
+ kamya.app.CheckoutActivity$5
+ kamya.app.CheckoutActivity$6
+ kamya.app.CheckoutActivity$7
+ kamya.app.CheckoutActivity$8
+ kamya.app.CheckoutActivity$Recyclerview1Adapter
+ kamya.app.CheckoutActivity$Recyclerview1Adapter$1
+ kamya.app.CheckoutActivity$Recyclerview1Adapter$2
+ kamya.app.CheckoutActivity$Recyclerview1Adapter$3
+ kamya.app.CheckoutActivity$Recyclerview1Adapter$4
+ kamya.app.CheckoutActivity$Recyclerview1Adapter$ViewHolder
+kamya/app/Payment.java
+ kamya.app.Payment
+ kamya.app.Payment$1
+ kamya.app.Payment$2
+ kamya.app.Payment$3
+ kamya.app.Payment$3$1
+ kamya.app.Payment$3$2
+ kamya.app.Payment$3$3
+ kamya.app.Payment$4
+ kamya.app.Payment$4$1
+ kamya.app.Payment$5
+ kamya.app.Payment$6

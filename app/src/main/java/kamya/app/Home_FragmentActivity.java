@@ -108,7 +108,12 @@ public class Home_FragmentActivity extends  Fragment  {
 	private LottieAnimationView loading;
 
 
-@NonNull
+	ArrayList<HashMap<String, Object>> cart_size = new ArrayList<>();
+
+	private SharedPreferences sh;
+
+
+    @NonNull
 	@Override
 	public View onCreateView(@NonNull LayoutInflater _inflater, @Nullable ViewGroup _container, @Nullable Bundle _savedInstanceState) {
 		View _view = _inflater.inflate(R.layout.home__fragment, _container, false);
@@ -127,7 +132,7 @@ public class Home_FragmentActivity extends  Fragment  {
 		linear_g222 = _view.findViewById(R.id.linear_g4);
 		linear_g2222 = _view.findViewById(R.id.linear_g5);
 
-
+		sh = getActivity().getSharedPreferences("sh", Activity.MODE_PRIVATE);
 
 		listview1 = _view.findViewById(R.id.listview1);
 		listview2 = _view.findViewById(R.id.listview2);
@@ -169,7 +174,10 @@ public class Home_FragmentActivity extends  Fragment  {
 		show_more4 = _view.findViewById(R.id.show_more3);
 
 
-menu.setOnClickListener(new OnClickListener() {
+
+
+
+			menu.setOnClickListener(new OnClickListener() {
 	@Override
 	public void onClick(View view) {
 
@@ -347,7 +355,10 @@ menu.setOnClickListener(new OnClickListener() {
 		super.onResume();
 		_slider();
 		requ_categories();
+		cart_size = new Gson().fromJson(sh.getString("cart_data", ""), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+		// refresh the list or recycle or grid
 
+		cart_count.setText(String.valueOf(cart_size.size()));
 
 	}
 
@@ -819,7 +830,7 @@ Code By EPIC Technical Tricks on 26th April 2022
 				wish_btn.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b) { this.setCornerRadius(a); this.setColor(b); return this; } }.getIns((int)100, 0xFFFFFFFF));
 
 
-				 wish_btn.setOnClickListener(new View.OnClickListener() {
+				 wish_btn.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View _view) {
 
@@ -926,7 +937,7 @@ Code By EPIC Technical Tricks on 26th April 2022
 
 			wish_btn.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b) { this.setCornerRadius(a); this.setColor(b); return this; } }.getIns((int)100, 0xFFFFFFFF));
 			//product_desc = results.get((int)_position).get("product_desc").toString();
-			wish_btn.setOnClickListener(new View.OnClickListener() {
+			wish_btn.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View _view) {
 
@@ -996,7 +1007,7 @@ Code By EPIC Technical Tricks on 26th April 2022
 
 
 			wish_btn.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b) { this.setCornerRadius(a); this.setColor(b); return this; } }.getIns((int)100, 0xFFFFFFFF));
-				wish_btn.setOnClickListener(new View.OnClickListener() {
+				wish_btn.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View _view) {
 
@@ -1067,7 +1078,7 @@ Code By EPIC Technical Tricks on 26th April 2022
 
 			wish_btn.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b) { this.setCornerRadius(a); this.setColor(b); return this; } }.getIns((int)100, 0xFFFFFFFF));
 //			product_desc = results.get((int)_position).get("product_desc").toString();
-			wish_btn.setOnClickListener(new View.OnClickListener() {
+			wish_btn.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View _view) {
 

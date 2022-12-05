@@ -1,5 +1,6 @@
 package kamya.app;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -92,7 +93,7 @@ public class CheckoutActivity extends  AppCompatActivity  {
 	private TextView textview12;
 	private TextView textview17;
 	private TextView textview15;
-	private TextView textview19;
+	private TextView textview19,total_price;
 
 	private RequestNetwork req_add_to_cart;
 	private RequestNetwork.RequestListener _req_add_to_cart_listener;
@@ -117,6 +118,11 @@ public class CheckoutActivity extends  AppCompatActivity  {
 
 	EditText pin_code_;
 
+	private SharedPreferences sh;
+
+	long total_price_of_cart_;
+
+
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
 		super.onCreate(_savedInstanceState);
@@ -128,6 +134,10 @@ public class CheckoutActivity extends  AppCompatActivity  {
 	private void initialize(Bundle _savedInstanceState) {
 
 		loading = findViewById(R.id.lottie_loading);
+
+		sh = getSharedPreferences("sh", Activity.MODE_PRIVATE);
+
+		total_price = findViewById(R.id.total_price);
 
 		re = new RequestNetwork(this);
 		req_add_to_cart = new RequestNetwork(this);
@@ -165,11 +175,13 @@ public class CheckoutActivity extends  AppCompatActivity  {
 		linear8 = findViewById(R.id.linear8);
 		linear11 = findViewById(R.id.linear11);
 		textview14 = findViewById(R.id.textview14);
-		textview18 = findViewById(R.id.textview18);
+
 		textview12 = findViewById(R.id.textview12);
-		textview17 = findViewById(R.id.textview17);
+
 		textview15 = findViewById(R.id.textview15);
-		textview19 = findViewById(R.id.textview19);
+
+
+
 		
 		textview9.setOnClickListener(new OnClickListener() {
 			@Override
@@ -185,8 +197,11 @@ public class CheckoutActivity extends  AppCompatActivity  {
 			if(pin){
 
 				Intent intent = new Intent();
+
 				intent.setClass(CheckoutActivity.this,Payment.class);
+				intent.putExtra("total_price",total_price.getText().toString().replaceAll("₹",""));
 				startActivity(intent);
+
 			}else {
 
 				showMessage("Please check pin code first");
@@ -203,6 +218,8 @@ public class CheckoutActivity extends  AppCompatActivity  {
 				final String _response = _param2;
 				final HashMap<String, Object> _responseHeaders = _param3;
 				loading.setVisibility(View.GONE);
+
+
 				//Toast.makeText(CheckoutActivity.this, "add to cart \n"+_response, Toast.LENGTH_SHORT).show();
 				_show_response(_response);
 			}
@@ -318,6 +335,10 @@ public class CheckoutActivity extends  AppCompatActivity  {
 		});
 
 	}
+
+
+
+
 
 	private void request_pin_code(String _pin){
 
@@ -485,12 +506,20 @@ public class CheckoutActivity extends  AppCompatActivity  {
 			loading.setVisibility(View.GONE);
 
 			if (_response.contains("200")) {
-				api_map = new Gson().fromJson(_response, new TypeToken<HashMap<String, Object>>(){}.getType());
-				// must add resultSet
+				//api_map = new Gson().fromJson(_response, new TypeToken<HashMap<String, Object>>(){}.getType());
+				/// must add resultSet
 				//" list " is a String datatype
-				list = (new Gson()).toJson(api_map.get("res"), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+				//list = (new Gson()).toJson(api_map.get("res"), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
 
-				results = new Gson().fromJson(list, new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+				//results = new Gson().fromJson(list, new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+
+
+
+				results = new Gson().fromJson(sh.getString("cart_data", ""), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+
+				total_price_of_cart_ = 0; // dont remove
+
+				total_price.setText("₹"+ calculate_cart_total_price());
 
 				// refresh the list or recycle or grid
 
@@ -532,6 +561,19 @@ public class CheckoutActivity extends  AppCompatActivity  {
 		}
 	}
 
+	private long calculate_cart_total_price() {
+
+		for(int x=0; results.size()>x; x++)
+		{
+			long value = (long)(Double.parseDouble(results.get(x).get("quantity").toString()) * Double.parseDouble(Objects.requireNonNull(results.get(x).get("product_price")).toString()));
+			//results.get(_position).put("total_price",value);
+
+			total_price_of_cart_ = value +  total_price_of_cart_;
+
+		}
+		return total_price_of_cart_;
+	}
+
 
 	public void _reftesh () {
 
@@ -558,7 +600,7 @@ public class CheckoutActivity extends  AppCompatActivity  {
 		}
 
 		@Override
-		public void onBindViewHolder(Recyclerview1Adapter.ViewHolder _holder, final int _position) {
+		public void onBindViewHolder(ViewHolder _holder, final int _position) {
 			View _view = _holder.itemView;
 
 			final LinearLayout bg = _view.findViewById(R.id.bg);
@@ -589,7 +631,7 @@ public class CheckoutActivity extends  AppCompatActivity  {
 				qty.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
 				varient.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
 
-				Glide.with(getApplicationContext()).load(Uri.parse("https://kkkamya.in/uploads/product/".concat(results.get(_position).get("product_image").toString()))).into(product_img);
+				Glide.with(getApplicationContext()).load(Uri.parse(results.get(_position).get("product_image").toString())).into(product_img);
 
 				name.setText(results.get(_position).get("product_name").toString());
 				qty.setText(results.get(_position).get("quantity").toString());
@@ -603,6 +645,12 @@ public class CheckoutActivity extends  AppCompatActivity  {
 
 						if(qty_count<99){
 							qty.setText(String.valueOf(++qty_count));
+							results.get(_position).put("quantity",qty.getText().toString());
+
+							String value = String.valueOf((long)(Double.parseDouble(qty.getText().toString()) * Double.parseDouble(Objects.requireNonNull(results.get(_position).get("product_price")).toString())));
+							results.get(_position).put("total_price",value);
+
+							sh.edit().putString("cart_data", new Gson().toJson(results)).apply();
 
 							request_update_cart(results.get(_position).get("product_id").toString(),qty.getText().toString(),"");
 
@@ -619,8 +667,17 @@ public class CheckoutActivity extends  AppCompatActivity  {
 						if(qty_count>1){
 
 							qty.setText(String.valueOf(--qty_count));
+							results.get(_position).put("quantity",qty.getText().toString());
+
+							String value = String.valueOf((long)(Double.parseDouble(qty.getText().toString()) * Double.parseDouble(Objects.requireNonNull(results.get(_position).get("product_price")).toString())));
+							results.get(_position).put("total_price",value);
+
+
+							sh.edit().putString("cart_data", new Gson().toJson(results)).apply();
+
+
 							request_update_cart(Objects.requireNonNull(results.get(_position).get("product_id")).toString(),qty.getText().toString(),"");
-							Toast.makeText(getApplicationContext(), qty.getText().toString(), Toast.LENGTH_SHORT).show();
+							//Toast.makeText(getApplicationContext(), qty.getText().toString(), Toast.LENGTH_SHORT).show();
 
 						}
 
@@ -632,7 +689,19 @@ public class CheckoutActivity extends  AppCompatActivity  {
 					@Override
 					public void onClick(View _view) {
 
-								_api_request_delete_cart_item(Objects.requireNonNull(results.get(_position).get("cart_id")).toString());
+						try{
+
+							results.remove((int)(_position));
+							sh.edit().putString("cart_data", new Gson().toJson(results)).apply();
+							_api_request_delete_cart_item(Objects.requireNonNull(results.get(_position).get("cart_id")).toString());
+
+
+
+						}catch (Exception e){
+
+						}
+
+
 					}
 				});
 
