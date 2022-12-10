@@ -81,7 +81,7 @@ public class ThankyouActivity extends  AppCompatActivity  {
 				});
 			}
 		};
-		_timer.schedule(time, 3000);
+		_timer.schedule(time, 5000);
 
 
 
@@ -97,8 +97,7 @@ public class ThankyouActivity extends  AppCompatActivity  {
 	}
 	
 	public void _transparent_satus () {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) { 
-			Window w = this.getWindow();w.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);}
+		Window w = this.getWindow();w.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 		getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN); if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) { getWindow().setStatusBarColor(Color.TRANSPARENT); }
 	}
 	

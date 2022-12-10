@@ -6,8 +6,8 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="26"
-        android:targetSdkVersion="30" />
+        android:minSdkVersion="23"
+        android:targetSdkVersion="33" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -30,7 +30,7 @@
             android:hardwareAccelerated="true"
             android:screenOrientation="portrait"
             android:supportsPictureInPicture="true"
-            android:theme="@style/NoActionBar" >
+            android:theme="@style/AppTheme.FullScreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -96,6 +96,12 @@
             android:supportsPictureInPicture="true" />
         <activity
             android:name="kamya.app.MyAddress_EDIT_Activity"
+            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="portrait"
+            android:supportsPictureInPicture="true" />
+        <activity
+            android:name="kamya.app.SearchActivity"
             android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
             android:hardwareAccelerated="true"
             android:screenOrientation="portrait"

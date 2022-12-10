@@ -58,7 +58,7 @@ public class MyOrdersActivity extends  AppCompatActivity  {
 	String user_id;
 
 	private TextView cart_count;
-	private TextView textview1;
+	private TextView textview1,msg;
 
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
@@ -74,6 +74,7 @@ public class MyOrdersActivity extends  AppCompatActivity  {
 		req_orders = new RequestNetwork(this);
 		loading = findViewById(R.id.lottie_loading);
 		textview1 = findViewById(R.id.textview1);
+		msg = findViewById(R.id.msg);
 
 		_req_orders_listener = new RequestNetwork.RequestListener() {
 			@Override
@@ -155,11 +156,12 @@ public class MyOrdersActivity extends  AppCompatActivity  {
 				//Toast.makeText(this, _response, Toast.LENGTH_SHORT).show();
 
 				if(results.size()>0){
+					msg.setVisibility(View.GONE);
 					recyclerview4.setAdapter(new Recyclerview4Adapter(results));
 					recyclerview4.setLayoutManager(new LinearLayoutManager(this));
 
 				}else {
-
+					msg.setVisibility(View.VISIBLE);
 					Toast.makeText(this, "No data found.", Toast.LENGTH_SHORT).show();
 				}
 
@@ -168,6 +170,7 @@ public class MyOrdersActivity extends  AppCompatActivity  {
 			}
 
 		} catch(Exception e) {
+			msg.setVisibility(View.VISIBLE);
 			Util.showMessage(getApplicationContext(), "Error on show response \n"+e);
 		}
 	}

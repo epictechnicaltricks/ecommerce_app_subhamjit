@@ -4,21 +4,22 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,10 +40,14 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class CheckoutActivity extends  AppCompatActivity  {
 
+	private TimerTask time;
+	private final Timer _timer = new Timer();
 	int qty_count=1;
 	private Toolbar _toolbar;
 	private AppBarLayout _app_bar;
@@ -55,13 +60,22 @@ public class CheckoutActivity extends  AppCompatActivity  {
 	private ArrayList<HashMap<String, Object>> results2 = new ArrayList<>();
 
 
-	private final HashMap<String, Object> map = new HashMap<>();
+	private HashMap<String, Object> map = new HashMap<>();
 
-	private final HashMap<String, Object> map2 = new HashMap<>();
+	private HashMap<String, Object> map2 = new HashMap<>();
 
 	private HashMap<String, Object> api_map = new HashMap<>();
 
 	private HashMap<String, Object> api_map2 = new HashMap<>();
+
+
+
+	private HashMap<String, Object> checkout_map = new HashMap<>();
+
+	ArrayList<HashMap<String, Object>> checkout_list = new ArrayList<>();
+
+	String order_id_from_check="" ;
+
 
 	String list="";
 
@@ -123,6 +137,36 @@ public class CheckoutActivity extends  AppCompatActivity  {
 	long total_price_of_cart_;
 
 
+	private RequestNetwork checkout_api;
+	private RequestNetwork.RequestListener _checkout_api_listener;
+
+
+
+
+	//////////////////////
+
+	private RequestNetwork coupon_api;
+	private RequestNetwork.RequestListener _coupon_api_listener;
+
+	HashMap<String, Object> coupon_map = new HashMap<>();
+	ArrayList<HashMap<String, Object>> coupon_listmap = new ArrayList<>();
+
+	EditText coupon_code;
+
+	private TextView total_price_2,discount,delivery,dis_percent,sub_total;
+
+
+	Button check_coupon;
+
+	String api ="https://kkkamya.in/index.php/Api_request/api_list?";
+
+RadioButton cod,pay_online;
+
+	////////////////////////////
+
+
+
+
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
 		super.onCreate(_savedInstanceState);
@@ -132,6 +176,21 @@ public class CheckoutActivity extends  AppCompatActivity  {
 	}
 	
 	private void initialize(Bundle _savedInstanceState) {
+
+
+
+
+		sub_total = findViewById(R.id.subtotal);
+		dis_percent =findViewById(R.id.dis_percent);
+
+		total_price = findViewById(R.id.total_price);
+		//total_price.setText("₹"+getIntent().getStringExtra("total_price"));
+
+
+		cod = findViewById(R.id.radioCOD);
+		pay_online = findViewById(R.id.radio_Online);
+
+
 
 		loading = findViewById(R.id.lottie_loading);
 
@@ -143,6 +202,8 @@ public class CheckoutActivity extends  AppCompatActivity  {
 		req_add_to_cart = new RequestNetwork(this);
 		req_delete_cart = new RequestNetwork(this);
 		pin_code_api = new RequestNetwork(this);
+
+		checkout_api = new RequestNetwork(this);
 
 
 		_app_bar = findViewById(R.id._app_bar);
@@ -181,7 +242,27 @@ public class CheckoutActivity extends  AppCompatActivity  {
 		textview15 = findViewById(R.id.textview15);
 
 
+/////////////////////
 
+
+
+
+		discount = findViewById(R.id.discount);
+		delivery = findViewById(R.id.delivery);
+
+		coupon_code = findViewById(R.id.coupon_code);
+		coupon_api = new RequestNetwork(this);
+
+		total_price_2 = findViewById(R.id.total_price_2);
+
+		sub_total = findViewById(R.id.subtotal);
+		dis_percent =findViewById(R.id.dis_percent);
+
+		check_coupon = findViewById(R.id.check_coupon);
+
+
+
+		//////////////////////////
 		
 		textview9.setOnClickListener(new OnClickListener() {
 			@Override
@@ -190,17 +271,150 @@ public class CheckoutActivity extends  AppCompatActivity  {
 			}
 		});
 
+		check_coupon.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				if(!coupon_code.getText().toString().trim().equals(""))
+
+					validate_coupon(coupon_code.getText().toString().trim(),"");
+
+				 else discount.setText("₹0");
+
+
+			}
+		});
+
+
+   cod.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+	@Override
+	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+		if(cod.isChecked()){
+
+			payment.setText("PLACE ORDER NOW");
+			delivery.setText("₹120");
+		}else {
+			delivery.setText("Free");
+			payment.setText("GO TO PAYMENT");
+		}
+	}
+});
+
+
+   _checkout_api_listener = new RequestNetwork.RequestListener() {
+	   @Override
+	   public void onResponse(String tag, String response, HashMap<String, Object> responseHeaders) {
+
+
+		   try {
+			   checkout_map.clear();
+			   checkout_list.clear();
+			   if (response.contains("200")) {
+				   checkout_map = new Gson().fromJson(response, new TypeToken<HashMap<String, Object>>(){}.getType());
+				   // must add resultSet
+				   //" list " is a String datatype
+				   String list2 = (new Gson()).toJson(coupon_map.get("res"), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+				     // refresh the list or recycle or grid
+
+				  order_id_from_check = list2;
+				  showMessage("Order id response :  \n\n"+response);
+
+
+			   } else {
+
+				 showMessage(response);
+			   }
+		   } catch(Exception e) {
+
+			   Util.showMessage(getApplicationContext(), "Error on checkout\n\n"+response);
+		   }
+
+
+	   }
+
+	   @Override
+	   public void onErrorResponse(String tag, String message) {
+
+
+
+	   }
+   };
+
+		_coupon_api_listener = new RequestNetwork.RequestListener() {
+			@Override
+			public void onResponse(String tag, String _response, HashMap<String, Object> responseHeaders) {
+
+				try {
+					coupon_map.clear();
+					coupon_listmap.clear();
+					if (_response.contains("200")) {
+						coupon_map = new Gson().fromJson(_response, new TypeToken<HashMap<String, Object>>(){}.getType());
+						// must add resultSet
+						//" list " is a String datatype
+						String list2 = (new Gson()).toJson(coupon_map.get("res"), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+						coupon_listmap = new Gson().fromJson(list2, new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+						// refresh the list or recycle or grid
+
+						double totalprice = Double.parseDouble(total_price.getText().toString().replaceAll("₹",""));
+						if(Double.parseDouble(coupon_listmap.get(0).get("min_amount").toString()) <= totalprice )
+						{
+							double get_percent = Double.parseDouble(Objects.requireNonNull(coupon_listmap.get(0).get("discount")).toString());
+							double discount_price = totalprice * (get_percent / 100) ;
+							double last_price = totalprice - discount_price;
+							discount.setText("- ₹"+(int)(discount_price));
+							total_price.setText("₹"+(int)(last_price));
+							dis_percent.setText("Applied "+(int)(get_percent)+"% off with Min. order of ₹"+(int)(Double.parseDouble(coupon_listmap.get(0).get("min_amount").toString())));
+						}
+
+
+					} else {
+
+						discount.setText("₹0");
+                       showMessage("Invalid coupon code.");
+					}
+				} catch(Exception e) {
+					discount.setText("₹0");
+					Util.showMessage(getApplicationContext(), "Error on coupon\n\n"+e);
+				}
+
+
+			}
+
+			@Override
+			public void onErrorResponse(String tag, String message) {
+				discount.setText("₹0");
+				showMessage("No internet!");
+			}
+		};
+
+
+
 
 
 		payment.setOnClickListener(view -> {
 
 			if(pin){
 
-				Intent intent = new Intent();
 
-				intent.setClass(CheckoutActivity.this,Payment.class);
-				intent.putExtra("total_price",total_price.getText().toString().replaceAll("₹",""));
-				startActivity(intent);
+				if(cod.isChecked()){
+
+					startActivity(new Intent(getApplicationContext(),ThankyouActivity.class));
+
+
+				}else {
+
+					Intent intent = new Intent();
+
+					intent.setClass(CheckoutActivity.this,Payment.class);
+					intent.putExtra("total_price",total_price.getText().toString().replaceAll("₹",""));
+					intent.putExtra("order_id",order_id_from_check);
+					startActivity(intent);
+				}
+
+
+
+
+
 
 			}else {
 
@@ -219,6 +433,7 @@ public class CheckoutActivity extends  AppCompatActivity  {
 				final HashMap<String, Object> _responseHeaders = _param3;
 				loading.setVisibility(View.GONE);
 
+				_api_checkout_request("COD","odisha");
 
 				//Toast.makeText(CheckoutActivity.this, "add to cart \n"+_response, Toast.LENGTH_SHORT).show();
 				_show_response(_response);
@@ -232,6 +447,7 @@ public class CheckoutActivity extends  AppCompatActivity  {
 				Toast.makeText(getApplicationContext(), "No Internet !", Toast.LENGTH_SHORT).show();
 			}
 		};
+
 
 		_req_add_to_cart_listener = new RequestNetwork.RequestListener() {
 			@Override
@@ -255,12 +471,14 @@ public class CheckoutActivity extends  AppCompatActivity  {
 			}
 		};
 
+
 		_req_delete_cart_listener = new RequestNetwork.RequestListener() {
 			@Override
 			public void onResponse(String _param1, String _param2, HashMap<String, Object> _param3) {
 				final String _response = _param2;
 
 				Toast.makeText(getApplicationContext(), "Removed Successfully", Toast.LENGTH_SHORT).show();
+
 				_api_request(user_id);
 				// THIS REQUEST FOR UPDATE CART VALUE
 
@@ -276,7 +494,36 @@ public class CheckoutActivity extends  AppCompatActivity  {
 		};
 
 
+pin_code_.addTextChangedListener(new TextWatcher() {
+	@Override
+	public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+	}
+
+	@Override
+	public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+		if(pin_code_.length()==6){
+
+			request_pin_code(pin_code_.getText().toString());
+
+		}else {
+
+			payment.setAlpha(.5f);
+			payment.setEnabled(false);
+			if(pin_code_.length()>5){
+
+
+				pin_code_.setError("Invalid PIN code.");
+			}
+
+		}
+	}
+
+	@Override
+	public void afterTextChanged(Editable editable) {
+
+	}
+});
 
 		verify_pin.setOnClickListener(new OnClickListener() {
 			@Override
@@ -352,14 +599,6 @@ public class CheckoutActivity extends  AppCompatActivity  {
 
 	}
 
-	public void _transparent_satus () {
-		Window w = this.getWindow();w.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-		getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-		getWindow().setStatusBarColor(Color.TRANSPARENT);
-	}
-
-
-
 
 	/** Called when the user touches the button */
 	public void close(View view)
@@ -367,7 +606,34 @@ public class CheckoutActivity extends  AppCompatActivity  {
 		finish();
 	}
 
+
+
+	public void validate_coupon(String _coupon_code, String picktime) {
+
+
+		coupon_map.clear();
+		coupon_map = new HashMap<>();
+		coupon_map.put("method","validateCoupon");
+		coupon_map.put("picktime","2022-11-28");
+		coupon_map.put("promo_code",_coupon_code);
+
+
+		coupon_api.setParams(coupon_map, RequestNetworkController.REQUEST_PARAM);
+		coupon_api.startRequestNetwork(RequestNetworkController.GET,
+				api,
+				"",  _coupon_api_listener);
+
+
+	}
+
+
+
 	private void initializeLogic() {
+
+
+
+
+		cod.setChecked(true);
 
 		payment.setEnabled(true);
 		pin = false;
@@ -388,7 +654,7 @@ public class CheckoutActivity extends  AppCompatActivity  {
 
 		recyclerview1.stopScroll();
 
-
+       _api_checkout_request("COD","odisha");
 
 
 
@@ -460,6 +726,26 @@ public class CheckoutActivity extends  AppCompatActivity  {
 
 	}
 
+
+	public void _api_checkout_request (String _payment_mode, String _state) {
+
+		checkout_map.clear();
+		checkout_list.clear();
+
+		checkout_map = new HashMap<>();
+		checkout_map.put("method", "checkout");
+		checkout_map.put("payment_mode", _payment_mode);
+		checkout_map.put("state", _state);
+
+		checkout_api.setParams(checkout_map, RequestNetworkController.REQUEST_PARAM);
+		checkout_api.startRequestNetwork(RequestNetworkController.GET,
+				"https://kkkamya.in/index.php/Api_request/api_list?",
+				"",_checkout_api_listener);
+
+	}
+
+
+
 	public void request_update_cart(String _product_id, String _qty, String _attrVals) {
 
 
@@ -488,6 +774,7 @@ public class CheckoutActivity extends  AppCompatActivity  {
 	public void _api_request_delete_cart_item (String _cart_id) {
 		map2.clear();
 		results.clear();
+		map2 = new HashMap<>();
 		map2.put("method", "deletecartitem");
 		map2.put("cart_id", _cart_id );
 		re.setParams(map2, RequestNetworkController.REQUEST_PARAM);
@@ -520,6 +807,8 @@ public class CheckoutActivity extends  AppCompatActivity  {
 				total_price_of_cart_ = 0; // dont remove
 
 				total_price.setText("₹"+ calculate_cart_total_price());
+				total_price_2.setText(total_price.getText().toString());
+				check_coupon.performClick();
 
 				// refresh the list or recycle or grid
 
@@ -542,7 +831,7 @@ public class CheckoutActivity extends  AppCompatActivity  {
 
 
 
-				_reftesh();
+				_refresh();
 
 
 
@@ -575,9 +864,9 @@ public class CheckoutActivity extends  AppCompatActivity  {
 	}
 
 
-	public void _reftesh () {
+	public void _refresh () {
 
-		_hight_of_scroll_in_listview(recyclerview1, results.size() * Util.getDip(getApplicationContext(), 170));
+		_hight_of_scroll_in_listview(recyclerview1, results.size() * Util.getDip(getApplicationContext(), 150));
 
 		recyclerview1.setAdapter(new Recyclerview1Adapter(results));
 		recyclerview1.setLayoutManager(new LinearLayoutManager(this));
@@ -652,7 +941,8 @@ public class CheckoutActivity extends  AppCompatActivity  {
 
 							sh.edit().putString("cart_data", new Gson().toJson(results)).apply();
 
-							request_update_cart(results.get(_position).get("product_id").toString(),qty.getText().toString(),"");
+							request_add_cart(Objects.requireNonNull(results.get(_position).get("product_id")).toString(),qty.getText().toString(),"");
+
 
 						}
 
@@ -675,9 +965,9 @@ public class CheckoutActivity extends  AppCompatActivity  {
 
 							sh.edit().putString("cart_data", new Gson().toJson(results)).apply();
 
+							request_add_cart(Objects.requireNonNull(results.get(_position).get("product_id")).toString(),qty.getText().toString(),"");
 
-							request_update_cart(Objects.requireNonNull(results.get(_position).get("product_id")).toString(),qty.getText().toString(),"");
-							//Toast.makeText(getApplicationContext(), qty.getText().toString(), Toast.LENGTH_SHORT).show();
+								//Toast.makeText(getApplicationContext(), qty.getText().toString(), Toast.LENGTH_SHORT).show();
 
 						}
 
@@ -691,10 +981,14 @@ public class CheckoutActivity extends  AppCompatActivity  {
 
 						try{
 
-							results.remove((int)(_position));
+							results.remove(_position);
 							sh.edit().putString("cart_data", new Gson().toJson(results)).apply();
+
 							_api_request_delete_cart_item(Objects.requireNonNull(results.get(_position).get("cart_id")).toString());
 
+										/*	results.clear();
+							results = new Gson().fromJson(sh.getString("cart_data", ""), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+							_refresh();*/
 
 
 						}catch (Exception e){
@@ -726,7 +1020,53 @@ public class CheckoutActivity extends  AppCompatActivity  {
 
 	}
 
+	public void _api_request_add_to_cart (String _product_id, String _qty, String _attrVals) {
 
+
+		//Toast.makeText(this, _qty+"\n"+_attrVals+"\n"+_product_id, Toast.LENGTH_SHORT).show();
+
+		HashMap<String, Object> map3 = new HashMap<>();
+		map3.put("method", "addtocart");
+		map3.put("product_id", _product_id);
+		map3.put("qty", _qty);
+		if(!_attrVals.equals("")) {
+			map3.put("attrVals", _attrVals);
+		}
+
+		req_add_to_cart.setParams(map3, RequestNetworkController.REQUEST_PARAM);
+		req_add_to_cart.startRequestNetwork(
+				RequestNetworkController.POST,
+				"https://kkkamya.in/index.php/Api_request/api_list?"
+				, ""
+				, _req_add_to_cart_listener);
+	}
+
+
+	private void request_add_cart(final String _produbt_id, final String _qty, final String _attrVal) {
+		if(time!=null)
+		{
+			time.cancel();
+			// dont remove this line
+		}
+
+		time = new TimerTask() {
+			@Override
+			public void run() {
+				runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+
+
+
+						_api_request_add_to_cart(_produbt_id,_qty,_attrVal);
+
+						time.cancel();
+					}
+				});
+			}
+		};
+		_timer.schedule(time, 1200);
+	}
 
 
 	@Deprecated

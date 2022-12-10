@@ -1461,7 +1461,14 @@ drawable back_white_full_round99
 drawable bag_background
 drawable bag_foreground
 drawable bags2
+drawable bg
 drawable bgg
+drawable bgg2
+drawable bgg4
+drawable bgg5
+drawable bgg6
+drawable bgg7
+drawable bgg8
 drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
 drawable btn_checkbox_unchecked_mtrl
@@ -1574,7 +1581,9 @@ drawable tooltip_frame_light
 drawable trans
 drawable trash
 drawable user2
+drawable visa
 drawable voucher
+drawable who
 id ALT
 id BOTTOM_END
 id BOTTOM_START
@@ -1652,6 +1661,7 @@ id activity_cashfree_payment
 id activity_cashfree_upi_payment
 id activity_chooser_view_content
 id add
+id add_to_cart
 id adjust_height
 id adjust_width
 id alertTitle
@@ -1665,6 +1675,7 @@ id appName
 id async
 id auto
 id automatic
+id b
 id back
 id background2
 id barline
@@ -1690,11 +1701,14 @@ id browser_actions_menu_view
 id btn_failure
 id btn_success
 id buttonPanel
+id buy_now
+id c
 id c_pass
 id cancel_action
 id cancel_button
 id cardview1
 id cart
+id cart_bottom_layout_
 id cart_count
 id cat
 id categori_image
@@ -1704,6 +1718,7 @@ id center_horizontal
 id center_vertical
 id cf_toolbar
 id chains
+id check_coupon
 id check_pin
 id checkbox
 id checked
@@ -1741,6 +1756,7 @@ id decor_content_parent
 id default_activity_button
 id del
 id delete
+id delivery
 id delivery_select
 id delivery_tiitle
 id delivery_type
@@ -1755,9 +1771,12 @@ id design_navigation_view
 id dialog_button
 id dimensions
 id direct
+id dis_percent
 id disableHome
+id discount
 id done_button
 id dropdown_menu
+id edit
 id edit_query
 id edittext1
 id edittext2
@@ -1807,6 +1826,7 @@ id image
 id image_bottom
 id image_top
 id imageview1
+id imageview12
 id imageview2
 id imageview3
 id imageview4
@@ -1815,6 +1835,7 @@ id imageview6
 id imageview7
 id imageview8
 id imageview9
+id imageview_aff
 id img
 id info
 id input_layout
@@ -1824,6 +1845,7 @@ id italic
 id item_touch_helper_previous_elevation
 id l
 id l2
+id l34
 id labeled
 id largeLabel
 id left
@@ -1841,6 +1863,7 @@ id linear17
 id linear2
 id linear3
 id linear30
+id linear31
 id linear333
 id linear4
 id linear5
@@ -1872,7 +1895,6 @@ id lottie_layer_name
 id lottie_loading
 id masked
 id materialbutton1
-id materialbutton2
 id media_actions
 id menu
 id message
@@ -1887,6 +1909,7 @@ id month_navigation_fragment_toggle
 id month_navigation_next
 id month_navigation_previous
 id month_title
+id msg
 id mtrl_calendar_day_selector_frame
 id mtrl_calendar_days_of_week
 id mtrl_calendar_frame
@@ -1918,6 +1941,7 @@ id navigation_header_container
 id never
 id new_grid
 id noScroll
+id no_coupon
 id none
 id normal
 id notifTV
@@ -2011,6 +2035,7 @@ id search_button
 id search_close_btn
 id search_edit_frame
 id search_go_btn
+id search_img
 id search_mag_icon
 id search_plate
 id search_src_text
@@ -2096,9 +2121,6 @@ id textview12
 id textview13
 id textview14
 id textview15
-id textview17
-id textview18
-id textview19
 id textview2
 id textview3
 id textview4
@@ -2125,7 +2147,9 @@ id toolbar
 id top
 id topLabel
 id topPanel
+id top_cardview1
 id total_price
+id total_price_2
 id touch_outside
 id transition_current_scene
 id transition_layout_save
@@ -2155,6 +2179,8 @@ id viewpager3
 id visible
 id vscroll1
 id vscroll2
+id wb
+id wb9877
 id web_view_main
 id welcome
 id wide
@@ -2318,6 +2344,7 @@ layout payment
 layout product_cus
 layout product_variant_cus
 layout profile
+layout search_layout
 layout see_more
 layout select_dialog_item_material
 layout select_dialog_multichoice_material

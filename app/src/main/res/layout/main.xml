@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   android:background="#000"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -16,24 +17,26 @@
 				android:id="@+id/bg"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
-				android:src="@drawable/bgg"
+				android:src="@drawable/bgg6"
 				android:scaleType="centerCrop"
-				android:alpha="0.00"/>
+				android:alpha="1"/>
 		</LinearLayout>
+
 		<LinearLayout
 			android:id="@+id/front"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:padding="8dp"
 			android:background="@android:color/transparent"
 			android:gravity="center_horizontal|center_vertical"
-			android:orientation="horizontal">
+			android:orientation="horizontal"
+			android:padding="8dp">
+
 			<ImageView
 				android:id="@+id/logo"
 				android:layout_width="160dp"
 				android:layout_height="160dp"
-				android:src="@drawable/logo"
-				android:scaleType="centerCrop"/>
+				android:scaleType="centerCrop"
+				android:src="@drawable/logo" />
 		</LinearLayout>
 	</RelativeLayout>
 </LinearLayout>

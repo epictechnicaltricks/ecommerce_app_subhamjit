@@ -22,7 +22,7 @@ import java.util.TimerTask;
 
 public class MainActivity extends  Activity { 
 	
-	private final Timer _timer = new Timer();
+
 	
 	private RelativeLayout relative;
 	private LinearLayout bg_layout;
@@ -31,6 +31,7 @@ public class MainActivity extends  Activity {
 	private ImageView bg;
 	
 	private TimerTask time;
+	private final Timer _timer = new Timer();
 	private final Intent in = new Intent();
 
 
@@ -82,6 +83,9 @@ public class MainActivity extends  Activity {
 
 	private void initializeLogic() {
 
+
+		_transparent_satus();
+
 		if (sh.getString("cart_data", "").equals("")) {
 			sh.edit().putString("cart_data", "[]").apply();
 		}
@@ -99,6 +103,11 @@ Glide.with(getApplicationContext()).load(Uri.parse("tggfxd")).into(bg);
 					public void run() {
 
 						in.setClass(getApplicationContext(),LayoutActivity.class);
+
+						in.putExtra("cart","");
+						// dont remove this
+						// this put extra used for launch cart from any activity
+
 						_ActivityTransition(logo, "p", in);
 						finish();
 
@@ -127,9 +136,10 @@ Glide.with(getApplicationContext()).load(Uri.parse("tggfxd")).into(bg);
 			}
 		};
 		_timer.schedule(time, 3500);
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+	/*	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 			getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-		}
+		}*/
 
 	}
 	
@@ -138,6 +148,13 @@ Glide.with(getApplicationContext()).load(Uri.parse("tggfxd")).into(bg);
 		
 		super.onActivityResult(_requestCode, _resultCode, _data);
 
+	}
+
+
+	public void _transparent_satus () {
+		Window w = this.getWindow();
+		w.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+		getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN); if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) { getWindow().setStatusBarColor(Color.TRANSPARENT); }
 	}
 	
 	public void _transparentStatusAndNavigation () {

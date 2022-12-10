@@ -49,10 +49,10 @@ public class Cart_FragmentActivity extends  Fragment  {
 
 	private HashMap<String, Object> api_map = new HashMap<>();
 	private String list = "";
-	
+
 	private ArrayList<HashMap<String, Object>> results = new ArrayList<>();
 	//private final ArrayList<HashMap<String, Object>> listmap = new ArrayList<>();
-	
+
 	private LinearLayout linear1;
 	private TextView textview1;
 	private RecyclerView recyclerview4;
@@ -61,8 +61,8 @@ public class Cart_FragmentActivity extends  Fragment  {
 	private LinearLayout linear3;
 	private MaterialButton checkout;
 	private TextView subtotal;
-	private TextView total_price;
-	
+	private TextView total_price,msg;
+
 	private RequestNetwork re;
 	private RequestNetwork.RequestListener _re_request_listener;
 
@@ -90,6 +90,8 @@ public class Cart_FragmentActivity extends  Fragment  {
 
 	long total_price_of_cart_;
 
+	LinearLayout cart_bottom_layout;
+
 	@NonNull
 	@Override
 	public View onCreateView(@NonNull LayoutInflater _inflater, @Nullable ViewGroup _container, @Nullable Bundle _savedInstanceState) {
@@ -99,13 +101,15 @@ public class Cart_FragmentActivity extends  Fragment  {
 
 		return _view;
 	}
-	
+
 	private void initialize(Bundle _savedInstanceState, View _view) {
 
 		swiperefreshlayout1 = (SwipeRefreshLayout) _view.findViewById(R.id.swiperefreshlayout1);
 
 		cart_count = _view.findViewById(R.id._cart_count);
 
+		msg = _view.findViewById(R.id.msg);
+		msg.setVisibility(View.GONE);
 
 		sh = getActivity().getSharedPreferences("sh", Activity.MODE_PRIVATE);
 
@@ -124,6 +128,7 @@ public class Cart_FragmentActivity extends  Fragment  {
 		req_add_to_cart = new RequestNetwork(getActivity());
 		req_delete_cart= new RequestNetwork(getActivity());
 
+		cart_bottom_layout = _view.findViewById(R.id.cart_bottom_layout_);
 
 
 		_re_request_listener = new RequestNetwork.RequestListener() {
@@ -137,7 +142,7 @@ public class Cart_FragmentActivity extends  Fragment  {
 				swiperefreshlayout1.setRefreshing(false);
 				_show_response(_response);
 			}
-			
+
 			@Override
 			public void onErrorResponse(String _param1, String _param2) {
 				final String _tag = _param1;
@@ -174,8 +179,9 @@ public class Cart_FragmentActivity extends  Fragment  {
 			public void onResponse(String _param1, String _param2, HashMap<String, Object> _param3) {
 				final String _response = _param2;
 
-				Toast.makeText(getContext(), "Removed Successfully", Toast.LENGTH_SHORT).show();
+
 				_api_request(user_id);
+				Toast.makeText(getContext(), "Removed Successfully", Toast.LENGTH_SHORT).show();
 				// THIS REQUEST FOR UPDATE CART VALUE
 
 			}
@@ -194,13 +200,17 @@ public class Cart_FragmentActivity extends  Fragment  {
 			@Override
 			public void onClick(View view) {
 
-                startActivity(new Intent(getContext(),MyAddressActivity.class));
+				if(!total_price.getText().toString().equals("₹0")) {
+					startActivity(new Intent(getContext(),MyAddressActivity.class));
+
+				}
+
 			}
 		});
 
 
 	}
-	
+
 	private void initializeLogic() {
 
 
@@ -222,13 +232,27 @@ public class Cart_FragmentActivity extends  Fragment  {
 		checkout_1.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.BOLD);
 		total_price.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.BOLD);
 		subtotal.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
+		msg.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
+
+
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
+
+		if (sh.getString("cart_data", "").length()>5) {
+
+			cart_bottom_layout.setVisibility(View.VISIBLE);
+			// this for cart have some items
+		}else {
+			cart_bottom_layout.setVisibility(View.GONE);
+		}
+
 		_api_request(user_id);
 	}
+
+
 
 	@Override
 	public void onActivityResult(int _requestCode, int _resultCode, Intent _data) {
@@ -236,7 +260,7 @@ public class Cart_FragmentActivity extends  Fragment  {
 		super.onActivityResult(_requestCode, _resultCode, _data);
 
 	}
-	
+
 	public void _api_request (String user_id) {
 
 		swiperefreshlayout1.setRefreshing(true);
@@ -263,7 +287,7 @@ public class Cart_FragmentActivity extends  Fragment  {
 				"https://kkkamya.in/index.php/Api_request/api_list?",
 				"", _req_delete_cart_listener);
 	}
-	
+
 
 
 
@@ -274,7 +298,7 @@ public class Cart_FragmentActivity extends  Fragment  {
 			results.clear();
 
 
-				if (_response.contains("200")) {
+			if (_response.contains("200")) {
 
 
 				//api_map = new Gson().fromJson(_response, new TypeToken<HashMap<String, Object>>(){}.getType());
@@ -285,43 +309,47 @@ public class Cart_FragmentActivity extends  Fragment  {
 
 
 
-					//Collections.reverse(listmap);
+				//Collections.reverse(listmap);
 
-					//recyclerview1.setAdapter(new Recyclerview1Adapter(listmap));
-					//recyclerview1.setLayoutManager(new LinearLayoutManager(getContext()));
+				//recyclerview1.setAdapter(new Recyclerview1Adapter(listmap));
+				//recyclerview1.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
-					results = new Gson().fromJson(sh.getString("cart_data", ""), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
-					// refresh the list or recycle or grid
+				results = new Gson().fromJson(sh.getString("cart_data", ""), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+				// refresh the list or recycle or grid
 
-					if(results.size()==0){
-						cart_count.setVisibility(View.GONE);
-					}else{
-						if(results.size()==1){
+				if(results.size()==0){
+					msg.setVisibility(View.VISIBLE);
+					cart_count.setVisibility(View.GONE);
+				}else{
+					msg.setVisibility(View.GONE);
+					if(results.size()==1){
 
-							cart_count.setText(results.size()+" item available");
+						cart_count.setText(results.size()+" item available");
 
-						}else {
+					}else {
 
-							cart_count.setText("Total items: "+ results.size());
-
-						}
+						cart_count.setText("Total items: "+ results.size());
 
 					}
 
-					total_price_of_cart_ = 0; // dont remove
+				}
 
-					total_price.setText("₹"+ calculate_cart_total_price());
+				total_price_of_cart_ = 0; // dont remove
 
-					_reftesh();
+				total_price.setText("₹"+ calculate_cart_total_price());
+
+				_reftesh();
 
 
 
 
 			}else {
-					cart_count.setVisibility(View.GONE);
-					Toast.makeText(getContext(), "No data found", Toast.LENGTH_LONG).show();
-				}
+				msg.setVisibility(View.VISIBLE);
+				msg.setText("No data found");
+				cart_count.setVisibility(View.GONE);
+				Toast.makeText(getContext(), "No data found", Toast.LENGTH_LONG).show();
+			}
 
 
 
@@ -411,7 +439,7 @@ public class Cart_FragmentActivity extends  Fragment  {
 		public Recyclerview4Adapter(ArrayList<HashMap<String, Object>> _arr) {
 			_data = _arr;
 		}
-		
+
 		@Override
 		public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 			LayoutInflater _inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -420,11 +448,11 @@ public class Cart_FragmentActivity extends  Fragment  {
 			_v.setLayoutParams(_lp);
 			return new ViewHolder(_v);
 		}
-		
+
 		@Override
 		public void onBindViewHolder(ViewHolder _holder, final int _position) {
 			View _view = _holder.itemView;
-			
+
 			final LinearLayout bg = _view.findViewById(R.id.bg);
 			final LinearLayout linear2 = _view.findViewById(R.id.linear2);
 			final LinearLayout barline = _view.findViewById(R.id.barline);
@@ -442,7 +470,7 @@ public class Cart_FragmentActivity extends  Fragment  {
 			final ImageView delete = _view.findViewById(R.id.delete);
 			final TextView pro_price_and_qty = _view.findViewById(R.id.pro_price_and_qty);
 			final TextView total_price = _view.findViewById(R.id.total_price);
-			
+
 			try {
 				bg.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b) { this.setCornerRadius(a); this.setColor(b); return this; } }.getIns((int)50, 0xFFECEFF1));
 				name.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.BOLD);
@@ -463,7 +491,7 @@ public class Cart_FragmentActivity extends  Fragment  {
 				pro_price_and_qty.setText(results.get(_position).get("product_price").toString().concat(" x ".concat(results.get(_position).get("quantity").toString())));
 				total_price.setText("₹".concat(results.get(_position).get("total_price").toString()));
 
-					plus.setOnClickListener(new OnClickListener() {
+				plus.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View _view) {
 						qty_count = Integer.parseInt(qty.getText().toString());
@@ -523,7 +551,7 @@ public class Cart_FragmentActivity extends  Fragment  {
 
 
 						//Toast.makeText(getActivity(), "delete", Toast.LENGTH_SHORT).show();
-							}
+					}
 				});
 
 				delete.setColorFilter(0xFFD50000);
@@ -533,18 +561,18 @@ public class Cart_FragmentActivity extends  Fragment  {
 				Util.showMessage(getContext(), "Error on parameters \n\n" +e);
 			}
 		}
-		
+
 		@Override
 		public int getItemCount() {
 			return _data.size();
 		}
-		
+
 		public class ViewHolder extends RecyclerView.ViewHolder{
 			public ViewHolder(View v){
 				super(v);
 			}
 		}
-		
+
 	}
 
 

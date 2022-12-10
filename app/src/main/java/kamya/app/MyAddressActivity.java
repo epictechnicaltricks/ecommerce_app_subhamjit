@@ -69,7 +69,18 @@ public class MyAddressActivity extends  AppCompatActivity  {
 						{
 							//Toast.makeText(this, "insdoe ", Toast.LENGTH_SHORT).show();
 							Intent in = new Intent();
+
+							if (sh.getString("cart_data", "").length()>5) {
+								in.putExtra("cart","true");
+								// this for cart have some items
+							}else {
+								in.putExtra("cart","false");
+							}
 							in.setClass(getApplicationContext(),LoginActivity.class);
+
+
+							//in.putExtra("cart","true");
+
 							startActivity(in);
 
 

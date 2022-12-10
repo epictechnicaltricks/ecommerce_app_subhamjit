@@ -4,75 +4,122 @@
 	android:layout_height="match_parent"
 	android:background="#fff"
 	android:orientation="vertical">
-	<LinearLayout
-		android:id="@+id/linear1"
+
+
+	<RelativeLayout
+		android:id="@+id/relative"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:orientation="vertical">
 
-
 		<LinearLayout
-			android:elevation="10dp"
-			android:id="@+id/l"
-			android:gravity="center"
+			android:id="@+id/bg_layout"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:padding="10dp"
-
+			android:layout_height="match_parent"
 			android:orientation="horizontal">
-
 			<ImageView
-				android:onClick="close"
-				android:layout_marginLeft="15dp"
-				android:layout_marginTop="0dp"
-
-				android:id="@+id/back"
-				android:layout_width="25dp"
-				android:layout_height="20dp"
-
-				android:src="@drawable/left"
-				android:scaleType="center"/>
-
-
-			<TextView
-				android:layout_weight="1"
-				android:id="@+id/textview1"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginLeft="15dp"
-				android:layout_marginTop="0dp"
-				android:padding="8dp"
-				android:text="My Orders"
-				android:textSize="25sp"
-				android:textStyle="bold"
-				android:textColor="#000000"/>
+				android:id="@+id/bg_img"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:src="@drawable/bgg8"
+				android:scaleType="centerCrop"
+				android:alpha="0.2"/>
 		</LinearLayout>
 
 
 
-				<androidx.recyclerview.widget.RecyclerView
-			android:id="@+id/recyclerview4"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:padding="8dp"
-			android:layout_weight="1"/>
 
-		<com.airbnb.lottie.LottieAnimationView
-			android:id="@+id/lottie_loading"
+		<LinearLayout
+			android:id="@+id/linear1"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:layout_centerInParent="true"
-			android:layout_weight="1"
-			android:padding="8dp"
-			android:scaleType="fitCenter"
-			android:scaleX="3"
-			android:scaleY="3"
-			app:lottie_autoPlay="true"
-			app:lottie_fileName="shimmer.json"
-			app:lottie_loop="true" />
+			android:orientation="vertical">
+
+
+			<LinearLayout
+				android:elevation="10dp"
+				android:id="@+id/l"
+				android:gravity="center"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:padding="10dp"
+
+				android:orientation="horizontal">
+
+				<ImageView
+					android:onClick="close"
+					android:layout_marginLeft="15dp"
+					android:layout_marginTop="0dp"
+
+					android:id="@+id/back"
+					android:layout_width="25dp"
+					android:layout_height="20dp"
+
+					android:src="@drawable/left"
+					android:scaleType="center"/>
+
+
+				<TextView
+					android:layout_weight="1"
+					android:id="@+id/textview1"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="15dp"
+					android:layout_marginTop="0dp"
+					android:padding="8dp"
+					android:text="My Orders"
+					android:textSize="25sp"
+					android:textStyle="bold"
+					android:textColor="#000000"/>
+			</LinearLayout>
 
 
 
-					</LinearLayout>
-	</LinearLayout>
+			<TextView
+
+				android:id="@+id/msg"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_horizontal|center_vertical"
+				android:layout_marginTop="105dp"
+				android:padding="8dp"
+				android:text="No result found."
+				android:textSize="20sp"
+				android:textStyle="normal"
+				android:textColor="#000000"/>
+
+			<androidx.recyclerview.widget.RecyclerView
+				android:id="@+id/recyclerview4"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:padding="8dp"
+				android:layout_weight="1"/>
+
+			<com.airbnb.lottie.LottieAnimationView
+				android:id="@+id/lottie_loading"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_centerInParent="true"
+				android:layout_weight="1"
+				android:padding="8dp"
+				android:scaleType="fitCenter"
+				android:scaleX="3"
+				android:scaleY="3"
+				app:lottie_autoPlay="true"
+				app:lottie_fileName="shimmer.json"
+				app:lottie_loop="true" />
+
+
+
+
+		</LinearLayout>
+
+	</RelativeLayout>
+
+
+
+
+
+
+</LinearLayout>
 

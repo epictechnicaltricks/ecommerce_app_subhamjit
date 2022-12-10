@@ -18,7 +18,7 @@
 
 				<ImageView
 					android:onClick="close"
-					android:id="@+id/imageview1"
+					android:id="@+id/imageview12"
 					android:layout_width="25dp"
 					android:layout_height="20dp"
 					android:layout_marginLeft="10dp"
@@ -51,12 +51,14 @@
 				android:layout_height="match_parent"
 				android:scrollbars="none">
 				<LinearLayout
+					android:layout_gravity="center"
 					android:id="@+id/inside_scroll"
 					android:layout_width="match_parent"
 					android:layout_height="match_parent"
 					android:orientation="vertical">
 
 					<LinearLayout
+						android:visibility="gone"
 						android:id="@+id/delivery_select"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
@@ -105,7 +107,7 @@
 
 
 					<LinearLayout
-
+                 android:visibility="gone"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:layout_marginTop="10dp"
@@ -152,6 +154,7 @@
 					</LinearLayout>
 
 					<LinearLayout
+						android:visibility="gone"
 						android:id="@+id/pin_layout"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
@@ -239,6 +242,7 @@
 
 
 					<LinearLayout
+						android:visibility="gone"
 						android:id="@+id/price_details"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
@@ -330,6 +334,7 @@
 
 
 					<TextView
+
 						android:id="@+id/textview13"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
@@ -340,6 +345,25 @@
 						android:textStyle="bold"
 						android:textColor="#B2068F1D"
 						android:layout_gravity="center_horizontal|center_vertical"/>
+
+
+				<ImageView
+					android:layout_gravity="center"
+					android:src="@drawable/visa"
+					android:scaleType="centerInside"
+					android:layout_width="260dp"
+					android:layout_height="wrap_content">
+
+
+				</ImageView>
+
+					<EditText
+						android:visibility="gone"
+						android:id="@+id/edit"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"/>
+
+
 				</LinearLayout>
 			</ScrollView>
 		</LinearLayout>

@@ -89,29 +89,9 @@ public class LayoutActivity extends  AppCompatActivity  {
 		logout = findViewById(R.id.Logout);
 		bill = findViewById(R.id.bill_id);
 
-		SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
-
-		try{
-			String _phone=sh.getString("mobile", "");
-			String _fullname=sh.getString("fullname", "");
-			String _email=sh.getString("email", "");
-			String _id = sh.getString("user_id", "");
-			//String _bill = sh.getString("bill_id", "");
 
 
-			phone.setText(_phone);
-			name.setText(_fullname);
-			email.setText(_email);
-			userid.setText(_id);
-			//bill.setText(_bill +"\nbill_id");
-
-		}catch(Exception e)
-		{
-			showMessage(e.toString());
-		}
-
-
-		logout.setOnClickListener(new View.OnClickListener() {
+		logout.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
 
@@ -204,7 +184,7 @@ public class LayoutActivity extends  AppCompatActivity  {
 
 
 
-		_fab.setOnClickListener(new View.OnClickListener() {
+		_fab.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 
@@ -264,11 +244,11 @@ public class LayoutActivity extends  AppCompatActivity  {
 	}
 
 	public void _UI () {
-		viewpager1.setAdapter(new LayoutActivity.MyFragmentAdapter(getApplicationContext(), getSupportFragmentManager(), 5));
+		viewpager1.setAdapter(new MyFragmentAdapter(getApplicationContext(), getSupportFragmentManager(), 5));
 		bottomnavigation1.getMenu().add(0, 0, 0, "Category").setIcon(R.drawable.catego);
 		bottomnavigation1.getMenu().add(0, 1, 0, "Cart").setIcon(R.drawable.bags2);
 		bottomnavigation1.getMenu().add(0, 2, 0, "").setIcon(R.drawable.trans);
-		bottomnavigation1.getMenu().add(0, 3, 0, "Wishlist").setIcon(R.drawable.heart);
+		bottomnavigation1.getMenu().add(0, 3, 0, "About").setIcon(R.drawable.who);
 		bottomnavigation1.getMenu().add(0, 4, 0, "Account").setIcon(R.drawable.user2);
 		//bottomnavigation1.getMenu().add(0, 5, 0, "Account").setIcon(R.drawable.user);
 
@@ -324,7 +304,11 @@ public class LayoutActivity extends  AppCompatActivity  {
 		try{ Objects.requireNonNull(getSupportActionBar()).hide(); }
 		catch (Exception e){}
 
-
+        if(getIntent().getStringExtra("cart").equals("true")){
+        	viewpager1.setCurrentItem(1);
+        	// this  cart used on viewProduct activity line 356
+			// on initializeLogic() for lauch cart frigment
+        }
 
 
 
@@ -360,11 +344,46 @@ public class LayoutActivity extends  AppCompatActivity  {
 		}
 	}
 
+	@Override
+	protected void onPostResume() {
+		super.onPostResume();
+
+		SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+
+		try{
+			String _phone=sh.getString("mobile", "");
+			String _fullname=sh.getString("fullname", "");
+			String _email=sh.getString("email", "");
+			String _id = sh.getString("user_id", "");
+			//String _bill = sh.getString("bill_id", "");
+
+
+			phone.setText(_phone);
+			name.setText(_fullname);
+			email.setText(_email);
+			userid.setText(_id);
+			//bill.setText(_bill +"\nbill_id");
+
+		}catch(Exception e)
+		{
+			showMessage(e.toString());
+		}
+
+
+	}
 
 	public void openDrawer() {
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id._drawer);
 		drawer.openDrawer(GravityCompat.START);
 	}
+
+	public void openCart() {
+		viewpager1 = (ViewPager) findViewById(R.id.viewpager1);
+		viewpager1.setCurrentItem(1);
+	}
+
+
+
 
 	public void _transparent_satus () {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

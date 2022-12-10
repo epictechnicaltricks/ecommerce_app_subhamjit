@@ -84,6 +84,9 @@
 				</LinearLayout>
 			</LinearLayout>
 			<LinearLayout
+				android:visibility="invisible"
+
+
 				android:id="@+id/top"
 				android:layout_width="170dp"
 				android:layout_height="180dp"
@@ -102,7 +105,7 @@
 					>
 
 					<ImageView
-						android:elevation="20dp"
+							android:elevation="20dp"
 						android:id="@+id/wish_btn"
 						android:focusable="false"
 						android:layout_width="37dp"

@@ -135,7 +135,7 @@ public class Util {
 		}
 
 		public static boolean isConnected(Context a) {
-				ConnectivityManager connectivityManager = (android.net.ConnectivityManager) 
+				ConnectivityManager connectivityManager = (ConnectivityManager)
 						a.getSystemService(Activity.CONNECTIVITY_SERVICE);
 				NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
 				return activeNetworkInfo != null && activeNetworkInfo.isConnected();

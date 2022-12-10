@@ -28,6 +28,8 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class Payment extends  AppCompatActivity  {
@@ -47,6 +49,9 @@ public class Payment extends  AppCompatActivity  {
 	private HashMap<String, Object> api_map = new HashMap<>();
 
 	String list="";
+	HashMap<String, String> params = new HashMap<>();
+	private TimerTask time;
+	private final Timer _timer = new Timer();
 
 Button place_order;
 
@@ -58,17 +63,20 @@ Button place_order;
 	private RequestNetwork token_api;
 	private RequestNetwork.RequestListener _token_api_listener;
 
-    String token_key="v79JCN4MzUIJiOicGbhJCLiQ1VKJiOiAXe0Jye.s79BTM0AjNwUDN1EjOiAHelJCLiIlTJJiOik3YuVmcyV3QyVGZy9mIsEjOiQnb19WbBJXZkJ3biwiIxADMwIXZkJ3TiojIklkclRmcvJye.K3NKICVS5DcEzXm2VQUO_ZagtWMIKKXzYOqPZ4x0r2P_N3-PRu2mowm-8UXoyqAgsG";
+    String token_key="";
     String amt = "1";
-    String order_id = "order001";
+    String order_id = "Order01";
 
     String app_id= "21054006fdf9a3c2f38752ec9a045012";
-    String secret_key="8c9aaf8742455034b69952a8fb29c7bf3db9aaba";
+    String secret_key="b3335cd2dbd7b41fdec1705d5bd1c27601872f3c";
     String msg="";
 
     Button check_coupon;
 
     String api ="https://kkkamya.in/index.php/Api_request/api_list?";
+
+
+EditText edit;
 
 	/** https://docs.cashfree.com/docs/android-sdk **/
 
@@ -83,10 +91,22 @@ Button place_order;
 	EditText coupon_code;
 
 	private TextView total_price,total_price_2,discount,delivery,dis_percent,sub_total;
+
+
+	/////////////////////
+
+
 	private SharedPreferences sh;
+
+
 
 	long total_price_of_cart_;
 	///
+
+	HashMap<String, Object> header = new HashMap<>();
+
+	HashMap<String, Object> order_param = new HashMap<>();
+
 
 
 	@Override
@@ -104,7 +124,9 @@ Button place_order;
 
 		sh = getSharedPreferences("sh", Activity.MODE_PRIVATE);
 
-sub_total = findViewById(R.id.subtotal);
+		edit = findViewById(R.id.edit);
+
+         sub_total = findViewById(R.id.subtotal);
 		dis_percent =findViewById(R.id.dis_percent);
 
 		total_price = findViewById(R.id.total_price);
@@ -175,7 +197,7 @@ check_coupon.setOnClickListener(new View.OnClickListener() {
 					double last_price = totalprice - discount_price;
 					discount.setText("- ₹"+(int)(discount_price));
 					total_price.setText("₹"+(int)(last_price));
-					dis_percent.setText("Added "+(int)(get_percent)+"% off with Min. order of ₹"+(int)(Double.parseDouble(coupon_listmap.get(0).get("min_amount").toString())));
+					dis_percent.setText("Applied "+(int)(get_percent)+"% off with Min. order of ₹"+(int)(Double.parseDouble(coupon_listmap.get(0).get("min_amount").toString())));
 				}
 
 
@@ -203,14 +225,51 @@ _token_api_listener = new RequestNetwork.RequestListener() {
 			HashMap<String,Object> map = new HashMap<>();
 			map = new Gson().fromJson(response, new TypeToken<HashMap<String, Object>>(){}.getType());
 			token_key = Objects.requireNonNull(map.get("cftoken")).toString();
+
+
+
+			AlertDialog.Builder builder1 = new AlertDialog.Builder(Payment.this);
+			builder1.setTitle("Payment token");
+			builder1.setMessage(token_key);
+			builder1.setCancelable(false);
+
+			builder1.setPositiveButton(
+					"OK",
+					(dialog, id) -> {
+
+						//startActivity(new Intent(getApplicationContext(),ThankyouActivity.class));
+						//finish();
+
+					});
+
+			AlertDialog alert11 = builder1.create();
+			alert11.show();
             //token_key = "v79JCN4MzUIJiOicGbhJCLiQ1VKJiOiAXe0Jye.s79BTM0AjNwUDN1EjOiAHelJCLiIlTJJiOik3YuVmcyV3QyVGZy9mIsEjOiQnb19WbBJXZkJ3biwiIxADMwIXZkJ3TiojIklkclRmcvJye.K3NKICVS5DcEzXm2VQUO_ZagtWMIKKXzYOqPZ4x0r2P_N3-PRu2mowm-8UXoyqAgsG";
-			doPayment(order_id,amt,token_key,"TEST");
+
+
+			time = new TimerTask() {
+				@Override
+				public void run() {
+					runOnUiThread(new Runnable() {
+						@Override
+						public void run() {
+
+							doPayment(order_id,amt,token_key,"PROD");
+							time.cancel();
+						}
+					});
+				}
+			};
+			_timer.schedule(time, 1500);
+
 			// this is test  mode
+
 		} else {
 
+			showMessage(response);
 			// remove this project by shubhamjit
 			// dt 29 nov 2022 9.44pm 3rd sem btech raajdhani college bbsr, odisha
-			doPayment(order_id,amt,token_key,"TEST");
+			// doPayment(order_id,amt,token_key,"TEST");
 
 		}
 	}
@@ -229,7 +288,22 @@ _token_api_listener = new RequestNetwork.RequestListener() {
 
 		// doPayment(order_id,amt,token_key,"TEST");
 		 // "TEST" or "PROD"
-		TokenGenerate(order_id,amt);
+		// token_key = edit.getText().toString();
+		// doPayment(order_id,amt,token_key,"PROD");
+
+
+		 order_id = getIntent().getStringExtra("order_id");
+
+		 if(!order_id.equals(""))
+		 {
+			 TokenGenerate(order_id,amt);
+		 }else {
+
+		 	showMessage("Order id null");
+			 TokenGenerate("DEMOID123",amt);
+		 }
+
+
 
 	}
 });
@@ -267,19 +341,46 @@ _token_api_listener = new RequestNetwork.RequestListener() {
 			String _id = sh.getString("user_id", "");
 			//String _bill = sh.getString("bill_id", "");
 
-			HashMap<String, String> params = new HashMap<>();
-			params.put(CFPaymentService.PARAM_APP_ID, "21054006fdf9a3c2f38752ec9a045012");
-			params.put(CFPaymentService.PARAM_ORDER_ID,  _order_id);
-			params.put(CFPaymentService.PARAM_CUSTOMER_EMAIL,  _email);
-			params.put(CFPaymentService.PARAM_ORDER_AMOUNT, _amt);
+			params.clear();
+			params = new HashMap<>();
+			params.put(CFPaymentService.PARAM_APP_ID, app_id);
 			params.put(CFPaymentService.PARAM_CUSTOMER_NAME, _fullname);
 			params.put(CFPaymentService.PARAM_CUSTOMER_PHONE, _phone);
-			params.put(CFPaymentService.PARAM_NOTIFY_URL, "https://kkkamya.in/index.php/Api_request/api_list?method=payment_response");
+			params.put(CFPaymentService.PARAM_ORDER_ID,  _order_id);
+			params.put(CFPaymentService.PARAM_ORDER_AMOUNT, _amt);
+			params.put(CFPaymentService.PARAM_CUSTOMER_EMAIL,  _email);
+			params.put(CFPaymentService.PARAM_ORDER_CURRENCY, "INR");
 
-			CFPaymentService.getCFPaymentServiceInstance().doPayment(Payment.this , params, _cftoken,_stage);
+			params.put(CFPaymentService.PARAM_ORDER_NOTE, "TEST NOTE");
 
 
+			params.put(CFPaymentService.PARAM_NOTIFY_URL, "https://kkkamya.in/index.php/Api_request/api_list?method=checkout&payment_mode=COD&state=odisha");
 
+			CFPaymentService.getCFPaymentServiceInstance().doPayment(Payment.this , params, _cftoken, _stage);
+			Toast.makeText(this, token_key, Toast.LENGTH_SHORT).show();
+
+
+		/*	String appId = "YOUR_APP_ID_HERE";
+			String orderId = "Order0001";
+			String orderAmount = "1";
+			String orderNote = "Test Order";
+			String customerName = "John Doe";
+			String customerPhone = "9900012345";
+			String customerEmail = "test@gmail.com";
+
+			Map<String, String> params = new HashMap<>();
+
+			params.put(PARAM_APP_ID, appId);
+			params.put(PARAM_ORDER_ID, orderId);
+			params.put(PARAM_ORDER_AMOUNT, orderAmount);
+			params.put(PARAM_ORDER_NOTE, orderNote);
+			params.put(PARAM_CUSTOMER_NAME, customerName);
+			params.put(PARAM_CUSTOMER_PHONE, customerPhone);
+			params.put(PARAM_CUSTOMER_EMAIL, customerEmail);
+			params.put(PARAM_ORDER_CURRENCY, "INR");
+			return params;
+
+*/
 
 		}catch (Exception e){
 
@@ -288,6 +389,8 @@ _token_api_listener = new RequestNetwork.RequestListener() {
 
 
 	}
+
+
 
 	public void validate_coupon(String _coupon_code, String picktime) {
 
@@ -311,19 +414,58 @@ _token_api_listener = new RequestNetwork.RequestListener() {
 	public void TokenGenerate(String _order_id, String _amt) {
 
 
-		HashMap<String, Object> header = new HashMap<>();
-		header.put("x-client-id","21054006fdf9a3c2f38752ec9a045012");
-		header.put("x-client-secret","8c9aaf8742455034b69952a8fb29c7bf3db9aaba");
+/*
+		// create your json here
+		JSONObject jsonObject = new JSONObject();
+		try {
+			jsonObject.put("KEY1", "VALUE1");
+			jsonObject.put("KEY2", "VALUE2");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 
-		HashMap<String, Object> order_param = new HashMap<>();
+		OkHttpClient client = new OkHttpClient();
+		MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+		// put your json here
+		RequestBody body = RequestBody.create(JSON, jsonObject.toString());
+		Request request = new Request.Builder()
+				.url("https://YOUR_URL/")
+				.post(body)
+				.build();
+
+		Response response = null;
+		try {
+			response = client.newCall(request).execute();
+			String resStr = response.body().string();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}*/
+
+		header.clear();
+		header = new HashMap<>();
+		header.put("Content-Type","application/json");
+
+		header.put("x-client-id",app_id);
+		header.put("x-client-secret",secret_key);
+
+
+		order_param.clear();
+
+		 order_param = new Gson().fromJson("{\n  \"orderId\": \"Order01\",\n  \"orderAmount\":1,\n  \"orderCurrency\":\"INR\"\n}", new TypeToken<HashMap<String, Object>>(){}.getType());
+
+		//order_param = new Gson().fromJson("", new )
+		/*order_param = new HashMap<>();
 		order_param.put("orderId",_order_id);
 		order_param.put("orderAmount",_amt);
 		order_param.put("orderCurrency","INR");
-
+*/
 		token_api.setHeaders(header);
-		token_api.setParams(order_param, RequestNetworkController.REQUEST_PARAM);
+
+		//token_api.setBody("","");
+
+		token_api.setParams(order_param, RequestNetworkController.REQUEST_BODY);
 		token_api.startRequestNetwork(RequestNetworkController.POST,
-				"https://test.cashfree.com/api/v2/cftoken/order",
+				"https://api.cashfree.com/api/v2/cftoken/order",
 				"", _token_api_listener);
 
 
@@ -332,6 +474,8 @@ _token_api_listener = new RequestNetwork.RequestListener() {
 	}
 
 	private void initializeLogic() {
+
+		place_order.performClick();
 
 		getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 		getWindow().setStatusBarColor(0xFFFFFFFF);
@@ -372,10 +516,10 @@ _token_api_listener = new RequestNetwork.RequestListener() {
 				AlertDialog.Builder builder1 = new AlertDialog.Builder(Payment.this);
 				builder1.setTitle("Payment response");
 				builder1.setMessage(msg);
-				builder1.setCancelable(false);
+				//builder1.setCancelable(false);
 
 				builder1.setPositiveButton(
-						"Yes",
+						"OK",
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
 

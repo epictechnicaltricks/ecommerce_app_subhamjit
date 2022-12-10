@@ -38,9 +38,7 @@ public class SeeMoreActivity extends  AppCompatActivity  {
 	private HashMap<String, Object> api_map = new HashMap<>();
 	private String list = "";
 
-	private ArrayList<HashMap<String, Object>> listmap = new ArrayList<>();
 	private ArrayList<HashMap<String, Object>> results = new ArrayList<>();
-	private ArrayList<HashMap<String, Object>> map = new ArrayList<>();
 
 	private LinearLayout bg;
 	private LinearLayout title_bg;
@@ -61,12 +59,12 @@ public class SeeMoreActivity extends  AppCompatActivity  {
 	
 	private void initialize(Bundle _savedInstanceState) {
 
-		bg = (LinearLayout) findViewById(R.id.bg);
-		title_bg = (LinearLayout) findViewById(R.id.title_bg);
-		gridview1 = (GridView) findViewById(R.id.gridview1);
-		linear2 = (LinearLayout) findViewById(R.id.linear2);
-		textview1 = (TextView) findViewById(R.id.textview1);
-		progressbar1 = (ProgressBar) findViewById(R.id.progressbar1);
+		bg = findViewById(R.id.bg);
+		title_bg = findViewById(R.id.title_bg);
+		gridview1 = findViewById(R.id.gridview1);
+		linear2 = findViewById(R.id.linear2);
+		textview1 = findViewById(R.id.textview1);
+		progressbar1 = findViewById(R.id.progressbar1);
 		re = new RequestNetwork(this);
 
 		_re_request_listener = new RequestNetwork.RequestListener() {
@@ -93,8 +91,8 @@ public class SeeMoreActivity extends  AppCompatActivity  {
 
 		//_transparentStatusAndNavigation();
 
-		gridview1.setVerticalSpacing((int)0);
-		gridview1.setHorizontalSpacing((int)0);
+		gridview1.setVerticalSpacing(0);
+		gridview1.setHorizontalSpacing(0);
 
 		title_bg.setElevation((float)10);
 		textview1.setTypeface(Typeface.createFromAsset(getApplicationContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.BOLD);
@@ -114,6 +112,8 @@ switch (getIntent().getStringExtra("type"))
 
 
 	public void _api_request (String _type) {
+
+
 		api_map.clear();
 		results.clear();
 		api_map.put("method", _type );
@@ -199,29 +199,29 @@ switch (getIntent().getStringExtra("type"))
 				_view = _inflater.inflate(R.layout.product_cus, null);
 			}
 
-			final androidx.cardview.widget.CardView cardview1 = (androidx.cardview.widget.CardView) _view.findViewById(R.id.cardview1);
-			final RelativeLayout relative = (RelativeLayout) _view.findViewById(R.id.relative);
-			final LinearLayout bottom = (LinearLayout) _view.findViewById(R.id.bottom);
-			final LinearLayout top = (LinearLayout) _view.findViewById(R.id.top);
-			final ImageView product_image = (ImageView) _view.findViewById(R.id.product_image);
-			final TextView product_name = (TextView) _view.findViewById(R.id.product_name);
-			final LinearLayout linear1 = (LinearLayout) _view.findViewById(R.id.linear1);
-			final TextView qty = (TextView) _view.findViewById(R.id.qty);
-			final TextView price = (TextView) _view.findViewById(R.id.price);
-			final ImageView wish_btn = (ImageView) _view.findViewById(R.id.wish_btn);
+			final androidx.cardview.widget.CardView cardview1 = _view.findViewById(R.id.cardview1);
+			final RelativeLayout relative = _view.findViewById(R.id.relative);
+			final LinearLayout bottom = _view.findViewById(R.id.bottom);
+			final LinearLayout top = _view.findViewById(R.id.top);
+			final ImageView product_image = _view.findViewById(R.id.product_image);
+			final TextView product_name = _view.findViewById(R.id.product_name);
+			final LinearLayout linear1 = _view.findViewById(R.id.linear1);
+			final TextView qty = _view.findViewById(R.id.qty);
+			final TextView price = _view.findViewById(R.id.price);
+			final ImageView wish_btn = _view.findViewById(R.id.wish_btn);
 
 			try {
 				product_name.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_medium.ttf"), Typeface.BOLD);
 				qty.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
 				price.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
-				price.setText("₹"+ Objects.requireNonNull(results.get((int) _position).get("product_price")).toString().replaceAll("[.]00",""));
-				product_name.setText(Objects.requireNonNull(results.get((int) _position).get("product_name")).toString());
+				price.setText("₹"+ Objects.requireNonNull(results.get(_position).get("product_price")).toString().replaceAll("[.]00",""));
+				product_name.setText(Objects.requireNonNull(results.get(_position).get("product_name")).toString());
 
 
 
 
 				Glide.with(getApplicationContext())
-						.load(Uri.parse(Objects.requireNonNull(results.get((int) _position).get("product_image")).toString()))
+						.load(Uri.parse(Objects.requireNonNull(results.get(_position).get("product_image")).toString()))
 						.error(R.drawable.pyramids)
 						.placeholder(R.drawable.pyramids)
 						.thumbnail(0.01f)
@@ -246,13 +246,13 @@ switch (getIntent().getStringExtra("type"))
 
 						Intent in = new Intent();
 						in.setClass(SeeMoreActivity.this,ViewProductActivity.class);
-						in.putExtra("imageURL", Objects.requireNonNull(results.get((int) _position).get("product_image")).toString());
+						in.putExtra("imageURL", Objects.requireNonNull(results.get(_position).get("product_image")).toString());
 
-						in.putExtra("product_id", Objects.requireNonNull(results.get((int) _position).get("product_id")).toString());
+						in.putExtra("product_id", Objects.requireNonNull(results.get(_position).get("product_id")).toString());
 
 						//in.putExtra("desc",Objects.requireNonNull(results.get((int) _position).get("product_desc")).toString());
 						in.putExtra("price",price.getText());
-						in.putExtra("cat_name", Objects.requireNonNull(results.get((int) _position).get("category_name")).toString());
+						in.putExtra("cat_name", Objects.requireNonNull(results.get(_position).get("category_name")).toString());
 						in.putExtra("name",product_name.getText());
 
 						_ActivityTransition(product_name, "p", in);

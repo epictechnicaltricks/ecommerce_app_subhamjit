@@ -80,8 +80,8 @@ public class ViewProductActivity extends  AppCompatActivity  {
 	private ImageView imageview3;
 	private ImageView imageview4;
 	private ImageView imageview5;
-	private TextView textview2;
-	private TextView textview1;
+	private TextView add_to_cart;
+	private TextView buy_now;
 
 	private RequestNetwork re; // product desc request
 	private RequestNetwork.RequestListener _re_request_listener;
@@ -191,8 +191,8 @@ public class ViewProductActivity extends  AppCompatActivity  {
 		imageview3 = (ImageView) findViewById(R.id.imageview3);
 		imageview4 = (ImageView) findViewById(R.id.imageview4);
 		imageview5 = (ImageView) findViewById(R.id.imageview5);*/
-		textview2 = findViewById(R.id.textview2);
-		textview1 = findViewById(R.id.textview1);
+		buy_now = findViewById(R.id.buy_now);
+		add_to_cart = findViewById(R.id.add_to_cart);
 
 		qty_product = findViewById(R.id.qty_product);
 		plus_ = findViewById(R.id.plus_);
@@ -354,6 +354,20 @@ public class ViewProductActivity extends  AppCompatActivity  {
 
 	private void initializeLogic() {
 
+		cart.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+
+				Intent i = new Intent();
+				i.setClass(getApplicationContext(),LayoutActivity.class);
+				i.putExtra("cart","true");
+				startActivity(i);
+				finish();
+
+			}
+		});
+
+
 
 		SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
 		user_id = sh.getString("user_id", "");
@@ -389,7 +403,6 @@ public class ViewProductActivity extends  AppCompatActivity  {
 		delivery_type.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
 
 		delivery_type2.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
-		textview2.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
 
 		plus_.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
 		minus_.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
@@ -403,8 +416,8 @@ public class ViewProductActivity extends  AppCompatActivity  {
 
 		textview10.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_medium.ttf"), Typeface.BOLD);
 		product_avl.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
-		textview1.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
-		textview2.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
+		add_to_cart.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_medium.ttf"), Typeface.BOLD);
+		buy_now.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_medium.ttf"), Typeface.BOLD);
 		price.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_medium.ttf"), Typeface.BOLD);
 		textview9.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_medium.ttf"), Typeface.BOLD);
 
@@ -431,19 +444,26 @@ public class ViewProductActivity extends  AppCompatActivity  {
 
 		_setTransitionName(vscroll1, "p");
 
-		textview1.setOnClickListener(new OnClickListener() {
+
+
+		buy_now.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Toast.makeText(ViewProductActivity.this, "Buy now clicked", Toast.LENGTH_SHORT).show();
+
+				//BUY NOW
+				_api_request_add_to_cart(product_id_variable,qty_product.getText().toString(),attr_id);
+				startActivity(new Intent(getApplicationContext(),MyAddressActivity.class));
+
+				//Toast.makeText(ViewProductActivity.this, "Buy now clicked", Toast.LENGTH_SHORT).show();
 			}
 		});
 
 
-		textview2.setOnClickListener(new OnClickListener() {
+		add_to_cart.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
 
-
+               // add to cart
 				_api_request_add_to_cart(product_id_variable,qty_product.getText().toString(),attr_id);
 
 				/*	      _cart_id, String _bill_id, String _user_id,
@@ -839,7 +859,7 @@ Code By EPIC Technical Tricks on 26th April 2022
 				, _req_update_cart_listener);
 	}
 
-	private void save_add_to_cart_offline(String _cart_id, String _bill_id, String _user_id,
+/*	private void save_add_to_cart_offline(String _cart_id, String _bill_id, String _user_id,
 										  String _product_id, String _product_attr,
 										  String _product_qty, String _price,
 										  String _total_price,String _cart_status,
@@ -867,7 +887,7 @@ Code By EPIC Technical Tricks on 26th April 2022
 		myEdit.putString("created_by", _created_by);
 		myEdit.apply();
 
-	}
+	}*/
 
 /*
 	SharedPreferences sharedPreferences = getSharedPreferences("cart_data", MODE_PRIVATE);

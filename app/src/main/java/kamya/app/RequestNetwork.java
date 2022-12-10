@@ -8,6 +8,8 @@ public class RequestNetwork {
 private HashMap<String, Object> params = new HashMap<>();
 private HashMap<String, Object> headers = new HashMap<>();
 
+private String body;
+
 private Activity activity;
 
 private int requestType = 0;
@@ -25,7 +27,16 @@ this.params = params;
 this.requestType = requestType;
 }
 
-public HashMap<String, Object> getParams() {
+    public void setBody(String body, int requestType) {
+        this.body = body;
+        this.requestType = requestType;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public HashMap<String, Object> getParams() {
 return params;
 }
 

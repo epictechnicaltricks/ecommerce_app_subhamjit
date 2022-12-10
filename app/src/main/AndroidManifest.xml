@@ -20,7 +20,7 @@
 			android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
 			android:hardwareAccelerated="true"
 			android:supportsPictureInPicture="true"
-			android:theme="@style/NoActionBar"
+			android:theme="@style/AppTheme.FullScreen"
 			android:screenOrientation="portrait"
 			android:exported="true">
 
@@ -91,6 +91,13 @@
 
 		<activity
 			android:name=".MyAddress_EDIT_Activity"
+			android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+			android:hardwareAccelerated="true"
+			android:supportsPictureInPicture="true"
+			android:screenOrientation="portrait"/>
+
+		<activity
+			android:name=".SearchActivity"
 			android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
 			android:hardwareAccelerated="true"
 			android:supportsPictureInPicture="true"

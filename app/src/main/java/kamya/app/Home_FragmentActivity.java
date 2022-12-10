@@ -79,9 +79,9 @@ public class Home_FragmentActivity extends  Fragment  {
 	private LinearLayout search;
 	private LinearLayout linear5;
 	private TextView cart_count;
-	private ImageView imageview3;
+	private ImageView cart_img;
 	private TextView welcome;
-	private TextView user_name;
+	private TextView user_name,cat;
 	private ImageView imageview2,menu;
 	private TextView search_textview;
 	private LinearLayout scroll;
@@ -112,6 +112,7 @@ public class Home_FragmentActivity extends  Fragment  {
 
 	private SharedPreferences sh;
 
+	ImageView search_img;
 
     @NonNull
 	@Override
@@ -140,6 +141,8 @@ public class Home_FragmentActivity extends  Fragment  {
 		listview4 = _view.findViewById(R.id.listview4);
 
 
+		search_img = _view.findViewById(R.id.search_img);
+
 		bg = _view.findViewById(R.id.bg);
 		linear2 = _view.findViewById(R.id.linear2);
 		//vscroll1 = (ScrollView) _view.findViewById(R.id.vscroll1);
@@ -147,7 +150,7 @@ public class Home_FragmentActivity extends  Fragment  {
 		search = _view.findViewById(R.id.search);
 		linear5 = _view.findViewById(R.id.linear5);
 		cart_count = _view.findViewById(R.id.cart_count);
-		imageview3 = _view.findViewById(R.id.imageview3);
+		cart_img = _view.findViewById(R.id.imageview3);
 
 		menu = _view.findViewById(R.id.menu);
 
@@ -173,8 +176,18 @@ public class Home_FragmentActivity extends  Fragment  {
 		show_more3 = _view.findViewById(R.id.show_more23);
 		show_more4 = _view.findViewById(R.id.show_more3);
 
+		cat = _view.findViewById(R.id.cat);
 
 
+		search_img.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+
+				startActivity(new Intent(getContext(), SearchActivity.class));
+
+
+			}
+		});
 
 
 			menu.setOnClickListener(new OnClickListener() {
@@ -185,6 +198,17 @@ public class Home_FragmentActivity extends  Fragment  {
 
 	}
 });
+
+
+			cart_img.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View view) {
+
+					((LayoutActivity) Objects.requireNonNull(getActivity())).openCart();
+
+
+				}
+			});
 
 		re = new RequestNetwork((Activity)getContext());
 
@@ -197,6 +221,12 @@ public class Home_FragmentActivity extends  Fragment  {
 				return true;
 			}
 		});
+
+
+
+
+
+
 
 		_re_request_listener = new RequestNetwork.RequestListener() {
 			@Override
@@ -290,6 +320,7 @@ public class Home_FragmentActivity extends  Fragment  {
 		show_more4.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.NORMAL);
 		title4.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.BOLD);
 
+		cat.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"fonts/google_sans_medium.ttf"), Typeface.BOLD);
 
 
 
@@ -358,7 +389,7 @@ public class Home_FragmentActivity extends  Fragment  {
 		cart_size = new Gson().fromJson(sh.getString("cart_data", ""), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
 		// refresh the list or recycle or grid
 
-		cart_count.setText(String.valueOf(cart_size.size()));
+		cart_count.setText(String.valueOf(" "+cart_size.size())+" ");
 
 	}
 

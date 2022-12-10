@@ -33,10 +33,11 @@ import java.util.Objects;
 public class Category_FragmentActivity extends  Fragment  {
 
 
-	private HashMap<String, Object> api_map = new HashMap<>();
+
 	private String list = "";
 
 	private final ArrayList<HashMap<String, Object>> listmap = new ArrayList<>();
+	private HashMap<String, Object> api_map = new HashMap<>();
 	private ArrayList<HashMap<String, Object>> results = new ArrayList<>();
 	private final ArrayList<HashMap<String, Object>> map = new ArrayList<>();
 

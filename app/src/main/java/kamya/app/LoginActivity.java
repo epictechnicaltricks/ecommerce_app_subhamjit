@@ -317,7 +317,22 @@ public class LoginActivity extends  Activity  {
 						myEdit.apply();
 
 
-						startActivity(new Intent(getApplicationContext(),MainActivity.class));
+						//startActivity(new Intent(getApplicationContext(),MainActivity.class));
+
+
+						Intent i = new Intent();
+						if(getIntent().getStringExtra("cart").equals("true"))
+						{
+							i.putExtra("cart","true");
+							i.setClass(getApplicationContext(),LayoutActivity.class);
+
+							//i.putExtra("cart","true");
+
+						}else {
+
+							i.setClass(getApplicationContext(),MainActivity.class);
+						}
+
 						finish();
 
                         showMessage("Welcome, "+Objects.requireNonNull(results.get(_position).get("fullname")));
@@ -378,7 +393,7 @@ public class LoginActivity extends  Activity  {
 						send_otp_api_request(phone_no.getText().toString().trim(),"otp_verify_new_user");
 
 						//login_txt.performClick();
-						showMessage("Register success, Login now.");
+						//showMessage("Register success, Login now.");
 
 					} else if(response.contains("exist!!")) {
 
@@ -830,139 +845,7 @@ if(resend_count>=1){  // when we click resend button again it will send otp
 		
 
 
-/*		try {
-			progressbar.setVisibility(View.GONE);
-			if (action.equals("login")) {
 
-			}
-			else {
-				if (_success) {
-					fauth.getCurrentUser().sendEmailVerification() .addOnCompleteListener(new OnCompleteListener<Void>() {
-						@Override
-						public void onComplete(Task<Void> task) {
-							if (task.isSuccessful()) {
-
-								login_txt.performClick();
-								sh.edit().putString("u_email", email.getText().toString().trim()).apply();
-								sh.edit().putString("u_phone", phone_no.getText().toString().trim()).apply();
-								sh.edit().putString("u_name", name.getText().toString().trim()).apply();
-								sh.edit().putString("refer_code", refer_code.getText().toString().trim()).apply();
-								_Sneek_Message(linear1, "Verification sent..");
-
-								_create_user_data_on_db();
-
-							} else {
-
-
-
-								_Sneek_Message(linear1, "Failed to verify..");
-							}
-						} });
-				}
-				else {
-					_Sneek_Message(linear1, _errorMessage);
-				}
-			}
-		} catch(Exception e) {
-			showMessage(e.toString());
-		}
-		*/
-
-/*		try {
-			progressbar.setVisibility(View.GONE);
-			if (_success) {
-				if (action.equals("login")) {
-					emailVerified = fauth.getCurrentUser().isEmailVerified();
-					if (emailVerified) {
-						if (email.getText().toString().equals("") || pass.getText().toString().equals("")) {
-
-						}
-						else {
-							if (Util.isConnected(getApplicationContext())) {
-
-								otp_timer = new TimerTask() {
-									@Override
-									public void run() {
-										runOnUiThread(new Runnable() {
-											@Override
-											public void run() {
-												in.setClass(getApplicationContext(), MainActivity.class);
-												startActivity(in);
-												otp_timer.cancel();
-												finish();
-											}
-										});
-									}
-								};
-								_timer.schedule(otp_timer, (int)(300));
-							}
-							else {
-								_Sneek_Message(linear1, "No internet !");
-							}
-						}
-					}
-					else {
-						email_dialog.setMessage("Please verify your email for login to your account! check your email now.\n\n** Check email on spam folder **");
-						email_dialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface _dialog, int _which) {
-								try {
-
-
-									Intent intent = getPackageManager().getLaunchIntentForPackage("com.google.android.gm");
-									intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-									startActivity(intent);
-
-
-								} catch(Exception e) {
-
-								}
-							}
-						});
-						email_dialog.setNeutralButton("Resend Verification", new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface _dialog, int _which) {
-								fauth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-									@Override
-									public void onComplete(Task<Void> task) {
-
-										if (task.isSuccessful()) {
-
-											_Sneek_Message(linear1, "Verification sent.");
-										} else {
-
-											_Sneek_Message(linear1, "Failed to sent verification..");
-										}
-
-
-									} });
-							}
-						});
-						email_dialog.create().show();
-					}
-				}
-				else {
-
-				}
-			}
-			else {
-				_Sneek_Message(linear1, _errorMessage);
-			}
-		} catch(Exception e) {
-			showMessage(e.toString());
-		}	*/
-
-
-/*
-
-// OTP SEND
-
-if (_success) {
-			_Sneek_Message(linear1, "Password reset email sent..");
-		}
-		else {
-			_Sneek_Message(linear1, "Failed to sent..");
-		}*/
 
 
 	}
@@ -972,7 +855,7 @@ if (_success) {
 	private void initializeLogic() {
 
 
-		new Timer().schedule(new TimerTask() {
+	/*	new Timer().schedule(new TimerTask() {
 			@Override
 			public void run() {
 
@@ -985,7 +868,7 @@ if (_success) {
 				// this code will be executed after 2 seconds
 			}
 		}, 4000);
-
+*/
 
 		getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 		getWindow().setStatusBarColor(0xFFFFFFFF);
@@ -1234,9 +1117,11 @@ if (_success) {
 	public void verify_otp_for_signup()
 	{
 		// restart the app
-		//finish();
-		//startActivity(new Intent(getApplicationContext(),MainActivity.class));
-		Toast.makeText(this, "Account created", Toast.LENGTH_SHORT).show();
+		/*startActivity(new Intent(getApplicationContext(),MainActivity.class));
+		finish();*/
+		//login_txt.performClick();
+		_signin_mode();
+		Toast.makeText(this, "Account created, Login now", Toast.LENGTH_LONG).show();
 
 	}
 
